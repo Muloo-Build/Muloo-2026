@@ -271,13 +271,6 @@ export const aboutContent = {
       bio: "Leads Muloo Build and provides Outsourced CTO services.",
       linkedin: "https://www.linkedin.com/in/mornevisagie/",
       image: "morne"
-    },
-    {
-      name: "Paul Manson",
-      role: "Business Analyst & Outsourced COO",
-      bio: "Trusted partner for Business Analysis and Outsourced COO Services.",
-      linkedin: "https://www.linkedin.com/in/paulmanson/",
-      image: "paul"
     }
   ]
 };

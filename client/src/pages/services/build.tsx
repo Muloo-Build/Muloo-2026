@@ -1,11 +1,11 @@
 import { Section } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Webhook, Code2, Shield, Zap, Database, Terminal, RefreshCw, Lock, Activity, Layers, Server, HardDrive, CheckCircle2 } from "lucide-react";
-import { Link } from "wouter";
 import { Badge } from "@/components/ui/badge";
 import { serviceBuildContent } from "@/lib/content";
 
 const streamBlue = "#155DFC";
+const meetingUrl = "https://meetings.hubspot.com/morne-visagie";
 
 export function ServicesBuild() {
   return (
@@ -488,7 +488,7 @@ export function ServicesBuild() {
           <p className="text-xl text-muted-foreground mb-10 leading-[1.8]">
             We’ll map the current stack, identify breakpoints, and ship a clear build plan.
           </p>
-          <Link href="/contact">
+          <a href={meetingUrl} target="_blank" rel="noopener noreferrer">
             <Button
               size="lg"
               className="font-bold px-10 h-14 text-white rounded-lg"
@@ -497,7 +497,7 @@ export function ServicesBuild() {
             >
               Book a Technical Scoping Session <ArrowRight className="ml-2" />
             </Button>
-          </Link>
+          </a>
         </div>
       </Section>
     </div>

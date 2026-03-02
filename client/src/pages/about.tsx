@@ -6,13 +6,11 @@ import { aboutContent } from "@/lib/content";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import jarrudImg from "@assets/d1bde727-2cda-4a05-ad55-08a4eeb1c30f_1771492083207.png";
 import morneImg from "@assets/Morne_1771492100987.png";
-import paulImg from "@assets/e03647df-fb65-4c59-b350-b505eb0fd17b_1771492117754.png";
 import cultureImg from "@assets/happiness-at-workplace-GettyImages-1129332568_1771487221441.jpg";
 
 const getImage = (imageName: string) => {
     if (imageName.includes("jarrud")) return jarrudImg;
     if (imageName.includes("morne")) return morneImg;
-    if (imageName.includes("paul")) return paulImg;
     return "";
 };
 
@@ -77,7 +75,7 @@ export function About() {
             <h2 className="text-3xl font-bold mb-4 text-white">Leadership</h2>
             <p className="text-muted-foreground">The people setting the technical standard.</p>
          </div>
-         <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+         <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {aboutContent.team && aboutContent.team.map((member, i) => (
                 <div key={i} className="glass-card p-8 rounded-xl flex flex-col items-center text-center gap-6 group">
                    <div className="h-32 w-32 rounded-full border-2 border-brand-teal/20 p-1 group-hover:border-brand-orange/50 transition-colors relative">

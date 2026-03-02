@@ -12,11 +12,11 @@ import {
   Activity,
   Share2,
 } from "lucide-react";
-import { Link } from "wouter";
 import { Badge } from "@/components/ui/badge";
 import { serviceAiContent } from "@/lib/content";
 
 const streamPurple = "#C140FF";
+const meetingUrl = "https://www.wearemuloo.com/meetings/jarrud2/jarrud";
 
 const serviceIcons = [Bot, Code2, Workflow, ShieldCheck];
 
@@ -392,7 +392,7 @@ export function ServicesAi() {
           <p className="text-xl text-muted-foreground mb-10 leading-[1.8]">
             We'll identify one workflow worth automating, ship a scoped pilot, and measure impact with clear guardrails.
           </p>
-          <Link href="/contact">
+          <a href={meetingUrl} target="_blank" rel="noopener noreferrer">
             <Button
               size="lg"
               className="font-bold px-10 h-14 text-white"
@@ -401,7 +401,7 @@ export function ServicesAi() {
             >
               Ship an AI Pilot <ArrowRight className="ml-2" />
             </Button>
-          </Link>
+          </a>
         </div>
       </Section>
     </div>
