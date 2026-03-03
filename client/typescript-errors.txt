@@ -1,0 +1,10 @@
+src/pages/services/build.tsx(12,6): error TS17008: JSX element 'div' has no corresponding closing tag.
+src/pages/services/build.tsx(14,8): error TS17008: JSX element 'Section' has no corresponding closing tag.
+src/pages/services/build.tsx(33,13): error TS17002: Expected corresponding JSX closing tag for 'div'.
+src/pages/services/build.tsx(439,1): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/pages/services/build.tsx(440,1): error TS1005: '</' expected.
+src/pages/services/hub.tsx(22,6): error TS17008: JSX element 'div' has no corresponding closing tag.
+src/pages/services/hub.tsx(24,8): error TS17008: JSX element 'Section' has no corresponding closing tag.
+src/pages/services/hub.tsx(62,13): error TS17002: Expected corresponding JSX closing tag for 'div'.
+src/pages/services/hub.tsx(396,1): error TS1381: Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+src/pages/services/hub.tsx(397,1): error TS1005: '</' expected.

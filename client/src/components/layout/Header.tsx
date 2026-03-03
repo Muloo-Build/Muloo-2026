@@ -17,7 +17,7 @@ export function Header() {
   const [location] = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const meetingUrl = "https://www.wearemuloo.com/meetings/jarrud2/jarrud";
+  const meetingUrl = "/meetings/jarrud";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -78,11 +78,11 @@ export function Header() {
         </nav>
 
         <div className="hidden md:flex items-center gap-4">
-          <a href={meetingUrl} target="_blank" rel="noopener noreferrer">
+          <Link href={meetingUrl}>
             <Button className="bg-gradient-muloo border-none text-white hover:brightness-110 font-bold rounded-full px-6 glow-muloo-sm transition-all hover:scale-105 hover:-translate-y-0.5 text-sm">
               Let's Talk
             </Button>
-          </a>
+          </Link>
         </div>
 
         {/* Mobile Navigation */}
@@ -113,11 +113,11 @@ export function Header() {
                   )}
                 </div>
               ))}
-              <a href={meetingUrl} target="_blank" rel="noopener noreferrer" onClick={() => setIsMobileMenuOpen(false)}>
+              <Link href={meetingUrl} onClick={() => setIsMobileMenuOpen(false)}>
                 <Button className="w-full bg-gradient-muloo border-none text-white font-bold hover:brightness-110 mt-4 h-12 rounded-xl">
                   Let's Talk
                 </Button>
-              </a>
+              </Link>
             </div>
           </SheetContent>
         </Sheet>

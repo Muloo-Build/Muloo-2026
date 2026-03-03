@@ -1,0 +1,657 @@
+diff --git a/client/public/favicon.png b/client/public/favicon.png
+index 625caff..d628454 100644
+Binary files a/client/public/favicon.png and b/client/public/favicon.png differ
+diff --git a/client/src/components/layout/Footer.tsx b/client/src/components/layout/Footer.tsx
+index c3d9996..6b2c2ff 100644
+--- a/client/src/components/layout/Footer.tsx
++++ b/client/src/components/layout/Footer.tsx
+@@ -1,5 +1,5 @@
+ import { Link } from "wouter";
+-import mulooLogo from "@assets/logo.png";
++import { Logo } from "./Logo";
+ import hubspotBadge from "@assets/gold-badge-color_1771487221441.png";
+ import googleBadge from "@assets/google-partner-logo_1771487221441.png";
+ 
+@@ -10,14 +10,14 @@ export function Footer() {
+         <div className="grid md:grid-cols-5 gap-12 mb-16">
+           <div>
+             <Link href="/" className="block mb-6 hover:opacity-90">
+-                <img src={mulooLogo} alt="Muloo" className="h-8 w-auto" />
++              <Logo className="text-xl md:text-2xl" />
+             </Link>
+             <p className="text-sm text-muted-foreground leading-relaxed">
+-              Based in Cape Town. <br/>
++              Based in Cape Town. <br />
+               Built for global teams.
+             </p>
+           </div>
+-          
++
+           <div>
+             <h4 className="font-bold mb-6 text-white text-sm">Expertise</h4>
+             <ul className="space-y-4 text-sm text-muted-foreground">
+@@ -40,8 +40,8 @@ export function Footer() {
+           </div>
+ 
+           <div>
+-             <h4 className="font-bold mb-6 text-white text-sm">Connect</h4>
+-             <ul className="space-y-4 text-sm text-muted-foreground">
++            <h4 className="font-bold mb-6 text-white text-sm">Connect</h4>
++            <ul className="space-y-4 text-sm text-muted-foreground">
+               <li><span>LinkedIn</span></li>
+               <li><span>GitHub</span></li>
+               <li><Link href="/styleguide" className="hover:text-brand-teal transition-colors">Styleguide</Link></li>
+@@ -57,7 +57,7 @@ export function Footer() {
+             </div>
+           </div>
+         </div>
+-        
++
+         <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-muted-foreground">
+           <p>&copy; {new Date().getFullYear()} Muloo. All rights reserved.</p>
+           <div className="flex gap-6">
+diff --git a/client/src/components/layout/Header.tsx b/client/src/components/layout/Header.tsx
+index 7ed9736..9136396 100644
+--- a/client/src/components/layout/Header.tsx
++++ b/client/src/components/layout/Header.tsx
+@@ -11,7 +11,7 @@ import {
+   DropdownMenuTrigger,
+ } from "@/components/ui/dropdown-menu";
+ import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
+-import mulooLogo from "@assets/logo.png";
++import { Logo } from "./Logo";
+ 
+ export function Header() {
+   const [location] = useLocation();
+@@ -30,14 +30,14 @@ export function Header() {
+     <header
+       className={cn(
+         "fixed top-0 left-0 right-0 z-50 transition-all duration-500 border-b",
+-        isScrolled 
+-          ? "bg-background/90 backdrop-blur-xl border-white/5 py-3" 
++        isScrolled
++          ? "bg-background/90 backdrop-blur-xl border-white/5 py-3"
+           : "bg-transparent border-transparent py-5"
+       )}
+     >
+       <div className="container mx-auto px-6 flex items-center justify-between">
+         <Link href="/" className="hover:opacity-90 transition-opacity">
+-            <img src={mulooLogo} alt="Muloo" className="h-10 md:h-11 w-auto" />
++          <Logo className="text-2xl md:text-3xl" />
+         </Link>
+ 
+         {/* Desktop Navigation */}
+@@ -67,10 +67,10 @@ export function Header() {
+             }
+             return (
+               <Link key={link.name} href={link.href} className={cn(
+-                  "text-[15px] font-medium hover:text-brand-teal transition-colors cursor-pointer text-white/90",
+-                  location === link.href ? "text-brand-teal" : ""
+-                )}>
+-                  {link.name}
++                "text-[15px] font-medium hover:text-brand-teal transition-colors cursor-pointer text-white/90",
++                location === link.href ? "text-brand-teal" : ""
++              )}>
++                {link.name}
+               </Link>
+             );
+           })}
+@@ -92,7 +92,7 @@ export function Header() {
+             </Button>
+           </SheetTrigger>
+           <SheetContent side="right" className="bg-[#0A0F1C] border-l-white/10 w-full sm:w-[400px] p-6 overflow-y-auto">
+-             <SheetTitle className="sr-only">Mobile Menu</SheetTitle>
++            <SheetTitle className="sr-only">Mobile Menu</SheetTitle>
+             <div className="flex flex-col gap-8 mt-10">
+               {navLinks.map((link) => (
+                 <div key={link.name} className="flex flex-col gap-4">
+@@ -101,13 +101,13 @@ export function Header() {
+                       <span className="text-lg font-bold text-muted-foreground/50 border-b border-white/10 pb-2">{link.name}</span>
+                       {link.subItems.map(sub => (
+                         <Link key={sub.name} href={sub.href} onClick={() => setIsMobileMenuOpen(false)} className="text-xl font-medium pl-4 border-l-2 border-transparent hover:border-brand-teal hover:text-brand-teal transition-all text-white">
+-                            {sub.name}
++                          {sub.name}
+                         </Link>
+                       ))}
+                     </div>
+                   ) : (
+                     <Link href={link.href} onClick={() => setIsMobileMenuOpen(false)} className="text-2xl font-bold hover:text-brand-teal transition-colors text-white">
+-                        {link.name}
++                      {link.name}
+                     </Link>
+                   )}
+                 </div>
+diff --git a/client/src/components/layout/Layout.tsx b/client/src/components/layout/Layout.tsx
+index 1a28cd3..08543ba 100644
+--- a/client/src/components/layout/Layout.tsx
++++ b/client/src/components/layout/Layout.tsx
+@@ -8,13 +8,19 @@ interface LayoutProps {
+ 
+ export function Layout({ children }: LayoutProps) {
+   return (
+-    <div className="min-h-screen flex flex-col bg-background text-foreground font-sans selection:bg-brand-teal selection:text-brand-navy">
+-      <Header />
+-      <main className="flex-grow pt-24">
+-        {children}
+-      </main>
+-      <Footer />
+-      <MulooAssist />
++    <div className="relative isolate min-h-screen bg-background text-foreground font-sans selection:bg-brand-teal selection:text-brand-navy">
++      <div className="blobs" aria-hidden="true">
++        <div className="blob blob-1"></div>
++        <div className="blob blob-2"></div>
++      </div>
++      <div className="relative z-20 flex min-h-screen flex-col">
++        <Header />
++        <main className="flex-grow pt-24">
++          {children}
++        </main>
++        <Footer />
++        <MulooAssist />
++      </div>
+     </div>
+   );
+ }
+diff --git a/client/src/index.css b/client/src/index.css
+index d6daddc..b8b8bc9 100644
+--- a/client/src/index.css
++++ b/client/src/index.css
+@@ -7,102 +7,123 @@
+   --radius-sm: 0.25rem;
+   --radius-md: 0.5rem;
+   --radius-lg: 0.75rem;
+-  
++
+   --color-background: hsl(var(--background));
+   --color-foreground: hsl(var(--foreground));
+-  
++
+   --color-card: hsl(var(--card));
+   --color-card-foreground: hsl(var(--card-foreground));
+-  
++
+   --color-popover: hsl(var(--popover));
+   --color-popover-foreground: hsl(var(--popover-foreground));
+-  
++
+   --color-primary: hsl(var(--primary));
+   --color-primary-foreground: hsl(var(--primary-foreground));
+-  
++
+   --color-secondary: hsl(var(--secondary));
+   --color-secondary-foreground: hsl(var(--secondary-foreground));
+-  
++
+   --color-muted: hsl(var(--muted));
+   --color-muted-foreground: hsl(var(--muted-foreground));
+-  
++
+   --color-accent: hsl(var(--accent));
+   --color-accent-foreground: hsl(var(--accent-foreground));
+-  
++
+   --color-destructive: hsl(var(--destructive));
+   --color-destructive-foreground: hsl(var(--destructive-foreground));
+-  
++
+   --color-border: hsl(var(--border));
+   --color-input: hsl(var(--input));
+   --color-ring: hsl(var(--ring));
+-  
++
+   /* Core Brand Foundation */
+   --color-brand-navy: #050A30;
+   --color-brand-teal: #00C4CC;
+   --color-brand-orange: #F47621;
+   --color-soft-teal: #E6FBFD;
+-  
++
+   /* Stream Accent Colours */
+   --color-stream-hub: #F47621;
+   --color-stream-build: #155DFC;
+   --color-stream-ai: #C140FF;
+   --color-stream-product: #59BF96;
+-  
++
+   --font-sans: 'Montserrat', sans-serif;
+   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
++  --font-aileron: 'Aileron', 'Montserrat', sans-serif;
+ }
+ 
+ :root {
+   --background: 233 81% 10%;
+   --foreground: 210 40% 98%;
+-  
++
+   --card: 233 60% 14%;
+   --card-foreground: 210 40% 98%;
+-  
++
+   --popover: 233 60% 14%;
+   --popover-foreground: 210 40% 98%;
+-  
++
+   --primary: 182 100% 40%;
+   --primary-foreground: 233 81% 10%;
+-  
++
+   --secondary: 233 60% 20%;
+   --secondary-foreground: 210 40% 98%;
+-  
++
+   --muted: 233 40% 20%;
+   --muted-foreground: 215 20% 65%;
+-  
++
+   --accent: 233 40% 20%;
+   --accent-foreground: 210 40% 98%;
+-  
++
+   --destructive: 0 62.8% 30.6%;
+   --destructive-foreground: 210 40% 98%;
+ 
+   --border: 233 30% 20%;
+   --input: 233 30% 20%;
+   --ring: 182 100% 40%;
+-  
++
+   --radius: 0.5rem;
++
++  --bg-color: #0A0A0A;
++  --accent-primary: #FF7A59;
++  --accent-secondary: #7B61FF;
+ }
+ 
+ @layer base {
+   * {
+     @apply border-border;
+   }
++
+   body {
+     @apply font-sans antialiased bg-background text-foreground;
+     background-color: #050A30;
+     min-height: 100vh;
++    position: relative;
++    overflow-x: hidden;
+   }
+-  
+-  h1, h2, h3, h4, h5, h6 {
+-    @apply font-bold tracking-tight text-white;
++
++  h1,
++  h2,
++  h3,
++  h4,
++  h5,
++  h6 {
++    @apply tracking-tight text-white;
++    font-weight: 600;
++    /* Semi-Bold */
++  }
++
++  h1 {
++    font-weight: 800;
++    /* Extra Bold */
+   }
+-  
++
+   ::selection {
+     @apply bg-brand-teal/30 text-white;
+   }
+-  
+-  code, pre {
++
++  code,
++  pre {
+     @apply font-mono;
+   }
+ }
+@@ -111,25 +132,38 @@
+   /* ─────────────────────────────────────
+      1. GRADIENT SYSTEM
+      ───────────────────────────────────── */
+-  
++
+   /* Core Hero Gradient: Navy base with subtle teal radial glow */
+   .bg-hero-gradient {
+-    background: 
++    background:
+       radial-gradient(ellipse 80% 50% at 50% -10%, rgba(0, 196, 204, 0.08), transparent),
+       radial-gradient(ellipse 60% 40% at 80% 50%, rgba(0, 196, 204, 0.04), transparent),
+       #050A30;
+   }
+ 
+   /* Stream Accent Glows */
+-  .glow-hub { background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(244, 118, 33, 0.06), transparent), #050A30; }
+-  .glow-build { background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(21, 93, 252, 0.06), transparent), #050A30; }
+-  .glow-ai { background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(193, 64, 255, 0.06), transparent), #050A30; }
+-  .glow-product { background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(89, 191, 150, 0.06), transparent), #050A30; }
++  .glow-hub {
++    background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(244, 118, 33, 0.06), transparent), #050A30;
++  }
+ 
+-  /* Soft Section Alternation */
+-  .bg-section-soft {
+-    background: linear-gradient(180deg, #050A30 0%, #0A1040 100%);
++  .glow-build {
++    background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(21, 93, 252, 0.06), transparent), #050A30;
+   }
++
++  .glow-ai {
++    background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(193, 64, 255, 0.06), transparent), #050A30;
++  }
++
++  .glow-product {
++    background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(89, 191, 150, 0.06), transparent), #050A30;
++  }
++
++  /* Soft Section */
++  .text-gradient-muloo {
++    @apply bg-clip-text text-transparent;
++    background-image: linear-gradient(135deg, #00C4CC 0%, #C140FF 50%, #F47621 100%);
++  }
++
+   .bg-section-light {
+     background: linear-gradient(180deg, #ffffff 0%, #E6FBFD 100%);
+   }
+@@ -142,25 +176,6 @@
+   }
+ 
+   /* ─────────────────────────────────────
+-     3. TEXT GRADIENTS
+-     ───────────────────────────────────── */
+-  .text-gradient-teal {
+-    @apply bg-clip-text text-transparent;
+-    background-image: linear-gradient(135deg, #00C4CC, #80E8ED);
+-  }
+-  .text-gradient-orange {
+-    @apply bg-clip-text text-transparent;
+-    background-image: linear-gradient(135deg, #F47621, #FFA366);
+-  }
+-
+-  /* ─────────────────────────────────────
+-     4. BACKGROUND GRID PATTERN
+-     ───────────────────────────────────── */
+-  .bg-grid-pattern {
+-    background-size: 60px 60px;
+-    background-image: 
+-      linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+-      linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+   }
+   .bg-grid-pattern-fade {
+     background-size: 60px 60px;
+@@ -180,9 +195,94 @@
+   /* ─────────────────────────────────────
+      6. GLOW EFFECTS
+      ───────────────────────────────────── */
+-  .glow-teal-sm { box-shadow: 0 0 20px -5px rgba(0, 196, 204, 0.3); }
+-  .glow-orange-sm { box-shadow: 0 0 20px -5px rgba(244, 118, 33, 0.3); }
+-  .glow-blue-sm { box-shadow: 0 0 20px -5px rgba(21, 93, 252, 0.3); }
+-  .glow-purple-sm { box-shadow: 0 0 20px -5px rgba(193, 64, 255, 0.3); }
+-  .glow-green-sm { box-shadow: 0 0 20px -5px rgba(89, 191, 150, 0.3); }
++  .glow-teal-sm {
++    box-shadow: 0 0 20px -5px rgba(0, 196, 204, 0.3);
++  }
++
++  .glow-orange-sm {
++    box-shadow: 0 0 20px -5px rgba(244, 118, 33, 0.3);
++  }
++
++  .glow-blue-sm {
++    box-shadow: 0 0 20px -5px rgba(21, 93, 252, 0.3);
++  }
++
++  .glow-purple-sm {
++    box-shadow: 0 0 20px -5px rgba(193, 64, 255, 0.3);
++  }
++
++  .glow-green-sm {
++    box-shadow: 0 0 20px -5px rgba(89, 191, 150, 0.3);
++  }
++
++  /* Muloo Logo Base Styles */
++  .muloo-logo {
++    display: inline-flex;
++    align-items: center;
++    line-height: 1;
++    font-family: var(--font-aileron);
++    font-weight: 900;
++    /* Aileron Heavy */
++  }
++
++  /* Ambient background blobs */
++  .blobs {
++    position: fixed;
++    inset: 0;
++    overflow: hidden;
++    z-index: 40;
++    pointer-events: none;
++  }
++
++  .blob {
++    position: absolute;
++    filter: blur(150px);
++    border-radius: 50%;
++    opacity: 0.15;
++    mix-blend-mode: screen;
++    animation: float 24s infinite alternate ease-in-out;
++    will-change: transform;
++  }
++
++  .blob-1 {
++    background: var(--accent-primary);
++    width: 500px;
++    height: 500px;
++    top: -150px;
++    left: -150px;
++  }
++
++  .blob-2 {
++    background: var(--accent-secondary);
++    width: 600px;
++    height: 600px;
++    bottom: -200px;
++    right: -200px;
++    animation-delay: -10s;
++  }
++
++  .formCard {
++    background: rgba(255, 255, 255, 0.03);
++    border: 1px solid rgba(255, 255, 255, 0.08);
++    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
++    backdrop-filter: blur(20px);
++    -webkit-backdrop-filter: blur(20px);
++    border-radius: 24px;
++  }
+ }
++
++@keyframes float {
++  0% {
++    transform: translate(0, 0) scale(1);
++  }
++
++  100% {
++    transform: translate(50px, 50px) scale(1.1);
++  }
++}
++
++@media (prefers-reduced-motion: reduce) {
++  .blob {
++    animation: none;
++  }
++}
+\ No newline at end of file
+diff --git a/package-lock.json b/package-lock.json
+index 5726916..e20c34d 100644
+--- a/package-lock.json
++++ b/package-lock.json
+@@ -89,6 +89,7 @@
+         "@types/ws": "^8.5.13",
+         "@vitejs/plugin-react": "^5.0.4",
+         "autoprefixer": "^10.4.21",
++        "cross-env": "^10.1.0",
+         "drizzle-kit": "^0.31.4",
+         "esbuild": "^0.25.0",
+         "postcss": "^8.5.6",
+@@ -405,6 +406,13 @@
+       "dev": true,
+       "license": "Apache-2.0"
+     },
++    "node_modules/@epic-web/invariant": {
++      "version": "1.0.0",
++      "resolved": "https://registry.npmjs.org/@epic-web/invariant/-/invariant-1.0.0.tgz",
++      "integrity": "sha512-lrTPqgvfFQtR/eY/qkIzp98OGdNJu0m5ji3q/nJI8v3SXkRKEnWiOxMmbvcSoAIzv/cGiuvRy57k4suKQSAdwA==",
++      "dev": true,
++      "license": "MIT"
++    },
+     "node_modules/@esbuild-kit/core-utils": {
+       "version": "3.3.2",
+       "resolved": "https://registry.npmjs.org/@esbuild-kit/core-utils/-/core-utils-3.3.2.tgz",
+@@ -4340,6 +4348,39 @@
+         "node": ">=6.6.0"
+       }
+     },
++    "node_modules/cross-env": {
++      "version": "10.1.0",
++      "resolved": "https://registry.npmjs.org/cross-env/-/cross-env-10.1.0.tgz",
++      "integrity": "sha512-GsYosgnACZTADcmEyJctkJIoqAhHjttw7RsFrVoJNXbsWWqaq6Ym+7kZjq6mS45O0jij6vtiReppKQEtqWy6Dw==",
++      "dev": true,
++      "license": "MIT",
++      "dependencies": {
++        "@epic-web/invariant": "^1.0.0",
++        "cross-spawn": "^7.0.6"
++      },
++      "bin": {
++        "cross-env": "dist/bin/cross-env.js",
++        "cross-env-shell": "dist/bin/cross-env-shell.js"
++      },
++      "engines": {
++        "node": ">=20"
++      }
++    },
++    "node_modules/cross-spawn": {
++      "version": "7.0.6",
++      "resolved": "https://registry.npmjs.org/cross-spawn/-/cross-spawn-7.0.6.tgz",
++      "integrity": "sha512-uV2QOWP2nWzsy2aMp8aRibhi9dlzF5Hgh5SHaB9OiTGEyDTiJJyx0uy51QXdyWbtAHNua4XJzUKca3OzKUd3vA==",
++      "dev": true,
++      "license": "MIT",
++      "dependencies": {
++        "path-key": "^3.1.0",
++        "shebang-command": "^2.0.0",
++        "which": "^2.0.1"
++      },
++      "engines": {
++        "node": ">= 8"
++      }
++    },
+     "node_modules/csstype": {
+       "version": "3.2.3",
+       "resolved": "https://registry.npmjs.org/csstype/-/csstype-3.2.3.tgz",
+@@ -5280,6 +5321,13 @@
+       "integrity": "sha512-hvpoI6korhJMnej285dSg6nu1+e6uxs7zG3BYAm5byqDsgJNWwxzM6z6iZiAgQR4TJ30JmBTOwqZUw3WlyH3AQ==",
+       "license": "MIT"
+     },
++    "node_modules/isexe": {
++      "version": "2.0.0",
++      "resolved": "https://registry.npmjs.org/isexe/-/isexe-2.0.0.tgz",
++      "integrity": "sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==",
++      "dev": true,
++      "license": "ISC"
++    },
+     "node_modules/jiti": {
+       "version": "2.6.1",
+       "resolved": "https://registry.npmjs.org/jiti/-/jiti-2.6.1.tgz",
+@@ -5902,6 +5950,16 @@
+         "node": ">= 0.4.0"
+       }
+     },
++    "node_modules/path-key": {
++      "version": "3.1.1",
++      "resolved": "https://registry.npmjs.org/path-key/-/path-key-3.1.1.tgz",
++      "integrity": "sha512-ojmeN0qd+y0jszEtoY48r0Peq5dwMEkIlCOu6Q5f41lfkswXuKtYrhgoTpLnyIcHm24Uhqx+5Tqm2InSwLhE6Q==",
++      "dev": true,
++      "license": "MIT",
++      "engines": {
++        "node": ">=8"
++      }
++    },
+     "node_modules/path-to-regexp": {
+       "version": "8.3.0",
+       "resolved": "https://registry.npmjs.org/path-to-regexp/-/path-to-regexp-8.3.0.tgz",
+@@ -6584,6 +6642,29 @@
+       "integrity": "sha512-E5LDX7Wrp85Kil5bhZv46j8jOeboKq5JMmYM3gVGdGH8xFpPWXUMsNrlODCrkoxMEeNi/XZIwuRvY4XNwYMJpw==",
+       "license": "ISC"
+     },
++    "node_modules/shebang-command": {
++      "version": "2.0.0",
++      "resolved": "https://registry.npmjs.org/shebang-command/-/shebang-command-2.0.0.tgz",
++      "integrity": "sha512-kHxr2zZpYtdmrN1qDjrrX/Z1rR1kG8Dx+gkpK1G4eXmvXswmcE1hTWBWYUzlraYw1/yZp6YuDY77YtvbN0dmDA==",
++      "dev": true,
++      "license": "MIT",
++      "dependencies": {
++        "shebang-regex": "^3.0.0"
++      },
++      "engines": {
++        "node": ">=8"
++      }
++    },
++    "node_modules/shebang-regex": {
++      "version": "3.0.0",
++      "resolved": "https://registry.npmjs.org/shebang-regex/-/shebang-regex-3.0.0.tgz",
++      "integrity": "sha512-7++dFhtcx3353uBaq8DDR4NuxBetBzC7ZQOhmTQInHEd6bSrXdiEyzCvG07Z44UYdLShWUyXt5M/yhz8ekcb1A==",
++      "dev": true,
++      "license": "MIT",
++      "engines": {
++        "node": ">=8"
++      }
++    },
+     "node_modules/side-channel": {
+       "version": "1.1.0",
+       "resolved": "https://registry.npmjs.org/side-channel/-/side-channel-1.1.0.tgz",
+@@ -8056,6 +8137,22 @@
+         "@esbuild/win32-x64": "0.27.2"
+       }
+     },
++    "node_modules/which": {
++      "version": "2.0.2",
++      "resolved": "https://registry.npmjs.org/which/-/which-2.0.2.tgz",
++      "integrity": "sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==",
++      "dev": true,
++      "license": "ISC",
++      "dependencies": {
++        "isexe": "^2.0.0"
++      },
++      "bin": {
++        "node-which": "bin/node-which"
++      },
++      "engines": {
++        "node": ">= 8"
++      }
++    },
+     "node_modules/wouter": {
+       "version": "3.9.0",
+       "resolved": "https://registry.npmjs.org/wouter/-/wouter-3.9.0.tgz",
+diff --git a/package.json b/package.json
+index 4e10f6e..e9644fa 100644
+--- a/package.json
++++ b/package.json
+@@ -5,9 +5,9 @@
+   "license": "MIT",
+   "scripts": {
+     "dev:client": "vite dev --port 5000",
+-    "dev": "NODE_ENV=development tsx server/index.ts",
++    "dev": "cross-env NODE_ENV=development tsx server/index.ts",
+     "build": "tsx script/build.ts",
+-    "start": "NODE_ENV=production node dist/index.cjs",
++    "start": "cross-env NODE_ENV=production node dist/index.cjs",
+     "check": "tsc",
+     "db:push": "drizzle-kit push"
+   },
+@@ -92,6 +92,7 @@
+     "@types/ws": "^8.5.13",
+     "@vitejs/plugin-react": "^5.0.4",
+     "autoprefixer": "^10.4.21",
++    "cross-env": "^10.1.0",
+     "drizzle-kit": "^0.31.4",
+     "esbuild": "^0.25.0",
+     "postcss": "^8.5.6",

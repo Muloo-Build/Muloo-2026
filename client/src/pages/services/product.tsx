@@ -1,11 +1,12 @@
 import { Section } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Wrench, Laptop, Rocket, BarChart3, Settings, Lightbulb, Users, CreditCard, Server, HeadphonesIcon, Activity, Star, Cloud } from "lucide-react";
+import { Link } from "wouter";
 import { Badge } from "@/components/ui/badge";
 import { serviceProductContent } from "@/lib/content";
 
 const streamGreen = "#59BF96";
-const meetingUrl = "https://meetings.hubspot.com/morne-visagie";
+const meetingUrl = "/meetings/morne";
 
 export function ServicesProduct() {
   return (
@@ -529,7 +530,7 @@ export function ServicesProduct() {
           <p className="text-xl text-muted-foreground mb-10 leading-[1.8]">
             Bring the idea. We'll validate the scope, define the first shippable version, and map the build and launch steps.
           </p>
-          <a href={meetingUrl} target="_blank" rel="noopener noreferrer">
+          <Link href={meetingUrl}>
             <Button
               size="lg"
               className="font-bold px-10 h-14 text-white"
@@ -538,7 +539,7 @@ export function ServicesProduct() {
             >
               Discuss Your Product Idea <ArrowRight className="ml-2" />
             </Button>
-          </a>
+          </Link>
         </div>
       </Section>
     </div>

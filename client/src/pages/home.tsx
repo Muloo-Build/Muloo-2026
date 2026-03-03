@@ -252,7 +252,7 @@ function DashboardMock() {
 }
 
 export function Home() {
-  const meetingUrl = "https://www.wearemuloo.com/meetings/jarrud2/jarrud";
+  const meetingUrl = "/meetings/jarrud";
 
   return (
     <div className="flex flex-col">
@@ -275,11 +275,11 @@ export function Home() {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 mb-12">
-                <a href={meetingUrl} target="_blank" rel="noopener noreferrer">
+                <Link href={meetingUrl}>
                   <Button size="lg" className="bg-gradient-muloo border-none text-white hover:brightness-110 font-bold px-8 h-14 rounded-lg glow-muloo-sm hover:-translate-y-0.5 transition-all" data-testid="button-hero-cta">
                     {homeContent.hero.primaryCta} <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
-                </a>
+                </Link>
                 <Link href="/case-studies">
                   <Button size="lg" variant="outline" className="border-white/15 text-white hover:bg-white/5 px-8 h-14 rounded-lg" data-testid="button-hero-secondary">
                     {homeContent.hero.secondaryCta}
@@ -524,11 +524,11 @@ export function Home() {
           <p className="text-xl text-muted-foreground mb-10 leading-[1.8]">
             Let's talk about your systems, your data, and what needs to change.
           </p>
-          <a href={meetingUrl} target="_blank" rel="noopener noreferrer">
+          <Link href={meetingUrl}>
             <Button size="lg" className="bg-gradient-muloo border-none text-white hover:brightness-110 font-bold px-10 h-14 rounded-lg glow-muloo-sm" data-testid="button-cta-final">
               Start a Conversation <ArrowRight className="ml-2" />
             </Button>
-          </a>
+          </Link>
         </div>
       </Section>
     </div>

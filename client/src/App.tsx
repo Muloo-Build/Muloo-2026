@@ -14,6 +14,7 @@ import { CaseStudies } from "./pages/resources/case-studies";
 import { CaseStudyDetail } from "./pages/resources/case-study-detail";
 import { Blog } from "./pages/resources/blog";
 import { BlogPost } from "./pages/resources/blog-post";
+import { MeetingJarrud, MeetingMorne } from "./pages/meetings";
 import NotFound from "./pages/not-found";
 import { Switch, Route } from "wouter";
 import { Layout } from "./components/layout/Layout";
@@ -47,6 +48,8 @@ function Router() {
         <Route path="/advisory" component={Advisory} />
         <Route path="/about" component={About} />
         <Route path="/contact" component={Contact} />
+        <Route path="/meetings/jarrud" component={MeetingJarrud} />
+        <Route path="/meetings/morne" component={MeetingMorne} />
         <Route path="/styleguide" component={Styleguide} />
 
         <Route path="/resources" component={ResourcesIndex} />

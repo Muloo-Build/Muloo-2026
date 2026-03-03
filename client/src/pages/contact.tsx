@@ -1,5 +1,6 @@
 import { Section } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
+import { Link } from "wouter";
 import { ContactForm } from "@/components/sections/contact-form";
 import { MapPin } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -12,17 +13,17 @@ const bookingOptions = [
     title: "Lead HubSpot Architect & Sales Engineer",
     description: "CRM strategy, architecture, growth systems.",
     buttonLabel: "Book with Jarrud",
-    link: "https://www.wearemuloo.com/meetings/jarrud2/jarrud",
+    link: "/meetings/jarrud",
     image: jarrudImg,
     accent: "rgba(244, 118, 33, 0.7)",
     testId: "booking-jarrud",
   },
   {
-    name: "Morné Visagie",
+    name: "Morne Visagie",
     title: "Partner & Outsourced CTO",
     description: "Technical architecture, integrations, scale systems.",
     buttonLabel: "Book with Morne",
-    link: "https://meetings.hubspot.com/morne-visagie",
+    link: "/meetings/morne",
     image: morneImg,
     accent: "rgba(21, 93, 252, 0.7)",
     testId: "booking-morne",
@@ -83,14 +84,14 @@ export function Contact() {
                     </div>
                   </div>
                   <p className="text-sm text-muted-foreground mb-6">{person.description}</p>
-                  <a href={person.link} target="_blank" rel="noopener noreferrer" className="block">
+                  <Link href={person.link} className="block">
                     <Button
                       className="w-full bg-gradient-muloo border-none text-white font-bold h-11 rounded-xl transition-all duration-300 hover:brightness-110 hover:-translate-y-0.5"
                       data-testid={`button-${person.testId}`}
                     >
                       {person.buttonLabel}
                     </Button>
-                  </a>
+                  </Link>
                 </div>
               </div>
             ))}
