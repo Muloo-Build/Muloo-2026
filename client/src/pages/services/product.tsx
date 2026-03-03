@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { serviceProductContent } from "@/lib/content";
 
 const streamGreen = "#59BF96";
-const meetingUrl = "/meetings/morne";
+const meetingUrl = "/contact/book/morne";
 
 export function ServicesProduct() {
   return (

@@ -5,6 +5,8 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowRight, BarChart3, Building2, Database, Code2, LineChart, ClipboardCheck, Layers, AlertTriangle, GitBranch, Workflow, Eye, Users, Settings, Shield, TrendingUp, Check } from "lucide-react";
 import { serviceHubContent } from "@/lib/content";
 import hubspotBadge from "@assets/gold-badge-color_1771487221441.png";
+import { BookingCard } from "@/components/meetings/BookingCard";
+import { getMeetingBySlug } from "@/content/meetings";
 
 const streamOrange = "#F47621";
 
@@ -18,6 +20,8 @@ const services = [
 ];
 
 export function ServicesHub() {
+  const jarrudMeeting = getMeetingBySlug("jarrud");
+
   return (
     <div className="flex flex-col">
       {/* Hero */}
@@ -189,6 +193,16 @@ export function ServicesHub() {
           ))}
         </div>
       </Section>
+
+      {jarrudMeeting && (
+        <Section className="py-12 md:py-16 border-t border-white/5">
+          <div className="mb-6">
+            <span className="font-mono text-xs uppercase tracking-widest text-[#F47621] mb-3 block">Strategy call</span>
+            <h2 className="text-2xl md:text-3xl font-bold text-white">Book a focused HubSpot call</h2>
+          </div>
+          <BookingCard meeting={jarrudMeeting} />
+        </Section>
+      )}
 
       {/* CRM Structure Visual */}
       <Section className="py-20 md:py-[120px] border-t border-white/5">
@@ -442,6 +456,16 @@ export function ServicesHub() {
           </div>
         </div>
       </Section>
+
+      {jarrudMeeting && (
+        <Section className="py-12 md:py-16 border-t border-white/5">
+          <div className="mb-6">
+            <span className="font-mono text-xs uppercase tracking-widest text-[#F47621] mb-3 block">Need a plan?</span>
+            <h2 className="text-2xl md:text-3xl font-bold text-white">Talk directly with Jarrud</h2>
+          </div>
+          <BookingCard meeting={jarrudMeeting} />
+        </Section>
+      )}
 
       {/* CTA */}
       <Section className="py-20 md:py-[120px] text-center bg-hero-gradient border-t border-white/5 relative overflow-hidden">

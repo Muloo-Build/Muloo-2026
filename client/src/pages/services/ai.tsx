@@ -17,7 +17,7 @@ import { Badge } from "@/components/ui/badge";
 import { serviceAiContent } from "@/lib/content";
 
 const streamPurple = "#C140FF";
-const meetingUrl = "/meetings/jarrud";
+const meetingUrl = "/contact/book/jarrud";
 
 const serviceIcons = [Bot, Code2, Workflow, ShieldCheck];
 

@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Database, Cpu, Bot, Layout, ChevronRight, Server, Workflow, Check, TrendingUp, Zap } from "lucide-react";
 import { Link } from "wouter";
 import { useState, useEffect } from "react";
+import { BookingCard } from "@/components/meetings/BookingCard";
+import { getMeetingBySlug } from "@/content/meetings";
 
 const rotatingPhrases = [
   "Technical Partner for HubSpot",
@@ -252,7 +254,9 @@ function DashboardMock() {
 }
 
 export function Home() {
-  const meetingUrl = "/meetings/jarrud";
+  const meetingUrl = "/contact/book/jarrud";
+  const jarrudMeeting = getMeetingBySlug("jarrud");
+  const morneMeeting = getMeetingBySlug("morne");
 
   return (
     <div className="flex flex-col">
@@ -298,6 +302,35 @@ export function Home() {
       </div>
 
       <ClientMarquee />
+
+      {jarrudMeeting && morneMeeting && (
+        <Section className="py-14 md:py-16 border-t border-white/5">
+          <div className="mb-8">
+            <h2 className="text-sm font-mono text-gradient-muloo uppercase tracking-widest mb-4">Book a quick call</h2>
+            <h3 className="text-3xl md:text-4xl font-bold text-white">Speak directly with Muloo leadership</h3>
+          </div>
+
+          <div className="md:grid md:grid-cols-2 md:gap-6">
+            <div className="md:hidden overflow-x-auto">
+              <div className="flex gap-4 snap-x snap-mandatory pb-2">
+                <div className="snap-start min-w-[92%]">
+                  <BookingCard meeting={jarrudMeeting} compact className="h-full" />
+                </div>
+                <div className="snap-start min-w-[92%]">
+                  <BookingCard meeting={morneMeeting} compact className="h-full" />
+                </div>
+              </div>
+            </div>
+
+            <div className="hidden md:block">
+              <BookingCard meeting={jarrudMeeting} compact className="h-full" />
+            </div>
+            <div className="hidden md:block">
+              <BookingCard meeting={morneMeeting} compact className="h-full" />
+            </div>
+          </div>
+        </Section>
+      )}
 
       {/* ── 2. FOUR STREAMS ── */}
       <Section className="py-20 md:py-[120px] bg-section-soft border-t border-white/5">

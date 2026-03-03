@@ -14,7 +14,7 @@ import { CaseStudies } from "./pages/resources/case-studies";
 import { CaseStudyDetail } from "./pages/resources/case-study-detail";
 import { Blog } from "./pages/resources/blog";
 import { BlogPost } from "./pages/resources/blog-post";
-import { MeetingJarrud, MeetingMorne } from "./pages/meetings";
+import { MeetingBookingPage } from "./pages/meetings";
 import NotFound from "./pages/not-found";
 import { Switch, Route } from "wouter";
 import { Layout } from "./components/layout/Layout";
@@ -23,6 +23,8 @@ import { queryClient } from "./lib/queryClient";
 import { Toaster } from "@/components/ui/toaster";
 import { useEffect } from "react";
 import { useLocation } from "wouter";
+import { PopupProvider } from "@/components/popups/PopupProvider";
+import { PopupRoot } from "@/components/popups/PopupRoot";
 
 function ScrollToTop() {
   const [location] = useLocation();
@@ -48,8 +50,8 @@ function Router() {
         <Route path="/advisory" component={Advisory} />
         <Route path="/about" component={About} />
         <Route path="/contact" component={Contact} />
-        <Route path="/meetings/jarrud" component={MeetingJarrud} />
-        <Route path="/meetings/morne" component={MeetingMorne} />
+        <Route path="/contact/book/:person" component={MeetingBookingPage} />
+        <Route path="/meetings/:person" component={MeetingBookingPage} />
         <Route path="/styleguide" component={Styleguide} />
 
         <Route path="/resources" component={ResourcesIndex} />
@@ -67,9 +69,12 @@ function Router() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <Toaster />
-      <ScrollToTop />
-      <Router />
+      <PopupProvider>
+        <Toaster />
+        <ScrollToTop />
+        <Router />
+        <PopupRoot />
+      </PopupProvider>
     </QueryClientProvider>
   );
 }
