@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 const WHATSAPP_NUMBER = "27686343652";
 const WHATSAPP_MESSAGE = "Hi Muloo, I would like to chat about my project.";
 
-function WhatsAppIcon({ className = "h-[27px] w-[27px]" }: { className?: string }) {
+function WhatsAppIcon({ className = "h-[34px] w-[34px]" }: { className?: string }) {
   return (
     <svg
       viewBox="0 0 32 32"
@@ -56,7 +56,7 @@ export function MulooAssist() {
         data-testid="button-whatsapp-chat"
       >
         <span className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 rounded-full" />
-        <WhatsAppIcon className="h-[27px] w-[27px] relative z-10" />
+        <WhatsAppIcon className="h-[34px] w-[34px] relative z-10" />
       </Button>
       <div className="absolute bottom-full right-0 mb-4 bg-card border border-white/10 p-4 rounded-xl shadow-xl w-64 origin-bottom-right scale-0 opacity-0 transition-all pointer-events-none">
         <p className="text-sm font-medium mb-2">Muloo Assist</p>
