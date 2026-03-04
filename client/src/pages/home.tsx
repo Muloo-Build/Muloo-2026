@@ -28,7 +28,6 @@ const heroStackItems: HeroStackItem[] = [
   { name: "Azure", src: "/assets/stack-logos/azure.svg", iconClassName: "h-5 w-5" },
   { name: "SAP", src: "/assets/stack-logos/sap.svg", iconClassName: "h-5 w-5" },
   { name: "xero", src: "/assets/stack-logos/xero.svg", iconClassName: "h-5 w-5", labelClassName: "lowercase" },
-  { name: "snowflake", src: "/assets/stack-logos/snowflake.svg", iconClassName: "h-5 w-5", labelClassName: "lowercase" },
 ];
 
 const streamColors: Record<string, { accent: string; border: string; bg: string; text: string; glow: string }> = {
