@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 const WHATSAPP_NUMBER = "27700000000"; // Replace with your WhatsApp number in international format (no +)
 const WHATSAPP_MESSAGE = "Hi Muloo, I would like to chat about my project.";
 
-function WhatsAppIcon({ className = "h-12 w-12" }: { className?: string }) {
+function WhatsAppIcon({ className = "h-9 w-9" }: { className?: string }) {
   return (
     <svg
       viewBox="0 0 32 32"
@@ -50,13 +50,13 @@ export function MulooAssist() {
     <div className="fixed bottom-6 right-6 z-40">
       <Button
         skipContactRedirect
-        className="h-28 w-28 rounded-full bg-gradient-muloo text-white shadow-xl hover:brightness-110 hover:scale-105 transition-all duration-300 flex items-center justify-center group relative overflow-hidden glow-muloo-sm"
+        className="h-14 w-14 rounded-full bg-gradient-muloo text-white shadow-xl hover:brightness-110 hover:scale-105 transition-all duration-300 flex items-center justify-center group relative overflow-hidden glow-muloo-sm"
         onClick={openWhatsApp}
         aria-label="Chat on WhatsApp"
         data-testid="button-whatsapp-chat"
       >
         <span className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 rounded-full" />
-        <WhatsAppIcon className="h-12 w-12 relative z-10" />
+        <WhatsAppIcon className="h-9 w-9 relative z-10" />
       </Button>
       <div className="absolute bottom-full right-0 mb-4 bg-card border border-white/10 p-4 rounded-xl shadow-xl w-64 origin-bottom-right scale-0 opacity-0 transition-all pointer-events-none">
         <p className="text-sm font-medium mb-2">Muloo Assist</p>

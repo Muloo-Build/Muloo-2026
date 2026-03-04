@@ -93,7 +93,9 @@
   }
 
   body {
-    @apply font-sans antialiased bg-background text-foreground;
+    @apply antialiased bg-background text-foreground;
+    font-family: var(--font-aileron);
+    font-weight: 400;
     background-color: #050A30;
     min-height: 100vh;
   }
@@ -105,6 +107,7 @@
   h5,
   h6 {
     @apply tracking-tight text-white;
+    font-family: var(--font-sans);
     font-weight: 600;
     /* Semi-Bold */
   }
@@ -121,6 +124,31 @@
   code,
   pre {
     @apply font-mono;
+  }
+
+  /* Unified body copy system */
+  main p:not(.font-mono):not([class*="text-"]),
+  main li:not(.font-mono):not([class*="text-"]) {
+    font-family: var(--font-aileron);
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  /* Normalize small muted body copy (card descriptions) */
+  main p.text-sm.text-muted-foreground,
+  main li.text-sm.text-muted-foreground {
+    font-family: var(--font-aileron);
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  @media (min-width: 768px) {
+    main p:not(.font-mono):not([class*="text-"]),
+    main li:not(.font-mono):not([class*="text-"]) {
+      font-size: 1.05rem;
+    }
   }
 }
 

@@ -193,7 +193,7 @@ export function Styleguide() {
       {/* Typography */}
       <Section data-testid="section-typography">
         <h2 className="text-3xl font-bold mb-2" data-testid="text-section-typography">Typography</h2>
-        <p className="text-muted-foreground mb-8">Montserrat for headings and body. JetBrains Mono for code.</p>
+        <p className="text-muted-foreground mb-8">Montserrat for headings. Aileron for body copy. JetBrains Mono for code.</p>
 
         <div className="mb-10" data-testid="section-typography-hierarchy">
           <h3 className="text-2xl font-bold mb-3">Typography Hierarchy</h3>
