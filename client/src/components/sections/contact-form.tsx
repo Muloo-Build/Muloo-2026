@@ -33,8 +33,11 @@ const enquiryOptions = [
 ] as const;
 
 const formSchema = z.object({
-  name: z.string().min(2, {
-    message: "Name must be at least 2 characters.",
+  firstName: z.string().min(1, {
+    message: "First name is required.",
+  }),
+  lastName: z.string().min(1, {
+    message: "Last name is required.",
   }),
   email: z.string().email({
     message: "Please enter a valid email.",
@@ -53,7 +56,8 @@ export function ContactForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
+      firstName: "",
+      lastName: "",
       email: "",
       company: "",
       interest: "",
@@ -64,7 +68,7 @@ export function ContactForm() {
   const mutation = useMutation({
     mutationFn: async (values: z.infer<typeof formSchema>) => {
       const payload = {
-        name: values.name,
+        name: `${values.firstName} ${values.lastName}`.trim(),
         email: values.email,
         company: values.company,
         message: `Focus area: ${values.interest}\n\n${values.message}`,
@@ -123,24 +127,44 @@ export function ContactForm() {
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Name</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="Your full name"
-                      {...field}
-                      className="h-11 bg-[#0A1236]/80 border-white/20 text-white placeholder:text-white/45 focus:border-brand-teal/70 focus-visible:ring-brand-teal/30"
-                      data-testid="input-name"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <FormField
+                control={form.control}
+                name="firstName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>First Name</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="First name"
+                        {...field}
+                        className="h-11 bg-[#0A1236]/80 border-white/20 text-white placeholder:text-white/45 focus:border-brand-teal/70 focus-visible:ring-brand-teal/30"
+                        data-testid="input-first-name"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="lastName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Last Name</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Last name"
+                        {...field}
+                        className="h-11 bg-[#0A1236]/80 border-white/20 text-white placeholder:text-white/45 focus:border-brand-teal/70 focus-visible:ring-brand-teal/30"
+                        data-testid="input-last-name"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
             <FormField
               control={form.control}
               name="email"

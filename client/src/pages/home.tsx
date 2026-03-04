@@ -305,11 +305,6 @@ export function Home() {
                     {homeContent.hero.primaryCta} <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
                 </Link>
-                <Link href="/case-studies">
-                  <Button size="lg" variant="outline" className="border-white/15 text-white hover:bg-white/5 px-8 h-14 rounded-lg" data-testid="button-hero-secondary">
-                    {homeContent.hero.secondaryCta}
-                  </Button>
-                </Link>
               </div>
 
               <p className="text-sm font-mono text-muted-foreground/50 tracking-wider">
@@ -577,22 +572,37 @@ export function Home() {
 function LeadMagnetSection() {
   return (
     <Section className="py-20 md:py-[120px] border-t border-white/5 relative overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 50% 60% at 50% 50%, rgba(193,64,255,0.04), transparent)" }} />
-      <div className="relative z-10 max-w-2xl mx-auto text-center">
-        <h2 className="text-sm font-mono text-gradient-muloo uppercase tracking-widest mb-4">Free Resource</h2>
-        <h3 className="text-3xl md:text-4xl font-bold text-white mb-6">Free HubSpot & Systems Health Check</h3>
-        <p className="text-muted-foreground mb-10 leading-[1.8]">
-          Get the 10-point checklist we use to stabilise CRM, integrations, and reporting foundations.
-        </p>
-        <a href="https://audit.wearemuloo.com/" target="_blank" rel="noopener noreferrer">
-          <Button
-            size="lg"
-            className="bg-gradient-muloo border-none text-white hover:brightness-110 font-bold px-10 h-14 rounded-lg glow-muloo-sm"
-            data-testid="button-lead-magnet"
-          >
-            Go to the Audit Tool <ArrowRight className="ml-2" />
-          </Button>
-        </a>
+      <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 60% 70% at 50% 45%, rgba(193,64,255,0.07), transparent)" }} />
+      <div className="relative z-10 max-w-4xl mx-auto">
+        <div className="relative rounded-3xl p-[1px] bg-gradient-muloo">
+          <div className="rounded-3xl bg-[#060E2B]/95 border border-white/10 px-8 py-10 md:px-12 md:py-12 text-center shadow-[0_30px_70px_-35px_rgba(193,64,255,0.45)]">
+            <span className="inline-flex items-center rounded-full border border-brand-teal/25 bg-brand-teal/10 px-4 py-1 text-[11px] font-mono uppercase tracking-widest text-brand-teal mb-5">
+              Lead Magnet
+            </span>
+            <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4 leading-tight">
+              Free HubSpot & Systems Health Check
+            </h2>
+            <p className="text-lg md:text-xl text-white/75 max-w-2xl mx-auto mb-8 leading-[1.7]">
+              Get the 10-point checklist we use to stabilise CRM, integrations, and reporting foundations.
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-3 mb-9 text-xs font-mono uppercase tracking-wider">
+              <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/70">10-Point Framework</span>
+              <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/70">Immediate Action Items</span>
+              <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/70">No Email Gate</span>
+            </div>
+            <a href="https://audit.wearemuloo.com/" target="_blank" rel="noopener noreferrer">
+              <Button
+                skipContactRedirect
+                size="lg"
+                className="bg-gradient-muloo border-none text-white hover:brightness-110 font-bold px-12 h-16 rounded-xl glow-muloo-sm text-lg"
+                data-testid="button-lead-magnet"
+              >
+                Open the Audit Tool <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+            </a>
+            <p className="text-xs text-white/45 mt-4">Opens audit.wearemuloo.com</p>
+          </div>
+        </div>
       </div>
     </Section>
   );
