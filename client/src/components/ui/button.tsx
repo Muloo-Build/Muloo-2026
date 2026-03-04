@@ -4,8 +4,6 @@ import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 
-const CONTACT_URL = "https://www.wearemuloo.com/contact"
-
 const buttonVariants = cva(
   "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0" +
 " hover-elevate active-elevate-2",
@@ -54,22 +52,13 @@ export interface ButtonProps
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, skipContactRedirect = false, onClick, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
-
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-      onClick?.(event)
-
-      if (event.defaultPrevented || skipContactRedirect || props.disabled) {
-        return
-      }
-
-      window.location.href = CONTACT_URL
-    }
+    void skipContactRedirect
 
     return (
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
-        onClick={handleClick}
+        onClick={onClick}
         {...props}
       />
     )

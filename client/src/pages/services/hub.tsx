@@ -53,7 +53,7 @@ export function ServicesHub() {
               </p>
               <p className="text-sm text-white/40 font-mono mt-6 max-w-2xl">From CRM selection to onboarding and governance. Built for long-term adoption.</p>
               <div className="mt-10">
-                <Link href="/contact">
+                <Link href="/contact/book/jarrud">
                   <Button
                     size="lg"
                     data-testid="button-hero-cta"
@@ -468,7 +468,7 @@ export function ServicesHub() {
           <p className="text-xl text-muted-foreground mb-10 leading-[1.8]">
             We’ll review your current CRM setup, clarify requirements, and map the next build and adoption steps.
           </p>
-          <Link href="/contact">
+          <Link href="/contact/book/jarrud">
             <Button
               size="lg"
               data-testid="button-cta-contact"

@@ -238,7 +238,16 @@ export function Advisory() {
                       <Linkedin className="h-4 w-4 mr-2" style={{ color: leader.accent }} /> View Profile
                     </Button>
                   </a>
-                  <Link href="/contact" data-testid={`link-meeting-${i}`}>
+                  <Link
+                    href={
+                      leader.name.toLowerCase().includes("jarrud")
+                        ? "/contact/book/jarrud"
+                        : leader.name.toLowerCase().includes("morne")
+                          ? "/contact/book/morne"
+                          : "/contact"
+                    }
+                    data-testid={`link-meeting-${i}`}
+                  >
                     <Button size="sm" className="text-white hover:opacity-90 font-bold transition-opacity" style={{ backgroundColor: leader.accent }}>
                       <Calendar className="h-4 w-4 mr-2" /> Book an Advisory Call
                     </Button>
@@ -364,7 +373,7 @@ export function Advisory() {
           <p className="text-xl text-muted-foreground mb-10 leading-[1.8]">
             Let's discuss how embedded leadership can accelerate your business.
           </p>
-          <Link href="/contact">
+          <Link href="/contact/book/morne">
             <Button size="lg" className="bg-brand-teal text-white hover:bg-brand-teal/90 font-bold px-10 h-14 rounded-lg" data-testid="button-advisory-cta">
               Book an Advisory Call <ArrowRight className="ml-2" />
             </Button>
