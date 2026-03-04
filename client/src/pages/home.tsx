@@ -163,7 +163,7 @@ function UICascade() {
 const clientLogos = [
   { name: "Chat Inc.", href: "https://www.chatinc.com/" },
   { name: "Phillips Law", href: "https://phillips-law.co.uk/" },
-  { name: "Group Elephant", href: "https://deviare.africa/the-company" },
+  { name: "Group Elephant", href: "https://www.groupelephant.com/" },
   { name: "epi-use", href: "https://www.epiuse.com/" },
   { name: "WConsulting", href: "https://wconsulting.co.za/#home" },
   { name: "Deviare", href: "https://deviare.africa/the-company" },
@@ -177,7 +177,7 @@ const clientLogos = [
 
 function ClientMarquee() {
   return (
-    <Section className="py-[8px] border-t border-b border-white/5 bg-[#030614]/50 overflow-hidden relative">
+    <Section className="py-2 md:py-2 border-t border-b border-white/5 bg-[#030614]/50 overflow-hidden relative">
       <div className="flex w-max animate-marquee hover:[animation-play-state:paused] transition-all">
         <div className="flex gap-20 items-center px-10">
           {clientLogos.map((client, i) => (
