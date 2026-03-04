@@ -14,6 +14,23 @@ const rotatingPhrases = [
   "Embedded CTO & Sales Engineering",
 ];
 
+type HeroStackItem = {
+  name: string;
+  src: string;
+  iconClassName: string;
+  labelClassName?: string;
+};
+
+const heroStackItems: HeroStackItem[] = [
+  { name: "HubSpot", src: "/assets/stack-logos/hubspot.svg", iconClassName: "h-5 w-5" },
+  { name: "SQL Server", src: "/assets/stack-logos/microsoftsqlserver.svg", iconClassName: "h-5 w-5" },
+  { name: "Dynamics 365", src: "/assets/stack-logos/microsoft-icon.svg", iconClassName: "h-4 w-4" },
+  { name: "Azure", src: "/assets/stack-logos/azure.svg", iconClassName: "h-5 w-5" },
+  { name: "SAP", src: "/assets/stack-logos/sap.svg", iconClassName: "h-5 w-5" },
+  { name: "xero", src: "/assets/stack-logos/xero.svg", iconClassName: "h-5 w-5", labelClassName: "lowercase" },
+  { name: "snowflake", src: "/assets/stack-logos/snowflake.svg", iconClassName: "h-5 w-5", labelClassName: "lowercase" },
+];
+
 const streamColors: Record<string, { accent: string; border: string; bg: string; text: string; glow: string }> = {
   hub: { accent: "bg-stream-hub", border: "border-stream-hub/30", bg: "bg-stream-hub/10", text: "text-stream-hub", glow: "group-hover:shadow-[0_0_40px_-8px_rgba(244,118,33,0.35)]" },
   build: { accent: "bg-stream-build", border: "border-stream-build/30", bg: "bg-stream-build/10", text: "text-stream-build", glow: "group-hover:shadow-[0_0_40px_-8px_rgba(21,93,252,0.35)]" },
@@ -75,6 +92,32 @@ function RotatingBadge() {
       >
         {rotatingPhrases[index]}
       </span>
+    </div>
+  );
+}
+
+function HeroStackStrip() {
+  return (
+    <div className="mt-12 md:mt-14">
+      <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-4 md:gap-x-8">
+        {heroStackItems.map((item) => (
+          <div
+            key={item.name}
+            className="group inline-flex items-center gap-2.5 text-white/45 transition-colors duration-300"
+            data-testid={`hero-stack-logo-${item.name.toLowerCase().replace(/\s+/g, "-")}`}
+          >
+            <img
+              src={item.src}
+              alt={`${item.name} logo`}
+              loading="lazy"
+              className={`${item.iconClassName} w-auto object-contain opacity-60 grayscale brightness-150 contrast-125 transition-all duration-300 group-hover:opacity-90`}
+            />
+            <span className={`text-sm md:text-[15px] font-semibold text-white/45 group-hover:text-white/70 transition-colors duration-300 ${item.labelClassName ?? ""}`}>
+              {item.name}
+            </span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -168,6 +211,7 @@ const clientLogos = [
   { name: "WConsulting", href: "https://wconsulting.co.za/#home" },
   { name: "Deviare", href: "https://deviare.africa/the-company" },
   { name: "Magnisol", href: "https://www.magnisol.com/" },
+  { name: "Reos Partners", href: "https://reospartners.com/" },
   { name: "Tusk", href: "https://tusk.agency/" },
   { name: "Virgin Active", href: "https://www.virginactive.co.za/" },
   { name: "SNG Grant Thornton", href: "https://www.grantthornton.co.za/" },
@@ -177,7 +221,7 @@ const clientLogos = [
 
 function ClientMarquee() {
   return (
-    <Section className="py-2 md:py-2 border-t border-b border-white/5 bg-[#030614]/50 overflow-hidden relative">
+    <Section className="py-[23px] md:py-[23px] border-t border-b border-white/5 bg-[#030614]/50 overflow-hidden relative">
       <div className="flex w-max animate-marquee hover:[animation-play-state:paused] transition-all">
         <div className="flex gap-20 items-center px-10">
           {clientLogos.map((client, i) => (
@@ -314,6 +358,8 @@ export function Home() {
 
             <UICascade />
           </div>
+
+          <HeroStackStrip />
         </div>
       </div>
 
