@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import { useState } from "react";
 
 const coreColors = [
   { name: "Navy", hex: "#050A30", className: "bg-brand-navy border border-white/10", textDark: false },
@@ -72,7 +73,155 @@ const copyRules = [
 
 const banList = ["unlock", "empower", "seamless", "transform", "next-level", "growth engine"];
 
+const brandAssets = [
+  { name: "Hero Background (PNG)", href: "/assets/hero-background.png" },
+  { name: "Hero UI Cascade (PNG)", href: "/assets/hero-ui-cascade-clean.png" },
+  { name: "Hero Column 2 Card (PNG)", href: "/assets/hero-column-2-flat.png" },
+];
+
+type SignatureProfile = {
+  name: string;
+  role: string;
+  tagline: string;
+  email: string;
+  mobile: string;
+  whatsapp: string;
+  website: string;
+  bookingUrl: string;
+  ctaLabel: string;
+};
+
+const defaultSignatureProfiles: SignatureProfile[] = [
+  {
+    name: "Jarrud van der Merwe",
+    role: "Lead HubSpot Architect & Sales Engineer",
+    tagline: "CRM strategy, architecture, growth systems.",
+    email: "jarrud@wearemuloo.com",
+    mobile: "+27 68 634 3652",
+    whatsapp: "+27 68 634 3652",
+    website: "https://www.wearemuloo.com",
+    bookingUrl: "https://www.wearemuloo.com/contact",
+    ctaLabel: "Book with Jarrud",
+  },
+  {
+    name: "Morne Visagie",
+    role: "Partner & Outsourced CTO",
+    tagline: "Technical architecture, integrations, scale systems.",
+    email: "morne@wearemuloo.com",
+    mobile: "+27 68 634 3652",
+    whatsapp: "+27 68 634 3652",
+    website: "https://www.wearemuloo.com",
+    bookingUrl: "https://www.wearemuloo.com/contact",
+    ctaLabel: "Book with Morne",
+  },
+];
+
+function escapeHtml(value: string) {
+  return value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+}
+
+function digitsOnly(value: string) {
+  return value.replace(/\D/g, "");
+}
+
+function buildSignatureHtml(profile: SignatureProfile) {
+  const safe = {
+    name: escapeHtml(profile.name),
+    role: escapeHtml(profile.role),
+    tagline: escapeHtml(profile.tagline),
+    email: escapeHtml(profile.email),
+    mobile: escapeHtml(profile.mobile),
+    whatsapp: escapeHtml(profile.whatsapp),
+    website: escapeHtml(profile.website),
+    bookingUrl: escapeHtml(profile.bookingUrl),
+    ctaLabel: escapeHtml(profile.ctaLabel),
+  };
+
+  const websiteHref = profile.website.startsWith("http") ? profile.website : `https://${profile.website}`;
+  const mobileHref = `tel:${digitsOnly(profile.mobile)}`;
+  const whatsappHref = `https://wa.me/${digitsOnly(profile.whatsapp)}`;
+  const emailHref = `mailto:${profile.email}`;
+  const initials = profile.name
+    .split(" ")
+    .slice(0, 2)
+    .map((part) => part[0] ?? "")
+    .join("")
+    .toUpperCase();
+
+  return `<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>${safe.name} Email Signature</title>
+</head>
+<body style="margin:0;padding:20px;background:#050A30;font-family:Arial,Helvetica,sans-serif;">
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="680" style="max-width:680px;width:100%;background:#060E2B;border:1px solid rgba(255,255,255,0.12);border-radius:14px;">
+    <tr>
+      <td style="padding:22px 24px;">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+          <tr>
+            <td valign="top" width="72" style="padding-right:16px;">
+              <div style="height:56px;width:56px;border-radius:999px;background:#0F1D55;border:1px solid rgba(255,255,255,0.12);color:#00C4CC;font-size:20px;line-height:56px;text-align:center;font-weight:700;">
+                ${initials}
+              </div>
+            </td>
+            <td valign="top">
+              <div style="font-size:34px;line-height:1.1;font-weight:800;color:#FFFFFF;font-family:Montserrat,Arial,Helvetica,sans-serif;margin-bottom:4px;">${safe.name}</div>
+              <div style="font-size:16px;line-height:1.4;color:#00C4CC;font-weight:600;margin-bottom:10px;">${safe.role}</div>
+              <div style="font-size:14px;line-height:1.5;color:#9FB1D2;margin-bottom:14px;">${safe.tagline}</div>
+              <div style="font-size:13px;line-height:1.7;color:#DDE8FF;">
+                <div><span style="color:#00C4CC;font-weight:600;">WhatsApp:</span> <a href="${whatsappHref}" style="color:#DDE8FF;text-decoration:none;">${safe.whatsapp}</a></div>
+                <div><span style="color:#00C4CC;font-weight:600;">Mobile:</span> <a href="${mobileHref}" style="color:#DDE8FF;text-decoration:none;">${safe.mobile}</a></div>
+                <div><span style="color:#00C4CC;font-weight:600;">Email:</span> <a href="${emailHref}" style="color:#DDE8FF;text-decoration:none;">${safe.email}</a></div>
+                <div><span style="color:#00C4CC;font-weight:600;">Website:</span> <a href="${websiteHref}" style="color:#DDE8FF;text-decoration:none;">${safe.website}</a></div>
+              </div>
+              <div style="margin-top:16px;">
+                <a href="${safe.bookingUrl}" style="display:inline-block;padding:10px 20px;border-radius:10px;color:#ffffff;text-decoration:none;font-weight:700;font-size:14px;background:#F47621;background-image:linear-gradient(135deg,#00C4CC 0%,#C140FF 50%,#F47621 100%);">
+                  ${safe.ctaLabel}
+                </a>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`;
+}
+
+function downloadSignatureHtml(profile: SignatureProfile) {
+  const html = buildSignatureHtml(profile);
+  const blob = new Blob([html], { type: "text/html;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = `${profile.name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}-signature.html`;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+}
+
 export function Styleguide() {
+  const [signatureProfiles, setSignatureProfiles] = useState<SignatureProfile[]>(defaultSignatureProfiles);
+
+  const updateSignatureProfile = (
+    index: number,
+    key: keyof SignatureProfile,
+    value: string,
+  ) => {
+    setSignatureProfiles((prev) =>
+      prev.map((profile, i) => (i === index ? { ...profile, [key]: value } : profile)),
+    );
+  };
+
   return (
     <div className="flex flex-col" data-testid="styleguide-page">
       {/* Hero */}
@@ -393,6 +542,128 @@ const colors = {
             <Badge variant="outline" data-testid="badge-outline">Outline</Badge>
             <Badge variant="navy" data-testid="badge-navy">Navy</Badge>
           </div>
+        </div>
+      </Section>
+
+      {/* Brand Assets */}
+      <Section data-testid="section-brand-assets">
+        <h2 className="text-3xl font-bold mb-2">Brand Assets</h2>
+        <p className="text-muted-foreground mb-8">
+          Canonical visual assets used across hero sections and marketing material.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {brandAssets.map((asset) => (
+            <Card key={asset.href} className="glass-card border-white/10">
+              <CardHeader>
+                <CardTitle className="text-lg">{asset.name}</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="rounded-lg overflow-hidden border border-white/10 bg-[#050A30]">
+                  <img src={asset.href} alt={asset.name} className="w-full h-32 object-cover" />
+                </div>
+                <div className="flex gap-3">
+                  <a href={asset.href} target="_blank" rel="noopener noreferrer">
+                    <Button variant="outline" size="sm">Preview</Button>
+                  </a>
+                  <a href={asset.href} download>
+                    <Button size="sm" className="bg-gradient-muloo text-white border-none">Download</Button>
+                  </a>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </Section>
+
+      {/* HTML Email Signatures */}
+      <Section className="bg-section-soft" data-testid="section-email-signatures">
+        <h2 className="text-3xl font-bold mb-2">HTML Email Signatures</h2>
+        <p className="text-muted-foreground mb-8">
+          Update contact fields and download a ready-to-use HTML signature file.
+        </p>
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+          {signatureProfiles.map((profile, index) => (
+            <Card key={profile.name} className="glass-card border-white/10">
+              <CardHeader>
+                <CardTitle className="text-xl">{profile.name}</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <div className="space-y-1">
+                    <p className="text-xs font-mono text-muted-foreground uppercase tracking-wider">Name</p>
+                    <Input
+                      value={profile.name}
+                      onChange={(e) => updateSignatureProfile(index, "name", e.target.value)}
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-xs font-mono text-muted-foreground uppercase tracking-wider">Role</p>
+                    <Input
+                      value={profile.role}
+                      onChange={(e) => updateSignatureProfile(index, "role", e.target.value)}
+                    />
+                  </div>
+                  <div className="space-y-1 md:col-span-2">
+                    <p className="text-xs font-mono text-muted-foreground uppercase tracking-wider">Tagline</p>
+                    <Input
+                      value={profile.tagline}
+                      onChange={(e) => updateSignatureProfile(index, "tagline", e.target.value)}
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-xs font-mono text-muted-foreground uppercase tracking-wider">WhatsApp</p>
+                    <Input
+                      value={profile.whatsapp}
+                      onChange={(e) => updateSignatureProfile(index, "whatsapp", e.target.value)}
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-xs font-mono text-muted-foreground uppercase tracking-wider">Mobile</p>
+                    <Input
+                      value={profile.mobile}
+                      onChange={(e) => updateSignatureProfile(index, "mobile", e.target.value)}
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-xs font-mono text-muted-foreground uppercase tracking-wider">Email</p>
+                    <Input
+                      value={profile.email}
+                      onChange={(e) => updateSignatureProfile(index, "email", e.target.value)}
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-xs font-mono text-muted-foreground uppercase tracking-wider">Website</p>
+                    <Input
+                      value={profile.website}
+                      onChange={(e) => updateSignatureProfile(index, "website", e.target.value)}
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-xs font-mono text-muted-foreground uppercase tracking-wider">CTA Label</p>
+                    <Input
+                      value={profile.ctaLabel}
+                      onChange={(e) => updateSignatureProfile(index, "ctaLabel", e.target.value)}
+                    />
+                  </div>
+                  <div className="space-y-1">
+                    <p className="text-xs font-mono text-muted-foreground uppercase tracking-wider">CTA URL</p>
+                    <Input
+                      value={profile.bookingUrl}
+                      onChange={(e) => updateSignatureProfile(index, "bookingUrl", e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className="flex flex-wrap gap-3">
+                  <Button
+                    className="bg-gradient-muloo text-white border-none"
+                    onClick={() => downloadSignatureHtml(profile)}
+                  >
+                    Download HTML
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
         </div>
       </Section>
 
