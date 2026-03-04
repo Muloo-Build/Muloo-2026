@@ -188,7 +188,7 @@ export function ServicesHub() {
               </div>
               <div>
                 <h3 className="text-lg font-semibold text-white mb-1">{s.title}</h3>
-                <p className="text-muted-foreground text-sm leading-[1.8]">{s.desc}</p>
+                <p className="text-muted-foreground text-base leading-[1.8]">{s.desc}</p>
               </div>
             </div>
           ))}
@@ -221,7 +221,7 @@ export function ServicesHub() {
                 "Automations documented and version-controlled",
                 "Permission models aligned to team structure",
               ].map((item, i) => (
-                <li key={i} className="flex items-center gap-3 text-sm text-white/70">
+                <li key={i} className="flex items-center gap-3 text-base text-white/70">
                   <span className="h-1.5 w-1.5 rounded-full shrink-0" style={{ backgroundColor: streamOrange }} />
                   {item}
                 </li>
@@ -350,7 +350,7 @@ export function ServicesHub() {
                 style={{ backgroundColor: `rgba(244, 118, 33, 0.3)` }}
               />
               <h3 className="text-base font-bold text-white mb-2">{step.title}</h3>
-              <p className="text-muted-foreground text-sm leading-[1.8]">{step.desc}</p>
+              <p className="text-muted-foreground text-base leading-[1.8]">{step.desc}</p>
             </div>
           ))}
         </div>
@@ -376,8 +376,8 @@ export function ServicesHub() {
               style={{ borderTop: `2px solid rgba(244, 118, 33, 0.3)` }}
               data-testid={`card-governance-${i}`}
             >
-              <h3 className="text-sm font-bold text-white mb-2">{item.title}</h3>
-              <p className="text-muted-foreground text-xs leading-[1.8]">{item.desc}</p>
+              <h3 className="text-base font-bold text-white mb-2">{item.title}</h3>
+              <p className="text-muted-foreground text-base leading-[1.8]">{item.desc}</p>
             </div>
           ))}
         </div>
@@ -403,8 +403,8 @@ export function ServicesHub() {
               style={{ borderTop: `2px solid rgba(244, 118, 33, 0.3)` }}
               data-testid={`card-clean-crm-${i}`}
             >
-              <h3 className="text-sm font-bold text-white mb-2">{item.title}</h3>
-              <p className="text-muted-foreground text-xs leading-[1.8]">{item.desc}</p>
+              <h3 className="text-base font-bold text-white mb-2">{item.title}</h3>
+              <p className="text-muted-foreground text-base leading-[1.8]">{item.desc}</p>
             </div>
           ))}
         </div>
@@ -434,7 +434,7 @@ export function ServicesHub() {
                 <item.icon className="h-5 w-5 text-[#F47621]" />
               </div>
               <h3 className="text-base font-bold mb-2 text-white">{item.title}</h3>
-              <p className="text-muted-foreground text-sm leading-[1.8]">{item.desc}</p>
+              <p className="text-muted-foreground text-base leading-[1.8]">{item.desc}</p>
             </div>
           ))}
         </div>
@@ -453,7 +453,7 @@ export function ServicesHub() {
           </blockquote>
           <div>
             <p className="text-white font-bold">Global technology services organisation</p>
-            <p className="text-muted-foreground text-sm">Multi-region CRM restructure</p>
+            <p className="text-muted-foreground text-base">Multi-region CRM restructure</p>
           </div>
         </div>
       </Section>

@@ -42,6 +42,21 @@ export function Footer() {
           <div>
             <h4 className="font-bold mb-6 text-white text-sm">Connect</h4>
             <ul className="space-y-4 text-sm text-muted-foreground">
+              <li>
+                <a href="tel:+27686343652" className="hover:text-brand-teal transition-colors">
+                  +27 68 634 3652
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://wa.me/27686343652"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-brand-teal transition-colors"
+                >
+                  WhatsApp
+                </a>
+              </li>
               <li><span>LinkedIn</span></li>
               <li><span>GitHub</span></li>
               <li><Link href="/styleguide" className="hover:text-brand-teal transition-colors">Styleguide</Link></li>

@@ -126,28 +126,19 @@
     @apply font-mono;
   }
 
-  /* Unified body copy system */
-  main p:not(.font-mono):not([class*="text-"]),
-  main li:not(.font-mono):not([class*="text-"]) {
-    font-family: var(--font-aileron);
-    font-weight: 400;
-    font-size: 1rem;
-    line-height: 1.8;
-  }
-
-  /* Normalize small muted body copy (card descriptions) */
-  main p.text-sm.text-muted-foreground,
-  main li.text-sm.text-muted-foreground {
-    font-family: var(--font-aileron);
-    font-weight: 400;
-    font-size: 1rem;
-    line-height: 1.8;
+  /* Unified body copy system across all pages */
+  main p:not(.font-mono):not([class*="text-lg"]):not([class*="text-xl"]):not([class*="text-2xl"]):not([class*="text-3xl"]):not([class*="text-4xl"]):not([class*="text-5xl"]):not([class*="text-6xl"]),
+  main li:not(.font-mono):not([class*="text-lg"]):not([class*="text-xl"]):not([class*="text-2xl"]):not([class*="text-3xl"]):not([class*="text-4xl"]):not([class*="text-5xl"]):not([class*="text-6xl"]) {
+    font-family: var(--font-aileron) !important;
+    font-weight: 400 !important;
+    font-size: 1rem !important;
+    line-height: 1.8 !important;
   }
 
   @media (min-width: 768px) {
-    main p:not(.font-mono):not([class*="text-"]),
-    main li:not(.font-mono):not([class*="text-"]) {
-      font-size: 1.05rem;
+    main p:not(.font-mono):not([class*="text-lg"]):not([class*="text-xl"]):not([class*="text-2xl"]):not([class*="text-3xl"]):not([class*="text-4xl"]):not([class*="text-5xl"]):not([class*="text-6xl"]),
+    main li:not(.font-mono):not([class*="text-lg"]):not([class*="text-xl"]):not([class*="text-2xl"]):not([class*="text-3xl"]):not([class*="text-4xl"]):not([class*="text-5xl"]):not([class*="text-6xl"]) {
+      font-size: 1.05rem !important;
     }
   }
 }

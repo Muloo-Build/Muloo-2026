@@ -41,6 +41,21 @@ export function Contact() {
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
             Ready to streamline your systems? Book a call directly with leadership or send us a focused brief.
           </p>
+          <p className="mt-4 text-base md:text-lg text-white/85">
+            Call:{" "}
+            <a href="tel:+27686343652" className="text-brand-teal hover:text-brand-teal/80 transition-colors">
+              +27 68 634 3652
+            </a>
+            <span className="mx-2 text-white/45">|</span>
+            <a
+              href="https://wa.me/27686343652"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-brand-teal hover:text-brand-teal/80 transition-colors"
+            >
+              WhatsApp
+            </a>
+          </p>
         </div>
       </Section>
 
@@ -140,6 +155,21 @@ export function Contact() {
             <div className="relative z-10 flex items-center gap-3 text-sm text-white/80">
               <MapPin className="h-4 w-4 text-brand-teal" />
               <span>Cape Town, South Africa</span>
+            </div>
+            <div className="relative z-10 mt-3 text-sm text-white/80">
+              <span className="mr-2">Call:</span>
+              <a href="tel:+27686343652" className="text-brand-teal hover:text-brand-teal/80 transition-colors">
+                +27 68 634 3652
+              </a>
+              <span className="mx-2 text-white/45">|</span>
+              <a
+                href="https://wa.me/27686343652"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-brand-teal hover:text-brand-teal/80 transition-colors"
+              >
+                WhatsApp
+              </a>
             </div>
           </div>
         </div>
