@@ -148,7 +148,7 @@ export function ServicesHub() {
           </h2>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-4xl">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 xl:gap-10 max-w-6xl">
           {[
             { icon: Database, title: "Overloaded properties", desc: "Too many fields, inconsistent naming, and duplicates that pollute reporting and slow adoption." },
             { icon: GitBranch, title: "Poor pipeline structure", desc: "Pipelines that don’t reflect reality, unclear stage criteria, and no operational enforcement." },
@@ -164,7 +164,7 @@ export function ServicesHub() {
                 <item.icon className="h-5 w-5 text-[#F47621]" />
               </div>
               <h3 className="text-base font-bold mb-2 text-white">{item.title}</h3>
-              <p className="text-muted-foreground text-sm leading-[1.8]">{item.desc}</p>
+                <p className="text-muted-foreground text-base leading-[1.8]">{item.desc}</p>
             </div>
           ))}
         </div>

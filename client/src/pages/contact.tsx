@@ -1,9 +1,9 @@
 import { Section } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
-import { Link } from "wouter";
 import { ContactForm } from "@/components/sections/contact-form";
 import { MapPin } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { usePopup } from "@/components/popups/usePopup";
 import jarrudImg from "@assets/d1bde727-2cda-4a05-ad55-08a4eeb1c30f_1771492083207.png";
 import morneImg from "@assets/Morne_1771492100987.png";
 
@@ -13,7 +13,7 @@ const bookingOptions = [
     title: "Lead HubSpot Architect & Sales Engineer",
     description: "CRM strategy, architecture, growth systems.",
     buttonLabel: "Book with Jarrud",
-    link: "/contact/book/jarrud",
+    popupKey: "meeting link popup jarrud",
     image: jarrudImg,
     accent: "rgba(244, 118, 33, 0.7)",
     testId: "booking-jarrud",
@@ -23,7 +23,7 @@ const bookingOptions = [
     title: "Partner & Outsourced CTO",
     description: "Technical architecture, integrations, scale systems.",
     buttonLabel: "Book with Morne",
-    link: "/contact/book/morne",
+    popupKey: "meeting link popup morne",
     image: morneImg,
     accent: "rgba(21, 93, 252, 0.7)",
     testId: "booking-morne",
@@ -31,6 +31,8 @@ const bookingOptions = [
 ];
 
 export function Contact() {
+  const { openPopup } = usePopup();
+
   return (
     <div className="flex flex-col">
       <Section className="pt-5 pb-6 md:pt-7 md:pb-8 text-center bg-hero-gradient border-b border-white/5">
@@ -84,14 +86,14 @@ export function Contact() {
                     </div>
                   </div>
                   <p className="text-sm text-muted-foreground mb-6">{person.description}</p>
-                  <Link href={person.link} className="block">
-                    <Button
-                      className="w-full bg-gradient-muloo border-none text-white font-bold h-11 rounded-xl transition-all duration-300 hover:brightness-110 hover:-translate-y-0.5"
-                      data-testid={`button-${person.testId}`}
-                    >
-                      {person.buttonLabel}
-                    </Button>
-                  </Link>
+                  <Button
+                    skipContactRedirect
+                    className="w-full bg-gradient-muloo border-none text-white font-bold h-11 rounded-xl transition-all duration-300 hover:brightness-110 hover:-translate-y-0.5"
+                    data-testid={`button-${person.testId}`}
+                    onClick={() => openPopup(person.popupKey)}
+                  >
+                    {person.buttonLabel}
+                  </Button>
                 </div>
               </div>
             ))}

@@ -161,29 +161,49 @@ function UICascade() {
 }
 
 const clientLogos = [
-  "Chat Inc.", "Phillips Law", "Group Elephant", "EPI-USE", "WConsulting",
-  "Eviare", "Virgin Active", "SNG Grant Thornton", "Aerobotics", "Nubeva"
+  { name: "Chat Inc.", href: "https://www.chatinc.com/" },
+  { name: "Phillips Law", href: "https://phillipslaw.co.zw/" },
+  { name: "Group Elephant", href: "https://www.groupelephant.com/" },
+  { name: "EPI-USE", href: "https://www.epiuse.com/" },
+  { name: "WConsulting", href: "https://www.wconsulting.co.za/" },
+  { name: "Eviare", href: "https://eviare.shop/" },
+  { name: "Virgin Active", href: "https://www.virginactive.co.za/" },
+  { name: "SNG Grant Thornton", href: "https://www.grantthornton.co.za/" },
+  { name: "Aerobotics", href: "https://aerobotics.com/" },
+  { name: "Nubeva", href: "https://www.nubeva.com/" },
 ];
 
 function ClientMarquee() {
   return (
     <Section className="py-[15px] border-t border-b border-white/5 bg-[#030614]/50 overflow-hidden relative">
-      <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#050A30] to-transparent z-10 pointer-events-none" />
-      <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#050A30] to-transparent z-10 pointer-events-none" />
-
       <div className="flex w-max animate-marquee hover:[animation-play-state:paused] transition-all">
         <div className="flex gap-20 items-center px-10">
           {clientLogos.map((client, i) => (
-            <span key={`logo1-${i}`} className="text-xl md:text-2xl font-black tracking-tighter text-white/20 uppercase hover:text-white/40 transition-colors cursor-default" style={{ fontFamily: "'Aileron', sans-serif" }}>
-              {client}
-            </span>
+            <a
+              key={`logo1-${i}`}
+              href={client.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xl md:text-2xl font-black tracking-tighter text-white/20 uppercase hover:text-white/50 transition-colors"
+              style={{ fontFamily: "'Aileron', sans-serif" }}
+            >
+              {client.name}
+            </a>
           ))}
         </div>
-        <div className="flex gap-20 items-center px-10" aria-hidden="true">
+        <div className="flex gap-20 items-center px-10 pointer-events-none" aria-hidden="true">
           {clientLogos.map((client, i) => (
-            <span key={`logo2-${i}`} className="text-xl md:text-2xl font-black tracking-tighter text-white/20 uppercase hover:text-white/40 transition-colors cursor-default" style={{ fontFamily: "'Aileron', sans-serif" }}>
-              {client}
-            </span>
+            <a
+              key={`logo2-${i}`}
+              href={client.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              tabIndex={-1}
+              className="text-xl md:text-2xl font-black tracking-tighter text-white/20 uppercase hover:text-white/50 transition-colors"
+              style={{ fontFamily: "'Aileron', sans-serif" }}
+            >
+              {client.name}
+            </a>
           ))}
         </div>
       </div>
