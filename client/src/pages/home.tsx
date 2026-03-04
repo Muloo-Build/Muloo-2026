@@ -162,11 +162,13 @@ function UICascade() {
 
 const clientLogos = [
   { name: "Chat Inc.", href: "https://www.chatinc.com/" },
-  { name: "Phillips Law", href: "https://phillipslaw.co.zw/" },
-  { name: "Group Elephant", href: "https://www.groupelephant.com/" },
-  { name: "EPI-USE", href: "https://www.epiuse.com/" },
-  { name: "WConsulting", href: "https://www.wconsulting.co.za/" },
-  { name: "Eviare", href: "https://eviare.shop/" },
+  { name: "Phillips Law", href: "https://phillips-law.co.uk/" },
+  { name: "Group Elephant", href: "https://deviare.africa/the-company" },
+  { name: "epi-use", href: "https://www.epiuse.com/" },
+  { name: "WConsulting", href: "https://wconsulting.co.za/#home" },
+  { name: "Deviare", href: "https://deviare.africa/the-company" },
+  { name: "Magnisol", href: "https://www.magnisol.com/" },
+  { name: "Tusk", href: "https://tusk.agency/" },
   { name: "Virgin Active", href: "https://www.virginactive.co.za/" },
   { name: "SNG Grant Thornton", href: "https://www.grantthornton.co.za/" },
   { name: "Aerobotics", href: "https://aerobotics.com/" },
@@ -175,7 +177,7 @@ const clientLogos = [
 
 function ClientMarquee() {
   return (
-    <Section className="py-[15px] border-t border-b border-white/5 bg-[#030614]/50 overflow-hidden relative">
+    <Section className="py-[8px] border-t border-b border-white/5 bg-[#030614]/50 overflow-hidden relative">
       <div className="flex w-max animate-marquee hover:[animation-play-state:paused] transition-all">
         <div className="flex gap-20 items-center px-10">
           {clientLogos.map((client, i) => (
