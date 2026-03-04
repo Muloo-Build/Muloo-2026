@@ -17,7 +17,7 @@ export function Header() {
   const [location] = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const meetingUrl = "/contact/book/jarrud";
+  const meetingUrl = "/contact";
 
   useEffect(() => {
     const handleScroll = () => {

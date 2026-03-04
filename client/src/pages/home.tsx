@@ -254,7 +254,6 @@ function DashboardMock() {
 }
 
 export function Home() {
-  const meetingUrl = "/contact/book/jarrud";
   const jarrudMeeting = getMeetingBySlug("jarrud");
   const morneMeeting = getMeetingBySlug("morne");
 
@@ -279,7 +278,7 @@ export function Home() {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 mb-12">
-                <Link href={meetingUrl}>
+                <Link href="/contact">
                   <Button size="lg" className="bg-gradient-muloo border-none text-white hover:brightness-110 font-bold px-8 h-14 rounded-lg glow-muloo-sm hover:-translate-y-0.5 transition-all" data-testid="button-hero-cta">
                     {homeContent.hero.primaryCta} <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
@@ -302,35 +301,6 @@ export function Home() {
       </div>
 
       <ClientMarquee />
-
-      {jarrudMeeting && morneMeeting && (
-        <Section className="py-14 md:py-16 border-t border-white/5">
-          <div className="mb-8">
-            <h2 className="text-sm font-mono text-gradient-muloo uppercase tracking-widest mb-4">Book a quick call</h2>
-            <h3 className="text-3xl md:text-4xl font-bold text-white">Speak directly with Muloo leadership</h3>
-          </div>
-
-          <div className="md:grid md:grid-cols-2 md:gap-6">
-            <div className="md:hidden overflow-x-auto">
-              <div className="flex gap-4 snap-x snap-mandatory pb-2">
-                <div className="snap-start min-w-[92%]">
-                  <BookingCard meeting={jarrudMeeting} compact className="h-full" />
-                </div>
-                <div className="snap-start min-w-[92%]">
-                  <BookingCard meeting={morneMeeting} compact className="h-full" />
-                </div>
-              </div>
-            </div>
-
-            <div className="hidden md:block">
-              <BookingCard meeting={jarrudMeeting} compact className="h-full" />
-            </div>
-            <div className="hidden md:block">
-              <BookingCard meeting={morneMeeting} compact className="h-full" />
-            </div>
-          </div>
-        </Section>
-      )}
 
       {/* ── 2. FOUR STREAMS ── */}
       <Section className="py-20 md:py-[120px] bg-section-soft border-t border-white/5">
@@ -549,21 +519,35 @@ export function Home() {
         </div>
       </Section>
 
-      {/* ── 8. FINAL CTA ── */}
-      <Section className="py-20 md:py-[120px] text-center bg-hero-gradient border-t border-white/5 relative overflow-hidden">
-        <div className="absolute inset-0 bg-grid-pattern-fade pointer-events-none opacity-50" />
-        <div className="relative z-10 max-w-3xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">Ready to build <span className="text-gradient-muloo">properly</span>?</h2>
-          <p className="text-xl text-muted-foreground mb-10 leading-[1.8]">
-            Let's talk about your systems, your data, and what needs to change.
-          </p>
-          <Link href={meetingUrl}>
-            <Button size="lg" className="bg-gradient-muloo border-none text-white hover:brightness-110 font-bold px-10 h-14 rounded-lg glow-muloo-sm" data-testid="button-cta-final">
-              Start a Conversation <ArrowRight className="ml-2" />
-            </Button>
-          </Link>
-        </div>
-      </Section>
+      {/* ── 8. BOOK A QUICK CALL ── */}
+      {jarrudMeeting && morneMeeting && (
+        <Section className="py-14 md:py-16 border-t border-white/5">
+          <div className="mb-8">
+            <h2 className="text-sm font-mono text-gradient-muloo uppercase tracking-widest mb-4">Book a quick call</h2>
+            <h3 className="text-3xl md:text-4xl font-bold text-white">Speak directly with Muloo leadership</h3>
+          </div>
+
+          <div className="md:grid md:grid-cols-2 md:gap-6">
+            <div className="md:hidden overflow-x-auto">
+              <div className="flex gap-4 snap-x snap-mandatory pb-2">
+                <div className="snap-start min-w-[92%]">
+                  <BookingCard meeting={jarrudMeeting} compact className="h-full" />
+                </div>
+                <div className="snap-start min-w-[92%]">
+                  <BookingCard meeting={morneMeeting} compact className="h-full" />
+                </div>
+              </div>
+            </div>
+
+            <div className="hidden md:block">
+              <BookingCard meeting={jarrudMeeting} compact className="h-full" />
+            </div>
+            <div className="hidden md:block">
+              <BookingCard meeting={morneMeeting} compact className="h-full" />
+            </div>
+          </div>
+        </Section>
+      )}
     </div>
   );
 }

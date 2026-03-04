@@ -4,11 +4,15 @@ import { ArrowRight, Wrench, Laptop, Rocket, BarChart3, Settings, Lightbulb, Use
 import { Link } from "wouter";
 import { Badge } from "@/components/ui/badge";
 import { serviceProductContent } from "@/lib/content";
+import { BookingCard } from "@/components/meetings/BookingCard";
+import { getMeetingBySlug } from "@/content/meetings";
 
 const streamGreen = "#59BF96";
 const meetingUrl = "/contact/book/morne";
 
 export function ServicesProduct() {
+  const jarrudMeeting = getMeetingBySlug("jarrud");
+
   return (
     <div className="flex flex-col">
       {/* Hero */}
@@ -519,6 +523,16 @@ export function ServicesProduct() {
           ))}
         </div>
       </Section>
+
+      {jarrudMeeting && (
+        <Section className="py-12 md:py-16 border-t border-white/5">
+          <div className="mb-6">
+            <span className="text-sm font-mono text-[#59BF96] uppercase tracking-widest mb-3 block">Need a plan?</span>
+            <h2 className="text-2xl md:text-3xl font-bold text-white">Talk directly with Jarrud</h2>
+          </div>
+          <BookingCard meeting={jarrudMeeting} />
+        </Section>
+      )}
 
       {/* CTA */}
       <Section className="py-20 md:py-[120px] text-center bg-hero-gradient glow-product border-t border-white/5 relative overflow-hidden">

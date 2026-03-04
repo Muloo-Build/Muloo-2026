@@ -15,6 +15,8 @@ import {
 import { Link } from "wouter";
 import { Badge } from "@/components/ui/badge";
 import { serviceAiContent } from "@/lib/content";
+import { BookingCard } from "@/components/meetings/BookingCard";
+import { getMeetingBySlug } from "@/content/meetings";
 
 const streamPurple = "#C140FF";
 const meetingUrl = "/contact/book/jarrud";
@@ -22,6 +24,8 @@ const meetingUrl = "/contact/book/jarrud";
 const serviceIcons = [Bot, Code2, Workflow, ShieldCheck];
 
 export function ServicesAi() {
+  const morneMeeting = getMeetingBySlug("morne");
+
   return (
     <div className="flex flex-col">
       {/* Hero */}
@@ -382,6 +386,16 @@ export function ServicesAi() {
           </div>
         </div>
       </Section>
+
+      {morneMeeting && (
+        <Section className="py-12 md:py-16 border-t border-white/5">
+          <div className="mb-6">
+            <span className="text-sm font-mono text-[#C140FF] uppercase tracking-widest mb-3 block">Need a plan?</span>
+            <h2 className="text-2xl md:text-3xl font-bold text-white">Talk directly with Morne</h2>
+          </div>
+          <BookingCard meeting={morneMeeting} />
+        </Section>
+      )}
 
       {/* CTA */}
       <Section className="py-20 md:py-[120px] text-center bg-hero-gradient glow-ai border-t border-white/5 relative overflow-hidden">

@@ -29,7 +29,7 @@ export function ServicesHub() {
         <div className="absolute inset-0 bg-grid-pattern-fade pointer-events-none" />
         <div className="container mx-auto px-6 relative z-10">
           <div className="flex items-center gap-16">
-            <div className="max-w-xl flex-1">
+            <div className="max-w-2xl flex-1">
               <div className="flex items-center gap-4 mb-8">
                 <Badge
                   data-testid="badge-hubspot-partner"
@@ -40,12 +40,13 @@ export function ServicesHub() {
                 <img
                   src={hubspotBadge}
                   alt="HubSpot Gold Partner Badge"
-                  className="h-12 w-auto"
+                  className="h-36 w-auto"
                   data-testid="img-hubspot-badge"
                 />
               </div>
               <h1 className="text-5xl md:text-7xl font-extrabold mb-8 leading-[1.1]">
-                {serviceHubContent.h1}
+                <span className="block">HubSpot</span>
+                <span className="block md:whitespace-nowrap">decisions, de-risked.</span>
               </h1>
               <p className="text-xl md:text-2xl text-muted-foreground leading-[1.8] border-l-4 border-[#F47621] pl-6 max-w-2xl">
                 {serviceHubContent.intro}
@@ -456,16 +457,6 @@ export function ServicesHub() {
           </div>
         </div>
       </Section>
-
-      {jarrudMeeting && (
-        <Section className="py-12 md:py-16 border-t border-white/5">
-          <div className="mb-6">
-            <span className="font-mono text-xs uppercase tracking-widest text-[#F47621] mb-3 block">Need a plan?</span>
-            <h2 className="text-2xl md:text-3xl font-bold text-white">Talk directly with Jarrud</h2>
-          </div>
-          <BookingCard meeting={jarrudMeeting} />
-        </Section>
-      )}
 
       {/* CTA */}
       <Section className="py-20 md:py-[120px] text-center bg-hero-gradient border-t border-white/5 relative overflow-hidden">

@@ -4,11 +4,15 @@ import { ArrowRight, Webhook, Code2, Shield, Zap, Database, Terminal, RefreshCw,
 import { Link } from "wouter";
 import { Badge } from "@/components/ui/badge";
 import { serviceBuildContent } from "@/lib/content";
+import { BookingCard } from "@/components/meetings/BookingCard";
+import { getMeetingBySlug } from "@/content/meetings";
 
 const streamBlue = "#155DFC";
 const meetingUrl = "/contact/book/morne";
 
 export function ServicesBuild() {
+  const morneMeeting = getMeetingBySlug("morne");
+
   return (
     <div className="flex flex-col">
       {/* Hero */}
@@ -480,6 +484,16 @@ export function ServicesBuild() {
           </p>
         </div>
       </Section>
+
+      {morneMeeting && (
+        <Section className="py-12 md:py-16 border-t border-white/5">
+          <div className="mb-6">
+            <span className="text-sm font-mono text-[#155DFC] uppercase tracking-widest mb-3 block">Need a plan?</span>
+            <h2 className="text-2xl md:text-3xl font-bold text-white">Talk directly with Morne</h2>
+          </div>
+          <BookingCard meeting={morneMeeting} />
+        </Section>
+      )}
 
       {/* CTA */}
       <Section className="py-20 md:py-[120px] text-center bg-hero-gradient glow-build border-t border-white/5 relative overflow-hidden">
