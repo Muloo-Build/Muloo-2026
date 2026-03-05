@@ -10,6 +10,7 @@ import {
   GitBranch,
   ShieldCheck,
   Users2,
+  Workflow,
 } from "lucide-react";
 import { SEO } from "@/components/layout/SEO";
 import {
@@ -20,6 +21,54 @@ import {
 } from "@/components/ui/accordion";
 
 const meetingUrl = "/contact/book/jarrud";
+const relatedHubspotServices = [
+  { title: "HubSpot Implementation", href: "/muloo-hub/hubspot-implementation" },
+  { title: "HubSpot Migration", href: "/muloo-hub/hubspot-migration" },
+  { title: "HubSpot Optimisation", href: "/muloo-hub/hubspot-optimisation" },
+];
+
+const structuredDeploymentPhases = [
+  {
+    number: "01",
+    title: "Audit",
+    description: "Review the existing CRM structure, pipelines, properties, workflows and reporting.",
+    outcome: "Clear understanding of the current HubSpot architecture.",
+    indicatorClass: "bg-stream-hub/15 text-stream-hub",
+    ringClass: "ring-stream-hub/30",
+  },
+  {
+    number: "02",
+    title: "Design",
+    description: "Define CRM architecture, pipeline structure, lifecycle stages and reporting model.",
+    outcome: "Blueprint for the HubSpot system.",
+    indicatorClass: "bg-stream-build/15 text-stream-build",
+    ringClass: "ring-stream-build/30",
+  },
+  {
+    number: "03",
+    title: "Build",
+    description: "Configure HubSpot pipelines, properties, automation and integrations.",
+    outcome: "Working CRM aligned with business processes.",
+    indicatorClass: "bg-stream-ai/15 text-stream-ai",
+    ringClass: "ring-stream-ai/30",
+  },
+  {
+    number: "04",
+    title: "Launch",
+    description: "Deploy the new structure, train users and validate reporting accuracy.",
+    outcome: "Operational HubSpot system.",
+    indicatorClass: "bg-stream-product/15 text-stream-product",
+    ringClass: "ring-stream-product/30",
+  },
+  {
+    number: "05",
+    title: "Optimise",
+    description: "Refine workflows, improve reporting and expand automation as the organisation grows.",
+    outcome: "HubSpot that evolves with the business.",
+    indicatorClass: "bg-brand-teal/15 text-brand-teal",
+    ringClass: "ring-brand-teal/30",
+  },
+];
 
 const guidedDeploymentTrustConfig = {
   showCredibilityStrip: true,
@@ -325,11 +374,19 @@ export function ServicesGuidedDeployment() {
       <SEO
         title="Guided Deployment | Muloo"
         description="Structured delivery for HubSpot and connected systems, with clear governance, sprint based releases, and confident launches."
+        canonicalUrl="https://www.wearemuloo.com/muloo-hub/guided-deployment"
       />
 
       <Section className="pt-20 pb-20 md:pt-28 md:pb-24 bg-hero-gradient relative overflow-hidden">
         <div className="absolute inset-0 bg-grid-pattern-fade pointer-events-none" />
         <div className="max-w-3xl">
+          <div className="flex items-center gap-2 text-sm mb-4">
+            <Link href="/" className="text-brand-teal hover:text-brand-teal/80">Home</Link>
+            <span className="text-white/40">/</span>
+            <Link href="/muloo-hub" className="text-brand-teal hover:text-brand-teal/80">Muloo Hub</Link>
+            <span className="text-white/40">/</span>
+            <span className="text-white/70">Guided Deployment</span>
+          </div>
           <Badge
             variant="outline"
             className="mb-6 border-brand-teal/30 text-brand-teal bg-brand-teal/5"
@@ -341,7 +398,7 @@ export function ServicesGuidedDeployment() {
             Launch with confidence. Adapt without chaos.
           </h1>
           <p className="text-lg md:text-2xl text-muted-foreground leading-[1.8] max-w-3xl">
-            Muloo&apos;s Guided Deployment is how we deliver HubSpot and connected systems in a way that stays disciplined, but doesn&apos;t fall apart the moment priorities change. We align on outcomes, ship in practical launchable slices, and keep progress visible with clear governance and comms.
+            Muloo Structured Deployment is how we deliver HubSpot and connected systems in a way that stays disciplined, but doesn&apos;t fall apart the moment priorities change. We align on outcomes, ship in practical launchable slices, and keep progress visible with clear governance and comms.
           </p>
 
           <div className="mt-10 flex flex-col sm:flex-row gap-4">
@@ -364,6 +421,102 @@ export function ServicesGuidedDeployment() {
                 See what&apos;s included
               </Button>
             </a>
+          </div>
+        </div>
+      </Section>
+
+      <Section className="py-20 md:py-[120px] border-t border-white/5 bg-section-soft">
+        <div className="mb-12 max-w-4xl">
+          <Badge
+            variant="outline"
+            className="mb-5 inline-flex items-center gap-2 border-brand-teal/30 text-brand-teal bg-brand-teal/10 uppercase text-[11px] tracking-wider"
+            data-testid="badge-muloo-method"
+          >
+            <Workflow className="h-3.5 w-3.5" />
+            Muloo Method
+          </Badge>
+          <p className="text-base md:text-lg text-muted-foreground leading-[1.8] mb-6">
+            The Muloo Method is our structured approach to designing and deploying HubSpot environments. It ensures CRM architecture, automation and reporting are implemented in the right order.
+          </p>
+          <h2 className="text-3xl md:text-4xl font-bold text-white">Muloo Structured Deployment Model</h2>
+        </div>
+
+        <div className="grid lg:grid-cols-5 gap-8 lg:gap-6">
+          {structuredDeploymentPhases.map((phase, index) => (
+            <div key={phase.number} className={`relative glass-card rounded-xl p-6 border border-white/10 ring-1 ${phase.ringClass}`}>
+              <div className="flex items-center gap-3 mb-5">
+                <div className={`h-10 w-10 rounded-full ${phase.indicatorClass} flex items-center justify-center border border-current/30`}>
+                  <span className="text-sm font-bold">{phase.number}</span>
+                </div>
+                <h3 className="text-xl font-bold text-white">{phase.title}</h3>
+              </div>
+
+              <p className="text-base text-muted-foreground leading-[1.8] mb-4">{phase.description}</p>
+              <div className="pt-4 border-t border-white/10">
+                <p className="text-xs font-mono uppercase tracking-wider text-brand-teal mb-2">Outcome</p>
+                <p className="text-sm text-white/80 leading-[1.7]">{phase.outcome}</p>
+              </div>
+
+              {index < structuredDeploymentPhases.length - 1 && (
+                <>
+                  <div className="hidden lg:block absolute top-8 -right-6 w-6 h-px bg-white/15" />
+                  <div className="lg:hidden absolute left-8 -bottom-8 h-8 w-px bg-white/15" />
+                </>
+              )}
+            </div>
+          ))}
+        </div>
+
+        <p className="text-base md:text-lg text-muted-foreground leading-[1.8] mt-10 max-w-4xl">
+          Muloo Structured Deployment ensures HubSpot is implemented with the right architecture, governance and reporting foundations from the beginning.
+        </p>
+      </Section>
+
+      <Section className="py-20 md:py-[120px] border-t border-white/5">
+        <div className="max-w-4xl">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Why we use a structured deployment model</h2>
+          <p className="text-base md:text-lg text-muted-foreground leading-[1.8] mb-6">
+            Most CRM projects fail because they jump straight into configuration without designing the system first.
+          </p>
+          <p className="text-base md:text-lg text-white/80 leading-[1.8] mb-6">
+            Muloo Structured Deployment ensures:
+          </p>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+            {[
+              "Clear CRM architecture",
+              "Reliable reporting",
+              "Structured pipelines",
+              "Controlled automation",
+              "Strong user adoption",
+            ].map((item) => (
+              <div key={item} className="glass-card rounded-xl p-5 border border-white/10">
+                <p className="text-base text-white/85 leading-[1.7]">{item}</p>
+              </div>
+            ))}
+          </div>
+
+          <p className="text-base md:text-lg text-muted-foreground leading-[1.8]">
+            The goal is to implement HubSpot as a business system, not just a collection of tools.
+          </p>
+        </div>
+      </Section>
+
+      <Section className="py-20 md:py-[120px] border-t border-white/5">
+        <div className="max-w-4xl">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Structured HubSpot delivery.</h2>
+          <p className="text-base md:text-lg text-muted-foreground leading-[1.8] mb-8">
+            Muloo Structured Deployment is the delivery method Muloo uses to implement and scale HubSpot environments safely and predictably.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4">
+            {relatedHubspotServices.map((service) => (
+              <Link key={service.href} href={service.href}>
+                <Button variant="outline" className="border-white/15 text-white hover:bg-white/5 h-11 px-6">
+                  {service.title}
+                </Button>
+              </Link>
+            ))}
           </div>
         </div>
       </Section>
@@ -466,7 +619,7 @@ export function ServicesGuidedDeployment() {
 
       <Section className="py-20 md:py-[120px] bg-section-soft border-t border-white/5">
         <div className="mb-14 max-w-3xl">
-          <h2 className="text-3xl md:text-4xl font-bold text-white">The Guided Deployment Framework</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-white">Muloo Structured Deployment</h2>
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">

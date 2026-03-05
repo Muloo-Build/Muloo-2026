@@ -4,8 +4,18 @@ export const navLinks = [
   {
     name: "Services", href: "/services",
     subItems: [
-      { name: "Muloo Hub", href: "/services/hub", desc: "Enterprise HubSpot Architecture" },
-      { name: "Guided Deployment", href: "/services/guided-deployment", desc: "Sprint based delivery with governance" },
+      {
+        name: "Muloo Hub",
+        href: "/muloo-hub",
+        desc: "Enterprise HubSpot Architecture",
+        links: [
+          { name: "HubSpot Audit", href: "/muloo-hub/hubspot-audit" },
+          { name: "Guided Deployment", href: "/muloo-hub/guided-deployment" },
+          { name: "HubSpot Implementation", href: "/muloo-hub/hubspot-implementation" },
+          { name: "HubSpot Migration", href: "/muloo-hub/hubspot-migration" },
+          { name: "HubSpot Optimisation", href: "/muloo-hub/hubspot-optimisation" }
+        ]
+      },
       { name: "Muloo Build", href: "/services/build", desc: "API-Centric Engineering" },
       { name: "Muloo AI", href: "/services/ai", desc: "AI Agents & Vibe Coding" },
       { name: "Muloo Product", href: "/services/product", desc: "SaaS & Internal Tools" }
@@ -47,34 +57,34 @@ export const homeContent = {
     {
       id: "hub",
       title: "Muloo Hub",
-      subtitle: "System Mastery",
-      desc: "Deep technical HubSpot implementation. We treat CRM configuration like software engineering—versioned, documented, and scalable.",
+      subtitle: "HubSpot Services",
+      desc: "HubSpot architecture and governance",
       features: ["Enterprise Architecture", "Data Migration", "Programmable Automation", "UI/UX Improvements"],
-      href: "/services/hub"
+      href: "/muloo-hub"
     },
     {
       id: "build",
       title: "Muloo Build",
-      subtitle: "Full Stack Engineering",
-      desc: "Where platforms disconnect, we connect them. Custom middleware, client portals, authenticated experiences, and API-centric development.",
+      subtitle: "Engineering Services",
+      desc: "API integrations and platform engineering",
       features: ["Custom Middleware", "Client Portals", "External Integrations", "Secure Auth Systems"],
       href: "/services/build"
     },
     {
-      id: "product",
-      title: "Muloo Product",
-      subtitle: "SaaS & Tools",
-      desc: "We build and maintain proprietary SaaS products and internal tools that solve specific operational gaps in the market.",
-      features: ["Internal Tools", "Commercial SaaS", "Product Strategy", "MVP Development"],
-      href: "/services/product"
-    },
-    {
       id: "ai",
       title: "Muloo AI",
-      subtitle: "Intelligence Layer",
-      desc: "Practical AI implementation. From coding agents that speed up dev to service agents that handle customer queries.",
+      subtitle: "Automation Services",
+      desc: "AI agents and workflow automation",
       features: ["Codex Dev Agents", "AI Service Agents", "Rapid Prototyping", "Security Audits"],
       href: "/services/ai"
+    },
+    {
+      id: "product",
+      title: "Muloo Product",
+      subtitle: "Product Services",
+      desc: "SaaS tools and internal platforms",
+      features: ["Internal Tools", "Commercial SaaS", "Product Strategy", "MVP Development"],
+      href: "/services/product"
     }
   ],
   stats: [
@@ -275,4 +285,5 @@ export const aboutContent = {
     }
   ]
 };
+
 

@@ -21,7 +21,7 @@ export function Footer() {
           <div>
             <h4 className="font-bold mb-6 text-white text-sm">Expertise</h4>
             <ul className="space-y-4 text-sm text-muted-foreground">
-              <li><Link href="/services/hub" className="hover:text-stream-hub transition-colors">Muloo Hub</Link></li>
+              <li><Link href="/muloo-hub" className="hover:text-stream-hub transition-colors">Muloo Hub</Link></li>
               <li><Link href="/services/build" className="hover:text-stream-build transition-colors">Muloo Build</Link></li>
               <li><Link href="/services/ai" className="hover:text-stream-ai transition-colors">Muloo AI</Link></li>
               <li><Link href="/services/product" className="hover:text-stream-product transition-colors">Muloo Product</Link></li>

@@ -362,6 +362,8 @@ export function Home() {
         </div>
       </div>
 
+      <HelpSegmentSection />
+
       <ClientMarquee />
 
       {/* ── 2. FOUR STREAMS ── */}
@@ -384,20 +386,8 @@ export function Home() {
                     {pillarIcons[pillar.id]}
                   </div>
 
-                  <h4 className="text-xs font-mono text-muted-foreground mb-2 uppercase tracking-wider">{pillar.subtitle}</h4>
-                  <h3 className="text-2xl font-bold mb-3 text-white transition-colors">
-                    muloo <span className={colors.text}>{pillar.title.replace("Muloo ", "")}</span>
-                  </h3>
-                  <p className="text-sm text-muted-foreground leading-[1.8] mb-6 flex-grow">{pillar.desc}</p>
-
-                  <ul className="space-y-2 mb-6 border-t border-white/5 pt-4">
-                    {pillar.features.slice(0, 3).map(feat => (
-                      <li key={feat} className="flex items-center text-xs text-white/50">
-                        <span className={`h-1.5 w-1.5 rounded-full mr-2 ${colors.accent}`} />
-                        {feat}
-                      </li>
-                    ))}
-                  </ul>
+                  <h3 className="text-2xl font-bold mb-3 text-white transition-colors">{pillar.title}</h3>
+                  <p className="text-base text-muted-foreground leading-[1.8] mb-8 flex-grow">{pillar.desc}</p>
 
                   <div className={`flex items-center text-sm font-semibold ${colors.text} mt-auto`}>
                     Explore <ChevronRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
@@ -438,7 +428,7 @@ export function Home() {
       </Section>
 
       {/* ── 4. OUTCOMES ── */}
-      <LeadMagnetSection />
+      <FreeReviewCtaSection />
 
       <Section className="py-20 md:py-[120px] bg-section-soft border-t border-white/5">
         <div className="mb-16">
@@ -614,7 +604,7 @@ export function Home() {
   );
 }
 
-function LeadMagnetSection() {
+function FreeReviewCtaSection() {
   return (
     <Section className="py-20 md:py-[120px] border-t border-white/5 relative overflow-hidden">
       <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 60% 70% at 50% 45%, rgba(193,64,255,0.07), transparent)" }} />
@@ -622,31 +612,71 @@ function LeadMagnetSection() {
         <div className="relative rounded-3xl p-[1px] bg-gradient-muloo">
           <div className="rounded-3xl bg-[#060E2B]/95 border border-white/10 px-8 py-10 md:px-12 md:py-12 text-center shadow-[0_30px_70px_-35px_rgba(193,64,255,0.45)]">
             <span className="inline-flex items-center rounded-full border border-brand-teal/25 bg-brand-teal/10 px-4 py-1 text-[11px] font-mono uppercase tracking-widest text-brand-teal mb-5">
-              Lead Magnet
+              Free Resource
             </span>
             <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-4 leading-tight">
-              Free HubSpot & Systems Health Check
+              Free CRM architecture review
             </h2>
             <p className="text-lg md:text-xl text-white/75 max-w-2xl mx-auto mb-8 leading-[1.7]">
-              Get the 10-point checklist we use to stabilise CRM, integrations, and reporting foundations.
+              Get a structured review of your CRM architecture, pipelines, and operational risks before your next platform decision.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-3 mb-9 text-xs font-mono uppercase tracking-wider">
-              <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/70">10-Point Framework</span>
-              <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/70">Immediate Action Items</span>
-              <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/70">No Email Gate</span>
+              <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/70">Architecture Findings</span>
+              <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/70">Priority Fixes</span>
+              <span className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/70">Roadmap Advice</span>
             </div>
-            <a href="https://audit.wearemuloo.com/" target="_blank" rel="noopener noreferrer">
+            <Link href="/contact">
               <Button
-                skipContactRedirect
                 size="lg"
                 className="bg-gradient-muloo border-none text-white hover:brightness-110 font-bold px-12 h-16 rounded-xl glow-muloo-sm text-lg"
-                data-testid="button-lead-magnet"
+                data-testid="button-free-crm-architecture-review"
               >
-                Open the Audit Tool <ArrowRight className="ml-2 h-5 w-5" />
+                Free CRM architecture review <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
-            </a>
-            <p className="text-xs text-white/45 mt-4">Opens audit.wearemuloo.com</p>
+            </Link>
           </div>
+        </div>
+      </div>
+    </Section>
+  );
+}
+
+function HelpSegmentSection() {
+  return (
+    <Section className="py-20 md:py-[110px] border-t border-white/5 bg-section-soft">
+      <div className="mb-12">
+        <h2 className="text-3xl md:text-4xl font-bold text-white">How can we help?</h2>
+      </div>
+
+      <div className="grid md:grid-cols-2 gap-6">
+        <div className="glass-card rounded-2xl p-8 md:p-10 border border-white/10 flex flex-col" data-testid="card-help-fix-hubspot">
+          <h3 className="text-2xl md:text-3xl font-bold text-white mb-5">Our HubSpot isn&apos;t working</h3>
+          <div className="space-y-2 text-base md:text-lg text-muted-foreground leading-[1.8] mb-8">
+            <p>Pipelines are messy.</p>
+            <p>Reporting is unreliable.</p>
+            <p>Automation is confusing.</p>
+          </div>
+
+          <Link href="/muloo-hub/hubspot-optimisation" className="mt-auto">
+            <Button size="lg" className="w-full sm:w-auto bg-gradient-muloo border-none text-white hover:brightness-110 font-bold px-8 h-14 rounded-lg glow-muloo-sm">
+              Fix my HubSpot <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          </Link>
+        </div>
+
+        <div className="glass-card rounded-2xl p-8 md:p-10 border border-white/10 flex flex-col" data-testid="card-help-plan-hubspot">
+          <h3 className="text-2xl md:text-3xl font-bold text-white mb-5">We want to implement HubSpot properly</h3>
+          <div className="space-y-2 text-base md:text-lg text-muted-foreground leading-[1.8] mb-8">
+            <p>Planning a CRM rollout?</p>
+            <p>Migrating from Salesforce?</p>
+            <p>Starting fresh with HubSpot?</p>
+          </div>
+
+          <Link href="/muloo-hub/hubspot-implementation" className="mt-auto">
+            <Button size="lg" className="w-full sm:w-auto bg-gradient-muloo border-none text-white hover:brightness-110 font-bold px-8 h-14 rounded-lg glow-muloo-sm">
+              Plan our HubSpot rollout <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          </Link>
         </div>
       </div>
     </Section>
