@@ -5,6 +5,7 @@ export const navLinks = [
     name: "Services", href: "/services",
     subItems: [
       { name: "Muloo Hub", href: "/services/hub", desc: "Enterprise HubSpot Architecture" },
+      { name: "Guided Deployment", href: "/services/guided-deployment", desc: "Sprint based delivery with governance" },
       { name: "Muloo Build", href: "/services/build", desc: "API-Centric Engineering" },
       { name: "Muloo AI", href: "/services/ai", desc: "AI Agents & Vibe Coding" },
       { name: "Muloo Product", href: "/services/product", desc: "SaaS & Internal Tools" }

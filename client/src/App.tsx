@@ -4,6 +4,7 @@ import { ServicesBuild } from "./pages/services/build";
 import { ServicesProduct } from "./pages/services/product";
 import { ServicesConsulting } from "./pages/services/consulting";
 import { ServicesAi } from "./pages/services/ai";
+import { ServicesGuidedDeployment } from "./pages/services/guided-deployment";
 import { Advisory } from "./pages/advisory";
 import { OperatorCircle } from "./pages/advisory/operator-circle";
 import { About } from "./pages/about";
@@ -46,6 +47,7 @@ function Router() {
         <Route path="/services/product" component={ServicesProduct} />
         <Route path="/services/consulting" component={ServicesConsulting} />
         <Route path="/services/ai" component={ServicesAi} />
+        <Route path="/services/guided-deployment" component={ServicesGuidedDeployment} />
         <Route path="/advisory/operator-circle" component={OperatorCircle} />
         <Route path="/advisory" component={Advisory} />
         <Route path="/about" component={About} />
