@@ -2,6 +2,7 @@ import { Section } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "wouter";
+import { useState } from "react";
 import {
   ArrowRight,
   CheckCircle2,
@@ -19,6 +20,147 @@ import {
 } from "@/components/ui/accordion";
 
 const meetingUrl = "/contact/book/jarrud";
+
+const guidedDeploymentTrustConfig = {
+  showCredibilityStrip: true,
+  credibilityItems: [
+    {
+      id: "hubspot-solutions-partner-badge",
+      type: "badge",
+      label: "HubSpot Solutions Partner",
+      src: "/assets/badges/hubspot-solutions-partner.png",
+      alt: "HubSpot Solutions Partner badge",
+      maxHeightClass: "h-8 md:h-10",
+    },
+    {
+      id: "hubspot-tenure",
+      type: "text",
+      icon: Clock3,
+      label: "10+ years HubSpot partner",
+    },
+    {
+      id: "governance-discipline",
+      type: "text",
+      icon: ShieldCheck,
+      label: "CRM governance + delivery discipline",
+    },
+    {
+      id: "global-delivery",
+      type: "text",
+      icon: GitBranch,
+      label: "Cape Town, serving UK AU US",
+    },
+    {
+      id: "service-coverage",
+      type: "text",
+      icon: Users2,
+      label: "HubSpot onboarding, migrations, CMS, integrations",
+      optional: true,
+    },
+  ],
+  showWhoSection: true,
+  whoItsFor: {
+    heading: "Who it's for and who it isn't",
+    forYouTitle: "Who it's for",
+    forYouItems: [
+      "Teams that need to launch confidently without losing control of scope or quality.",
+      "Organisations balancing delivery pace with governance, risk controls, and clear ownership.",
+      "Leaders who want technical progress that is visible, measurable, and decision ready.",
+    ],
+    notForYouTitle: "Not for you",
+    notForYouItems: [
+      "If you want unstructured delivery with no acceptance criteria or release gates.",
+      "If every in flight sprint must absorb ad hoc changes without trade off decisions.",
+      "If there is no stakeholder capacity for weekly decisions, demos, and sign off.",
+    ],
+  },
+  showDeliverablesSection: true,
+  deliverablesHeading: "What you'll walk away with",
+  deliverables: [
+    "Outcome roadmap and sprint plan.",
+    "QA checklist and release gates.",
+    "Data model and property map.",
+    "Integration spec and validation rules.",
+    "Handover pack and admin runbook.",
+    "Training plan (role based).",
+  ],
+  showCadenceSection: true,
+  cadenceHeading: "Sample cadence",
+  cadence: [
+    {
+      phase: "Week 0",
+      title: "Alignment and scope framing",
+      detail: "Confirm outcomes, priorities, constraints, success criteria, and sprint boundaries.",
+    },
+    {
+      phase: "Week 1",
+      title: "Sprint one build and demo",
+      detail: "Deliver the first controlled slice, run QA checks, and gather stakeholder feedback.",
+    },
+    {
+      phase: "Week 2",
+      title: "Sprint two build and validation",
+      detail: "Implement agreed changes between sprints and validate against acceptance criteria.",
+    },
+    {
+      phase: "Week 3",
+      title: "Launch and stabilisation",
+      detail: "Go live with release gates, monitor outcomes, and close operational risks.",
+    },
+    {
+      phase: "Post launch",
+      title: "Review and reprioritisation",
+      detail: "Capture learnings, update the roadmap, and plan the next release cadence.",
+    },
+  ],
+  showCredentialsSection: true,
+  credentialsHeading: "Credentials and proof",
+  credentialsSubcopy:
+    "Partner and certification signals are included below. Update asset paths as badges and accreditations evolve.",
+  credentialBadges: [
+    {
+      id: "cred-hubspot-partner",
+      label: "HubSpot Solutions Partner badge",
+      src: "/assets/badges/hubspot-solutions-partner.png",
+      alt: "HubSpot Solutions Partner badge",
+      maxHeightClass: "h-8 md:h-10",
+    },
+    {
+      id: "cred-hubspot-academy-admin",
+      label: "HubSpot Academy certification badge",
+      src: "/assets/badges/hubspot-academy-admin.png",
+      alt: "HubSpot Academy certification badge",
+      maxHeightClass: "h-8 md:h-10",
+    },
+    {
+      id: "cred-hubspot-academy-integration",
+      label: "HubSpot Academy integration certification badge",
+      src: "/assets/badges/hubspot-academy-integration.png",
+      alt: "HubSpot Academy integration certification badge",
+      maxHeightClass: "h-8 md:h-10",
+    },
+  ],
+  caseStudySnapshots: [
+    {
+      client: "Client name",
+      delivered: "What we delivered",
+      timeframe: "Timeframe",
+      href: "",
+    },
+    {
+      client: "Client name",
+      delivered: "What we delivered",
+      timeframe: "Timeframe",
+      href: "",
+    },
+    {
+      client: "Client name",
+      delivered: "What we delivered",
+      timeframe: "Timeframe",
+      href: "",
+    },
+  ],
+};
 
 const frameworkSteps = [
   {
@@ -172,6 +314,12 @@ const faqs = [
 ];
 
 export function ServicesGuidedDeployment() {
+  const [hiddenBadgeIds, setHiddenBadgeIds] = useState<Record<string, boolean>>({});
+
+  const onBadgeError = (id: string) => {
+    setHiddenBadgeIds((prev) => ({ ...prev, [id]: true }));
+  };
+
   return (
     <div className="flex flex-col">
       <SEO
@@ -220,6 +368,41 @@ export function ServicesGuidedDeployment() {
         </div>
       </Section>
 
+      {guidedDeploymentTrustConfig.showCredibilityStrip && (
+        <Section className="py-6 md:py-8 bg-section-soft border-t border-b border-white/5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 md:gap-4">
+            {guidedDeploymentTrustConfig.credibilityItems.map((item) => (
+              <div
+                key={item.id}
+                className="rounded-lg border border-white/10 bg-white/[0.02] px-4 py-3 flex items-center gap-3 min-h-14"
+                data-testid={`credibility-item-${item.id}`}
+              >
+                {item.type === "badge" ? (
+                  item.src && !hiddenBadgeIds[item.id] ? (
+                    <img
+                      src={item.src}
+                      alt={item.alt}
+                      className={`${item.maxHeightClass} w-auto object-contain`}
+                      loading="lazy"
+                      onError={() => onBadgeError(item.id)}
+                    />
+                  ) : (
+                    <Badge variant="outline" className="border-brand-teal/30 text-brand-teal bg-brand-teal/5 text-xs">
+                      {item.label}
+                    </Badge>
+                  )
+                ) : (
+                  <>
+                    {item.icon && <item.icon className="h-4 w-4 text-brand-teal shrink-0" />}
+                    <span className="text-sm text-white/75 leading-[1.4]">{item.label}</span>
+                  </>
+                )}
+              </div>
+            ))}
+          </div>
+        </Section>
+      )}
+
       <Section className="py-20 md:py-[120px] border-t border-white/5">
         <div className="max-w-3xl mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Projects fail for two opposite reasons</h2>
@@ -244,6 +427,42 @@ export function ServicesGuidedDeployment() {
           You need a delivery approach that protects quality and timelines, but still lets you change direction when the evidence says you should.
         </p>
       </Section>
+
+      {guidedDeploymentTrustConfig.showWhoSection && (
+        <Section className="py-20 md:py-[120px] bg-section-soft border-t border-white/5">
+          <div className="mb-14 max-w-3xl">
+            <h2 className="text-3xl md:text-4xl font-bold text-white">
+              {guidedDeploymentTrustConfig.whoItsFor.heading}
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="glass-card rounded-xl p-7 border border-white/10" data-testid="card-who-its-for">
+              <h3 className="text-2xl font-bold text-white mb-4">{guidedDeploymentTrustConfig.whoItsFor.forYouTitle}</h3>
+              <ul className="space-y-3">
+                {guidedDeploymentTrustConfig.whoItsFor.forYouItems.map((item) => (
+                  <li key={item} className="flex items-start gap-2.5 text-base text-muted-foreground leading-[1.7]">
+                    <span className="mt-2 h-1.5 w-1.5 rounded-full bg-brand-teal shrink-0" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="glass-card rounded-xl p-7 border border-white/10" data-testid="card-not-for-you">
+              <h3 className="text-2xl font-bold text-white mb-4">{guidedDeploymentTrustConfig.whoItsFor.notForYouTitle}</h3>
+              <ul className="space-y-3">
+                {guidedDeploymentTrustConfig.whoItsFor.notForYouItems.map((item) => (
+                  <li key={item} className="flex items-start gap-2.5 text-base text-muted-foreground leading-[1.7]">
+                    <span className="mt-2 h-1.5 w-1.5 rounded-full bg-brand-teal shrink-0" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </Section>
+      )}
 
       <Section className="py-20 md:py-[120px] bg-section-soft border-t border-white/5">
         <div className="mb-14 max-w-3xl">
@@ -271,6 +490,52 @@ export function ServicesGuidedDeployment() {
           ))}
         </div>
       </Section>
+
+      {guidedDeploymentTrustConfig.showDeliverablesSection && (
+        <Section className="py-20 md:py-[120px] border-t border-white/5">
+          <div className="mb-14 max-w-3xl">
+            <h2 className="text-3xl md:text-4xl font-bold text-white">
+              {guidedDeploymentTrustConfig.deliverablesHeading}
+            </h2>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {guidedDeploymentTrustConfig.deliverables.map((item, index) => (
+              <div
+                key={item}
+                className="glass-card rounded-xl p-6 border border-white/10"
+                data-testid={`card-deliverable-${index + 1}`}
+              >
+                <div className="h-9 w-9 rounded-lg bg-brand-teal/10 flex items-center justify-center mb-4">
+                  <CheckCircle2 className="h-4 w-4 text-brand-teal" />
+                </div>
+                <p className="text-base text-white/85 leading-[1.8]">{item}</p>
+              </div>
+            ))}
+          </div>
+        </Section>
+      )}
+
+      {guidedDeploymentTrustConfig.showCadenceSection && (
+        <Section className="py-20 md:py-[120px] bg-section-soft border-t border-white/5">
+          <div className="mb-14 max-w-3xl">
+            <h2 className="text-3xl md:text-4xl font-bold text-white">
+              {guidedDeploymentTrustConfig.cadenceHeading}
+            </h2>
+          </div>
+
+          <div className="max-w-4xl pl-4 md:pl-6 border-l border-white/10 space-y-6">
+            {guidedDeploymentTrustConfig.cadence.map((item) => (
+              <div key={item.phase} className="relative glass-card rounded-xl border border-white/10 p-6">
+                <span className="absolute -left-[31px] md:-left-[39px] top-7 h-3 w-3 rounded-full bg-brand-teal" />
+                <p className="text-sm font-mono uppercase tracking-wider text-brand-teal mb-2">{item.phase}</p>
+                <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
+                <p className="text-base text-muted-foreground leading-[1.8]">{item.detail}</p>
+              </div>
+            ))}
+          </div>
+        </Section>
+      )}
 
       <Section className="py-20 md:py-[120px] border-t border-white/5">
         <div className="mb-14 max-w-3xl">
@@ -364,6 +629,68 @@ export function ServicesGuidedDeployment() {
           ))}
         </div>
       </Section>
+
+      {guidedDeploymentTrustConfig.showCredentialsSection && (
+        <Section className="py-20 md:py-[120px] bg-section-soft border-t border-white/5">
+          <div className="mb-14 max-w-3xl">
+            <h2 className="text-3xl md:text-4xl font-bold text-white">
+              {guidedDeploymentTrustConfig.credentialsHeading}
+            </h2>
+            <p className="text-base text-muted-foreground leading-[1.8] mt-4">
+              {guidedDeploymentTrustConfig.credentialsSubcopy}
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
+            {guidedDeploymentTrustConfig.credentialBadges.map((badge) => (
+              <div key={badge.id} className="rounded-lg border border-white/10 bg-white/[0.02] p-4 flex items-center gap-3 min-h-16" data-testid={`credential-badge-${badge.id}`}>
+                {badge.src && !hiddenBadgeIds[badge.id] ? (
+                  <img
+                    src={badge.src}
+                    alt={badge.alt}
+                    className={`${badge.maxHeightClass} w-auto object-contain`}
+                    loading="lazy"
+                    onError={() => onBadgeError(badge.id)}
+                  />
+                ) : (
+                  <Badge variant="outline" className="border-brand-teal/30 text-brand-teal bg-brand-teal/5 text-xs">
+                    {badge.label}
+                  </Badge>
+                )}
+                <span className="text-sm text-white/70">{badge.label}</span>
+              </div>
+            ))}
+          </div>
+
+          <div>
+            <h3 className="text-2xl font-bold text-white mb-6">Case study snapshots</h3>
+            <div className="grid md:grid-cols-3 gap-6">
+              {guidedDeploymentTrustConfig.caseStudySnapshots.map((snapshot, index) => (
+                <div
+                  key={`${snapshot.client}-${index}`}
+                  className="glass-card rounded-xl p-6 border border-white/10"
+                  data-testid={`card-snapshot-${index + 1}`}
+                >
+                  <p className="text-xs font-mono uppercase tracking-wider text-brand-teal mb-3">
+                    {snapshot.client}
+                  </p>
+                  <h4 className="text-lg font-bold text-white mb-2">{snapshot.delivered}</h4>
+                  <p className="text-sm text-muted-foreground mb-5">{snapshot.timeframe}</p>
+                  {snapshot.href ? (
+                    <Link href={snapshot.href}>
+                      <Button variant="outline" className="h-9 text-sm border-white/15 text-white hover:bg-white/5">
+                        View snapshot <ArrowRight className="ml-2 h-4 w-4" />
+                      </Button>
+                    </Link>
+                  ) : (
+                    <span className="text-sm text-white/40">Link to be added</span>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </Section>
+      )}
 
       <Section className="py-20 md:py-[120px] border-t border-white/5">
         <div className="mb-10 max-w-3xl">
