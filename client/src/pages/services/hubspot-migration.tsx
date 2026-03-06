@@ -24,29 +24,6 @@ const migrationOutcomes = [
   "Better adoption",
 ];
 
-const relatedHubspotResources = [
-  {
-    title: "HubSpot Audit",
-    desc: "Evaluate your current HubSpot setup and identify improvements.",
-    href: "/muloo-hub/hubspot-audit",
-  },
-  {
-    title: "Guided Deployment",
-    desc: "Structured HubSpot onboarding using Muloo’s implementation framework.",
-    href: "/services/guided-deployment",
-  },
-  {
-    title: "HubSpot Migration",
-    desc: "Move your CRM data safely into HubSpot with structured data mapping.",
-    href: "/muloo-hub/hubspot-migration",
-  },
-  {
-    title: "HubSpot Optimisation",
-    desc: "Improve pipelines, automation and reporting inside an existing HubSpot portal.",
-    href: "/muloo-hub/hubspot-optimisation",
-  },
-];
-
 export function ServicesHubspotMigration() {
   return (
     <div className="flex flex-col">
@@ -118,25 +95,6 @@ export function ServicesHubspotMigration() {
               </li>
             ))}
           </ul>
-        </div>
-      </Section>
-
-      <Section className="py-20 md:py-[120px] bg-section-soft border-t border-white/5">
-        <div className="mb-14 max-w-4xl">
-          <h2 className="text-3xl md:text-4xl font-bold text-white">Explore more HubSpot resources</h2>
-        </div>
-        <div className="grid md:grid-cols-2 gap-6">
-          {relatedHubspotResources.map((resource) => (
-            <Link key={resource.title} href={resource.href} className="block h-full">
-              <div className="glass-card rounded-xl p-7 border border-white/10 h-full hover:border-brand-teal/25 transition-all duration-300">
-                <h3 className="text-xl font-bold text-white mb-3">{resource.title}</h3>
-                <p className="text-base text-muted-foreground leading-[1.8] mb-6">{resource.desc}</p>
-                <span className="text-sm font-semibold text-brand-teal inline-flex items-center">
-                  Explore <ArrowRight className="ml-2 h-4 w-4" />
-                </span>
-              </div>
-            </Link>
-          ))}
         </div>
       </Section>
 

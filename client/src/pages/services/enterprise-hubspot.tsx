@@ -97,7 +97,7 @@ export function ServicesEnterpriseHubspot() {
 
       <Section className="py-20 md:py-[120px] border-t border-white/5">
         <div className="mb-14 max-w-4xl">
-          <h2 className="text-3xl md:text-4xl font-bold text-white">How Muloo supports enterprise HubSpot</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-white">Muloo enterprise architecture</h2>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {mulooSupport.map((item) => (
@@ -110,7 +110,7 @@ export function ServicesEnterpriseHubspot() {
 
       <Section className="py-20 md:py-[120px] bg-section-soft border-t border-white/5">
         <div className="mb-10 max-w-4xl">
-          <h2 className="text-3xl md:text-4xl font-bold text-white">Enterprise architecture examples</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-white">Example deployments</h2>
         </div>
         <div className="max-w-4xl glass-card rounded-2xl p-8 md:p-10 border border-white/10">
           <h3 className="text-2xl font-bold text-white mb-6">Global services firm</h3>
@@ -133,7 +133,7 @@ export function ServicesEnterpriseHubspot() {
 
       <Section className="py-20 md:py-[120px] border-t border-white/5">
         <div className="mb-10 max-w-4xl">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Governance layer</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Governance</h2>
           <p className="text-base md:text-lg text-muted-foreground leading-[1.8] max-w-3xl">
             Enterprise HubSpot delivery needs a formal governance layer to keep data, automation, and integrations stable as complexity grows.
           </p>

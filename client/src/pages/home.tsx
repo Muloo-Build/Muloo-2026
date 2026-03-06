@@ -1,7 +1,7 @@
 import { Section } from "@/components/ui/section";
 import { homeContent } from "@/lib/content";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Database, Cpu, Bot, Layout, ChevronRight, Server, Workflow, Check, TrendingUp, Zap } from "lucide-react";
+import { ArrowRight, Database, Cpu, Bot, Layout, ChevronRight, Server, Workflow, Check, TrendingUp, Zap, Award, Clock3, Layers3, Globe2 } from "lucide-react";
 import { Link } from "wouter";
 import { useState, useEffect } from "react";
 import { BookingCard } from "@/components/meetings/BookingCard";
@@ -62,6 +62,13 @@ const processSteps = [
   { step: "02", title: "Architect", desc: "Technical blueprint with measurable KPIs, defined milestones, and cost estimates before any code is written." },
   { step: "03", title: "Ship", desc: "Iterative delivery with weekly demos and stakeholder sign-off — working software, not slide decks." },
   { step: "04", title: "Support", desc: "SLA-backed monitoring, quarterly reviews, and proactive recommendations as your business evolves." },
+];
+
+const heroCredibilityItems = [
+  { label: "HubSpot Solutions Partner (Gold)", icon: Award },
+  { label: "10+ years HubSpot partner", icon: Clock3 },
+  { label: "CRM architecture specialists", icon: Layers3 },
+  { label: "Serving UK, AU and US companies", icon: Globe2 },
 ];
 
 function RotatingBadge() {
@@ -362,6 +369,8 @@ export function Home() {
         </div>
       </div>
 
+      <HeroCredibilityStrip />
+
       <HelpSegmentSection />
 
       <ClientMarquee />
@@ -601,6 +610,25 @@ export function Home() {
         </Section>
       )}
     </div>
+  );
+}
+
+function HeroCredibilityStrip() {
+  return (
+    <Section className="py-6 md:py-8 border-t border-b border-white/5 bg-section-soft">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+        {heroCredibilityItems.map((item) => (
+          <div
+            key={item.label}
+            className="rounded-lg border border-white/10 bg-white/[0.02] px-4 py-3 flex items-center gap-3 min-h-14"
+            data-testid={`hero-credibility-${item.label.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
+          >
+            <item.icon className="h-4 w-4 text-brand-teal shrink-0" />
+            <span className="text-sm text-white/75 leading-[1.4]">{item.label}</span>
+          </div>
+        ))}
+      </div>
+    </Section>
   );
 }
 

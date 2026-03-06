@@ -56,8 +56,8 @@ const deploymentMethod = [
   },
   {
     step: "04",
-    title: "Train",
-    desc: "Enable teams with role-based training, runbooks, and admin ownership.",
+    title: "Launch",
+    desc: "Deploy safely, enable users, and validate reporting and operational readiness.",
   },
   {
     step: "05",
@@ -86,6 +86,27 @@ const governanceItems = [
     title: "Executive reporting clarity",
     desc: "Leadership dashboards built on governed data that can be trusted.",
     icon: BarChart3,
+  },
+];
+
+const caseStudies = [
+  {
+    clientType: "Global technology services group",
+    challenge: "Fragmented CRM setup across regions with inconsistent lifecycle stages and unreliable reporting.",
+    implemented: "Rebuilt pipelines, standardised lifecycle architecture, and introduced governance controls for properties and automation.",
+    outcome: "Leadership gained trusted multi-region reporting and clearer pipeline visibility without spreadsheet workarounds.",
+  },
+  {
+    clientType: "B2B SaaS revenue team",
+    challenge: "Automation conflicts and duplicated properties causing reporting drift and sales process confusion.",
+    implemented: "Rationalised property model, restructured workflows, and aligned pipeline stages with real revenue operations.",
+    outcome: "Cleaner automation, stronger team adoption, and faster decision-making through stable dashboards.",
+  },
+  {
+    clientType: "Professional services organisation",
+    challenge: "Legacy CRM migration risk with unclear ownership and inconsistent data quality.",
+    implemented: "Executed controlled migration into HubSpot with validation rules, role-based permissions, and release checkpoints.",
+    outcome: "Operational HubSpot launch with structured governance and measurable improvements in reporting accuracy.",
   },
 ];
 
@@ -125,7 +146,7 @@ export function ServicesHub() {
             Enterprise HubSpot architecture.
           </h1>
           <p className="text-lg md:text-2xl text-muted-foreground leading-[1.8] max-w-3xl">
-            Muloo Hub designs, deploys and governs enterprise HubSpot environments from first implementations to complex global rollouts.
+            Muloo designs, deploys and governs HubSpot environments for growing organisations.
           </p>
           <p className="text-base md:text-lg text-white/80 leading-[1.8] max-w-3xl mt-5">
             All HubSpot projects are delivered using the Muloo Method, our structured approach to CRM architecture and deployment.
@@ -159,7 +180,10 @@ export function ServicesHub() {
 
       <Section className="py-20 md:py-[120px] bg-section-soft border-t border-white/5">
         <div className="mb-14 max-w-3xl">
-          <h2 className="text-3xl md:text-4xl font-bold text-white">Our Deployment Method</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-white">Deployment Method</h2>
+          <p className="text-base md:text-lg text-muted-foreground leading-[1.8] mt-4">
+            The Muloo Method structures delivery into practical phases so HubSpot launches with strong architecture, governance and reporting foundations.
+          </p>
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
@@ -212,28 +236,42 @@ export function ServicesHub() {
 
       <Section className="py-20 md:py-[120px] border-t border-white/5">
         <div className="mb-14 max-w-3xl">
-          <h2 className="text-3xl md:text-4xl font-bold text-white">Case Example</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-white">Case Studies</h2>
         </div>
 
-        <div className="max-w-4xl">
-          <div className="glass-card rounded-xl border border-white/10 p-8 md:p-10" data-testid="card-hub-case-example">
-            <h3 className="text-2xl font-bold text-white mb-6">Multi-region HubSpot rollout</h3>
-            <ul className="space-y-3">
-              <li className="text-base text-muted-foreground leading-[1.8]">Pipelines rebuilt</li>
-              <li className="text-base text-muted-foreground leading-[1.8]">Lifecycle stages aligned</li>
-              <li className="text-base text-muted-foreground leading-[1.8]">Leadership reporting implemented</li>
-            </ul>
-          </div>
+        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+          {caseStudies.map((study, index) => (
+            <div key={study.clientType} className="glass-card rounded-xl border border-white/10 p-7" data-testid={`card-hub-case-study-${index + 1}`}>
+              <div className="space-y-5">
+                <div>
+                  <p className="text-xs font-mono uppercase tracking-wider text-brand-teal mb-2">Client Type</p>
+                  <p className="text-base font-semibold text-white leading-[1.7]">{study.clientType}</p>
+                </div>
+                <div>
+                  <p className="text-xs font-mono uppercase tracking-wider text-brand-teal mb-2">Challenge</p>
+                  <p className="text-sm text-muted-foreground leading-[1.8]">{study.challenge}</p>
+                </div>
+                <div>
+                  <p className="text-xs font-mono uppercase tracking-wider text-brand-teal mb-2">What Muloo Implemented</p>
+                  <p className="text-sm text-muted-foreground leading-[1.8]">{study.implemented}</p>
+                </div>
+                <div>
+                  <p className="text-xs font-mono uppercase tracking-wider text-brand-teal mb-2">Outcome</p>
+                  <p className="text-sm text-white/85 leading-[1.8]">{study.outcome}</p>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </Section>
 
       <Section className="py-20 md:py-[120px] text-center bg-hero-gradient border-t border-white/5 relative overflow-hidden">
         <div className="absolute inset-0 bg-grid-pattern-fade pointer-events-none opacity-40" />
         <div className="relative z-10 max-w-3xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">Ready for a structured HubSpot?</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">Ready for a structured HubSpot deployment?</h2>
           <Link href="/contact/book/jarrud">
             <Button className="bg-gradient-muloo border-none text-white hover:brightness-110 h-14 px-8 font-bold" data-testid="button-hub-final-book-call">
-              Book a HubSpot strategy call <ArrowRight className="ml-2 h-5 w-5" />
+              Book a strategy call <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
           </Link>
         </div>

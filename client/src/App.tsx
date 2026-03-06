@@ -10,8 +10,11 @@ import { ServicesHubspotArchitecture } from "./pages/services/hubspot-architectu
 import { ServicesHubspotImplementation } from "./pages/services/hubspot-implementation";
 import { ServicesHubspotMigration } from "./pages/services/hubspot-migration";
 import { ServicesHubspotOptimisation } from "./pages/services/hubspot-optimisation";
+import { ServicesHubspotGovernance } from "./pages/services/hubspot-governance";
 import { ServicesHubspotVsSalesforce } from "./pages/services/hubspot-vs-salesforce";
 import { ServicesEnterpriseHubspot } from "./pages/services/enterprise-hubspot";
+import { ServicesRevOps } from "./pages/services/revops";
+import { ServicesSalesforceToHubspotMigration } from "./pages/services/salesforce-to-hubspot-migration";
 import { Advisory } from "./pages/advisory";
 import { OperatorCircle } from "./pages/advisory/operator-circle";
 import { About } from "./pages/about";
@@ -53,11 +56,13 @@ function Router() {
         <Route path="/muloo-hub/architecture" component={ServicesHubspotArchitecture} />
         <Route path="/muloo-hub/hubspot-architecture" component={ServicesHubspotArchitecture} />
         <Route path="/muloo-hub/enterprise-hubspot" component={ServicesEnterpriseHubspot} />
+        <Route path="/muloo-hub/revops" component={ServicesRevOps} />
         <Route path="/muloo-hub/hubspot-vs-salesforce" component={ServicesHubspotVsSalesforce} />
         <Route path="/muloo-hub/hubspot-audit" component={ServicesHubspotAudit} />
         <Route path="/muloo-hub/hubspot-implementation" component={ServicesHubspotImplementation} />
         <Route path="/muloo-hub/hubspot-migration" component={ServicesHubspotMigration} />
-        <Route path="/muloo-hub/salesforce-to-hubspot-migration" component={ServicesHubspotMigration} />
+        <Route path="/muloo-hub/hubspot-governance" component={ServicesHubspotGovernance} />
+        <Route path="/muloo-hub/salesforce-to-hubspot-migration" component={ServicesSalesforceToHubspotMigration} />
         <Route path="/muloo-hub/hubspot-optimisation" component={ServicesHubspotOptimisation} />
         <Route path="/services/hub" component={ServicesHub} />
         <Route path="/services/build" component={ServicesBuild} />

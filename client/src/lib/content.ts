@@ -7,7 +7,7 @@ export const navLinks = [
       {
         name: "Muloo Hub",
         href: "/muloo-hub",
-        desc: "Enterprise HubSpot Architecture",
+        desc: "Enterprise HubSpot architecture",
         links: [
           { name: "HubSpot Audit", href: "/muloo-hub/hubspot-audit" },
           { name: "Guided Deployment", href: "/muloo-hub/guided-deployment" },
@@ -16,9 +16,9 @@ export const navLinks = [
           { name: "HubSpot Optimisation", href: "/muloo-hub/hubspot-optimisation" }
         ]
       },
-      { name: "Muloo Build", href: "/services/build", desc: "API-Centric Engineering" },
-      { name: "Muloo AI", href: "/services/ai", desc: "AI Agents & Vibe Coding" },
-      { name: "Muloo Product", href: "/services/product", desc: "SaaS & Internal Tools" }
+      { name: "Muloo Build", href: "/services/build", desc: "API integrations and platform engineering" },
+      { name: "Muloo AI", href: "/services/ai", desc: "AI agents and automation" },
+      { name: "Muloo Product", href: "/services/product", desc: "Software products" }
     ]
   },
   {
