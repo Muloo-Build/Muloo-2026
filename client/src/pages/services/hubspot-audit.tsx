@@ -5,7 +5,7 @@ import { SEO } from "@/components/layout/SEO";
 import { ArrowRight, Database, GitBranch, Workflow, BarChart3, Link2, CheckCircle2 } from "lucide-react";
 import { Link } from "wouter";
 
-const requestAuditUrl = "/contact";
+const requestAuditUrl = "https://audit.wearemuloo.com/";
 
 const analysisCards = [
   {
@@ -82,11 +82,11 @@ export function ServicesHubspotAudit() {
           </p>
 
           <div className="mt-10">
-            <Link href={requestAuditUrl}>
+            <a href={requestAuditUrl} target="_blank" rel="noopener noreferrer">
               <Button size="lg" className="bg-gradient-muloo border-none text-white hover:brightness-110 font-bold px-8 h-14 rounded-lg">
-                Request your HubSpot audit <ArrowRight className="ml-2 h-5 w-5" />
+                Run your free HubSpot audit <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
-            </Link>
+            </a>
           </div>
         </div>
       </Section>
@@ -164,11 +164,11 @@ export function ServicesHubspotAudit() {
       <Section className="py-20 md:py-[120px] text-center bg-hero-gradient border-t border-white/5 relative overflow-hidden">
         <div className="absolute inset-0 bg-grid-pattern-fade pointer-events-none opacity-40" />
         <div className="relative z-10 max-w-3xl mx-auto">
-          <Link href={requestAuditUrl}>
+          <a href={requestAuditUrl} target="_blank" rel="noopener noreferrer">
             <Button className="bg-gradient-muloo border-none text-white hover:brightness-110 h-14 px-8 font-bold">
-              Request your HubSpot audit <ArrowRight className="ml-2 h-5 w-5" />
+              Run your free HubSpot audit <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
-          </Link>
+          </a>
         </div>
       </Section>
     </div>

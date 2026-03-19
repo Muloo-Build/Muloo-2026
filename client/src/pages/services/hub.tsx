@@ -226,11 +226,11 @@ export function ServicesHub() {
           <p className="text-base md:text-lg text-muted-foreground leading-[1.8] mb-8 max-w-3xl">
             Run the audit to identify architecture debt, data quality issues, and workflow risks before rollout decisions are made.
           </p>
-          <Link href="/muloo-hub/hubspot-audit">
+          <a href="https://audit.wearemuloo.com/" target="_blank" rel="noopener noreferrer">
             <Button className="bg-gradient-muloo border-none text-white hover:brightness-110 h-12 px-7" data-testid="button-hub-audit-lead-magnet">
               Open HubSpot Audit <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
-          </Link>
+          </a>
         </div>
       </Section>
 

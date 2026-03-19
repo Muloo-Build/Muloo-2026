@@ -143,7 +143,7 @@ export const serviceProductContent = {
     },
     {
       title: "HubSpot Audit Tool",
-      desc: "Automated HubSpot portal audit identifying duplicates, automation issues and data risks. Link: https://audit.wearemuloo.com/",
+      desc: "Automated HubSpot portal audit identifying duplicates, automation issues and data risks.",
       status: "Beta"
     }
   ]
