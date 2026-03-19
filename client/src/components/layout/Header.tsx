@@ -160,6 +160,11 @@ export function Header() {
         </nav>
 
         <div className="hidden md:flex items-center gap-4">
+          <a href="https://deploy.wearemuloo.com/client/login" target="_blank" rel="noopener noreferrer">
+            <Button variant="outline" className="text-white border-white/20 hover:bg-white/10 font-bold rounded-full px-6 transition-all text-sm">
+              Client Login
+            </Button>
+          </a>
           <Link href={meetingUrl}>
             <Button className="bg-gradient-muloo border-none text-white hover:brightness-110 font-bold rounded-full px-6 glow-muloo-sm transition-all hover:scale-105 hover:-translate-y-0.5 text-sm">
               Let's Talk
@@ -250,11 +255,18 @@ export function Header() {
                   )}
                 </div>
               ))}
-              <Link href={meetingUrl} onClick={() => setIsMobileMenuOpen(false)}>
-                <Button className="w-full bg-gradient-muloo border-none text-white font-bold hover:brightness-110 mt-4 h-12 rounded-xl">
-                  Let's Talk
-                </Button>
-              </Link>
+              <div className="flex flex-col gap-3 mt-4">
+                <a href="https://deploy.wearemuloo.com/client/login" target="_blank" rel="noopener noreferrer" onClick={() => setIsMobileMenuOpen(false)}>
+                  <Button variant="outline" className="w-full text-white border-white/20 bg-transparent hover:bg-white/10 font-bold h-12 rounded-xl">
+                    Client Login
+                  </Button>
+                </a>
+                <Link href={meetingUrl} onClick={() => setIsMobileMenuOpen(false)}>
+                  <Button className="w-full bg-gradient-muloo border-none text-white font-bold hover:brightness-110 h-12 rounded-xl">
+                    Let's Talk
+                  </Button>
+                </Link>
+              </div>
             </div>
           </SheetContent>
         </Sheet>

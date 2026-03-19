@@ -1,7 +1,7 @@
 import { Section } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
 import { ContactForm } from "@/components/sections/contact-form";
-import { MapPin } from "lucide-react";
+import { MapPin, ArrowRight, LayoutDashboard } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { usePopup } from "@/components/popups/usePopup";
 import jarrudImg from "@assets/d1bde727-2cda-4a05-ad55-08a4eeb1c30f_1771492083207.png";
@@ -56,6 +56,26 @@ export function Contact() {
               WhatsApp
             </a>
           </p>
+        </div>
+      </Section>
+
+      <Section className="py-10 md:py-12 border-b border-white/5 bg-[#040A22]/30">
+        <div className="max-w-4xl mx-auto text-center px-4">
+          <div className="inline-flex items-center justify-center p-3 sm:p-4 rounded-full bg-brand-teal/10 mb-5 sm:mb-6">
+            <LayoutDashboard className="text-brand-teal w-6 h-6 sm:w-8 sm:h-8" />
+          </div>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">
+            Existing Client?
+          </h2>
+          <p className="text-base sm:text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+            Access your active projects, view outstanding quotes, and manage your support queries through our secure client portal.
+          </p>
+          <a href="https://deploy.wearemuloo.com/client/login" target="_blank" rel="noopener noreferrer">
+            <Button className="bg-brand-teal hover:bg-brand-teal/90 text-[#040A22] font-bold rounded-full px-8 py-6 h-auto text-base sm:text-lg transition-all hover:scale-105">
+              Access Client Portal
+              <ArrowRight className="ml-2 w-5 h-5" />
+            </Button>
+          </a>
         </div>
       </Section>
 
