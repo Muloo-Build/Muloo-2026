@@ -59,23 +59,35 @@ export function Contact() {
         </div>
       </Section>
 
-      <Section className="py-10 md:py-12 border-b border-white/5 bg-[#040A22]/30">
-        <div className="max-w-4xl mx-auto text-center px-4">
-          <div className="inline-flex items-center justify-center p-3 sm:p-4 rounded-full bg-brand-teal/10 mb-5 sm:mb-6">
-            <LayoutDashboard className="text-brand-teal w-6 h-6 sm:w-8 sm:h-8" />
+      <Section className="py-8 md:py-10 border-b border-white/5">
+        <div className="max-w-4xl mx-auto px-4">
+          <div className="group relative rounded-2xl p-[1px] bg-white/10 transition-all duration-300">
+            <div
+              className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              style={{
+                backgroundImage: `linear-gradient(130deg, rgba(0, 196, 204, 0.4), rgba(0, 196, 204, 0.1), rgba(255, 255, 255, 0.05))`,
+              }}
+              aria-hidden="true"
+            />
+            <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#060E2B] p-8 md:p-12 text-center h-full">
+              <div className="absolute left-1/2 -top-10 h-32 w-32 -translate-x-1/2 rounded-full bg-brand-teal/15 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="inline-flex items-center justify-center p-3 rounded-2xl bg-white/5 border border-white/10 mb-6">
+                <LayoutDashboard className="text-brand-teal w-6 h-6 sm:w-8 sm:h-8" />
+              </div>
+              <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
+                Existing Client?
+              </h2>
+              <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
+                Access your active projects, view outstanding quotes, and manage your support queries through our secure client portal.
+              </p>
+              <a href="https://deploy.wearemuloo.com/client/login" target="_blank" rel="noopener noreferrer">
+                <Button className="inline-flex bg-gradient-muloo border-none text-white font-bold rounded-xl px-8 h-12 transition-all duration-300 hover:brightness-110 hover:-translate-y-0.5">
+                  Access Client Portal
+                  <ArrowRight className="ml-2 w-4 h-4" />
+                </Button>
+              </a>
+            </div>
           </div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4">
-            Existing Client?
-          </h2>
-          <p className="text-base sm:text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Access your active projects, view outstanding quotes, and manage your support queries through our secure client portal.
-          </p>
-          <a href="https://deploy.wearemuloo.com/client/login" target="_blank" rel="noopener noreferrer">
-            <Button className="bg-brand-teal hover:bg-brand-teal/90 text-[#040A22] font-bold rounded-full px-8 py-6 h-auto text-base sm:text-lg transition-all hover:scale-105">
-              Access Client Portal
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </Button>
-          </a>
         </div>
       </Section>
 
