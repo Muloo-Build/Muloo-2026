@@ -57,8 +57,16 @@ export function Footer() {
                   WhatsApp
                 </a>
               </li>
-              <li><span>LinkedIn</span></li>
-              <li><span>GitHub</span></li>
+              <li>
+                <a href="#" className="hover:text-brand-teal transition-colors" target="_blank" rel="noopener noreferrer">
+                  LinkedIn
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-brand-teal transition-colors" target="_blank" rel="noopener noreferrer">
+                  GitHub
+                </a>
+              </li>
               <li><Link href="/styleguide" className="hover:text-brand-teal transition-colors">Styleguide</Link></li>
             </ul>
           </div>
@@ -76,8 +84,8 @@ export function Footer() {
         <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-muted-foreground">
           <p>&copy; {new Date().getFullYear()} Muloo. All rights reserved.</p>
           <div className="flex gap-6">
-            <span>Privacy Policy</span>
-            <span>Terms of Service</span>
+            <Link href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
+            <Link href="/terms-of-service" className="hover:text-white transition-colors">Terms of Service</Link>
           </div>
         </div>
       </div>

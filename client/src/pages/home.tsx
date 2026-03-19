@@ -1,7 +1,7 @@
 import { Section } from "@/components/ui/section";
 import { homeContent } from "@/lib/content";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Database, Cpu, Bot, Layout, ChevronRight, Server, Workflow, Check, TrendingUp, Zap, Award, Clock3, Layers3, Globe2 } from "lucide-react";
+import { ArrowRight, Database, Cpu, Bot, Layout, ChevronRight, Server, Workflow, Check, TrendingUp, Zap, Award, Clock3, Layers3, Globe2, Terminal } from "lucide-react";
 import { Link } from "wouter";
 import { useState, useEffect } from "react";
 import { BookingCard } from "@/components/meetings/BookingCard";
@@ -677,32 +677,40 @@ function HelpSegmentSection() {
       </div>
 
       <div className="grid md:grid-cols-2 gap-6">
-        <div className="glass-card rounded-2xl p-8 md:p-10 border border-white/10 flex flex-col" data-testid="card-help-fix-hubspot">
-          <h3 className="text-2xl md:text-3xl font-bold text-white mb-5">Our HubSpot isn&apos;t working</h3>
-          <div className="space-y-2 text-base md:text-lg text-muted-foreground leading-[1.8] mb-8">
-            <p>Pipelines are messy.</p>
-            <p>Reporting is unreliable.</p>
-            <p>Automation is confusing.</p>
+        <div className="glass-card rounded-2xl p-8 md:p-10 border border-white/10 flex flex-col group hover:border-stream-hub/20 transition-all duration-300 relative overflow-hidden" data-testid="card-help-muloo-hub">
+          <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">
+            <Layers3 className="w-32 h-32 text-stream-hub" />
+          </div>
+          <span className="text-sm font-mono text-stream-hub uppercase tracking-widest mb-4">Muloo Hub</span>
+          <h3 className="text-2xl md:text-3xl font-bold text-white mb-5 z-10">HubSpot Architecture & RevOps</h3>
+          <div className="space-y-2 text-base md:text-lg text-muted-foreground leading-[1.8] mb-8 z-10 flex-grow">
+            <p>We need enterprise HubSpot architecture.</p>
+            <p>Our revenue operations need aligning.</p>
+            <p>Complex data migrations & guided deployments.</p>
           </div>
 
-          <Link href="/muloo-hub/hubspot-optimisation" className="mt-auto">
-            <Button size="lg" className="w-full sm:w-auto bg-gradient-muloo border-none text-white hover:brightness-110 font-bold px-8 h-14 rounded-lg glow-muloo-sm">
-              Fix my HubSpot <ArrowRight className="ml-2 h-5 w-5" />
+          <Link href="/muloo-hub" className="mt-auto z-10">
+            <Button size="lg" className="w-full sm:w-auto bg-stream-hub/10 hover:bg-stream-hub/20 text-stream-hub border border-stream-hub/30 font-bold px-8 h-14 rounded-lg flex items-center justify-center">
+              Explore Muloo Hub <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
           </Link>
         </div>
 
-        <div className="glass-card rounded-2xl p-8 md:p-10 border border-white/10 flex flex-col" data-testid="card-help-plan-hubspot">
-          <h3 className="text-2xl md:text-3xl font-bold text-white mb-5">We want to implement HubSpot properly</h3>
-          <div className="space-y-2 text-base md:text-lg text-muted-foreground leading-[1.8] mb-8">
-            <p>Planning a CRM rollout?</p>
-            <p>Migrating from Salesforce?</p>
-            <p>Starting fresh with HubSpot?</p>
+        <div className="glass-card rounded-2xl p-8 md:p-10 border border-white/10 flex flex-col group hover:border-stream-build/20 transition-all duration-300 relative overflow-hidden" data-testid="card-help-muloo-build">
+          <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">
+            <Terminal className="w-32 h-32 text-stream-build" />
+          </div>
+          <span className="text-sm font-mono text-stream-build uppercase tracking-widest mb-4">Muloo Build</span>
+          <h3 className="text-2xl md:text-3xl font-bold text-white mb-5 z-10">Custom Engineering & Integration</h3>
+          <div className="space-y-2 text-base md:text-lg text-muted-foreground leading-[1.8] mb-8 z-10 flex-grow">
+            <p>We need systems to talk to each other.</p>
+            <p>We require bespoke middleware & APIs.</p>
+            <p>Our backend architecture is scaling.</p>
           </div>
 
-          <Link href="/muloo-hub/hubspot-implementation" className="mt-auto">
-            <Button size="lg" className="w-full sm:w-auto bg-gradient-muloo border-none text-white hover:brightness-110 font-bold px-8 h-14 rounded-lg glow-muloo-sm">
-              Plan our HubSpot rollout <ArrowRight className="ml-2 h-5 w-5" />
+          <Link href="/services/build" className="mt-auto z-10">
+            <Button size="lg" className="w-full sm:w-auto bg-stream-build/10 hover:bg-stream-build/20 text-stream-build border border-stream-build/30 font-bold px-8 h-14 rounded-lg flex items-center justify-center">
+              Explore Muloo Build <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
           </Link>
         </div>
