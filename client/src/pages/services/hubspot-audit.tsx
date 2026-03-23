@@ -9,51 +9,51 @@ const requestAuditUrl = "https://audit.wearemuloo.com/";
 
 const analysisCards = [
   {
-    title: "Data structure",
-    desc: "Properties, lifecycle stages and field hygiene.",
+    title: "Data architecture & hygiene",
+    desc: "We audit custom properties, object associations, lifecycle stages, and historical data hygiene to ensure your database is fundamentally built for scale—not just quick fixes.",
     icon: Database,
   },
   {
-    title: "Pipelines",
-    desc: "Deal stages, reporting visibility and sales workflows.",
+    title: "Pipeline engineering",
+    desc: "We dissect deal stages, required fields, and sales workflows to eliminate friction for reps while guaranteeing accurate, predictable revenue forecasting for leadership.",
     icon: GitBranch,
   },
   {
-    title: "Automation",
-    desc: "Workflows, triggers and operational risk.",
+    title: "Programmable automation",
+    desc: "We untangle complex workflows, identify redundant triggers, and highlight silent operational risks that cause data overrides or broken customer experiences.",
     icon: Workflow,
   },
   {
-    title: "Reporting",
-    desc: "Executive dashboards and pipeline visibility.",
+    title: "Attribution & reporting",
+    desc: "We evaluate your executive dashboards, custom report builders, and revenue attribution models to ensure absolute confidence in your go-to-market metrics.",
     icon: BarChart3,
   },
   {
-    title: "Integrations",
-    desc: "External systems and data integrity.",
+    title: "System integrations",
+    desc: "We inspect API connections, native HubSpot integrations, and sync errors that threaten data integrity across your broader tech stack.",
     icon: Link2,
   },
 ];
 
 const receiveItems = [
-  "Audit summary report",
-  "Portal architecture findings",
-  "Priority fixes",
-  "Recommended roadmap",
+  "Comprehensive technical summary report detailing portal health.",
+  "Deep-dive portal architecture findings and structural vulnerabilities.",
+  "Critical priority fixes to instantly stabilize broken workflows.",
+  "A pragmatic, phased roadmap for long-term HubSpot optimization.",
 ];
 
 const audienceItems = [
-  "Companies already using HubSpot",
-  "Teams struggling with messy pipelines",
-  "Businesses migrating CRM systems",
-  "Leaders needing better reporting",
+  "Scaling companies whose HubSpot portal has become overly complex and unmanageable.",
+  "Revenue operations teams struggling with messy pipelines and unreliable data.",
+  "Businesses preparing to scale or migrate systems that need a clean foundation.",
+  "Executive leaders demanding accurate reporting and transparent ROI from their CRM.",
 ];
 
 const outcomeItems = [
-  "Clean reporting",
-  "Simplified automation",
-  "Improved pipeline visibility",
-  "Stronger CRM governance",
+  "A single source of truth with clean, reliable executive reporting.",
+  "Simplified, guardrailed automation that runs without manual babysitting.",
+  "Unprecedented pipeline visibility and predictable sales velocity.",
+  "Stronger CRM governance, user permissions, and clear change-control processes.",
 ];
 
 export function ServicesHubspotAudit() {
@@ -61,7 +61,7 @@ export function ServicesHubspotAudit() {
     <div className="flex flex-col">
       <SEO
         title="HubSpot Audit | Muloo"
-        description="Find out exactly why your HubSpot portal is not delivering the results it should, and get a clear roadmap for improvement."
+        description="Stop guessing why your CRM feels broken. We diagnose structural flaws and tangled automations to give you a clear roadmap for technical recovery."
         canonicalUrl="https://www.wearemuloo.com/muloo-hub/hubspot-audit"
       />
 
@@ -75,10 +75,10 @@ export function ServicesHubspotAudit() {
             HubSpot Audit
           </Badge>
           <h1 className="text-5xl md:text-7xl font-extrabold leading-[1.08] text-white mb-8">
-            HubSpot audit.
+            Deep-dive HubSpot audit.
           </h1>
           <p className="text-lg md:text-2xl text-muted-foreground leading-[1.8] max-w-3xl">
-            Find out exactly why your HubSpot portal isn&apos;t delivering the results it should.
+            Stop guessing why your CRM feels broken. We diagnose structural flaws, data silos, and tangled automations to give you a clear, actionable roadmap for technical recovery.
           </p>
 
           <div className="mt-10">
