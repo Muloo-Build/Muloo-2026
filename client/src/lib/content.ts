@@ -104,11 +104,15 @@ export type CaseStudy = {
   stream: "hub" | "build" | "ai" | "product";
   tag: string;
   client: string;
+  logo: { text: string; src?: string; website?: string };
   title: string;
   status?: string | null;
   summary: string;
   metrics: { value: string; label: string }[];
   facts: { industry: string; region: string; timeline: string; services: string[]; stack: string[] };
+  champion: { label: string; detail: string };
+  problemBullets: string[];
+  solutionBullets: string[];
   challenge: string;
   approach: string[];
   built: string[];
@@ -122,6 +126,7 @@ export const caseStudies: CaseStudy[] = [
     stream: "hub",
     tag: "CRM Architecture",
     client: "Phillips Law",
+    logo: { text: "Phillips Law", website: "https://phillips-law.co.uk/" },
     title: "From a failed implementation to scalable multi-pipeline architecture",
     status: null,
     summary:
@@ -138,6 +143,21 @@ export const caseStudies: CaseStudy[] = [
       services: ["HubSpot Audit & Rescue", "Multi-pipeline Architecture", "Automation", "Reporting"],
       stack: ["HubSpot"],
     },
+    champion: {
+      label: "Phillips Law leadership and operations teams",
+      detail:
+        "The client-side champion group needed confidence that HubSpot could support more than 20 product and service lines without losing reporting visibility.",
+    },
+    problemBullets: [
+      "A previous agency had implemented HubSpot as a basic CRM, not as a structured business platform.",
+      "More than 20 product and service lines needed separate journeys, handovers, ownership rules and reporting.",
+      "Poor configuration, duplication and weak automation logic had eroded internal trust in the portal.",
+    ],
+    solutionBullets: [
+      "Stabilised the portal through a technical HubSpot audit and rescue phase.",
+      "Rebuilt the account around multi-pipeline architecture, product-line process design and team visibility rules.",
+      "Implemented automation and reporting across pipeline value, deal movement, product-line performance and management oversight.",
+    ],
     challenge:
       "The previous agency treated HubSpot like a basic CRM. Phillips Law needed it to operate as a structured business platform — more than 20 product and service lines, separate pipelines per business area, significant process differences between them, pipeline-specific automation, complex team structures, and multi-pipeline reporting. Poor foundations had eroded internal confidence in the system.",
     approach: [
@@ -159,6 +179,7 @@ export const caseStudies: CaseStudy[] = [
     stream: "ai",
     tag: "Digital Transformation",
     client: "W.consulting",
+    logo: { text: "W.consulting", website: "https://wconsulting.co.za/" },
     title: "Turning an underused HubSpot portal into a growth platform",
     status: null,
     summary:
@@ -175,6 +196,21 @@ export const caseStudies: CaseStudy[] = [
       services: ["HubSpot Discovery", "CRM Architecture", "Marketing Operations", "Event Automation", "Reporting"],
       stack: ["HubSpot", "Miro", "Custom code"],
     },
+    champion: {
+      label: "W.consulting leadership, marketing and CPD teams",
+      detail:
+        "The client champions helped turn HubSpot from a marketing tool into a shared operating layer across CRM, events, CPD feedback and future sales activation.",
+    },
+    problemBullets: [
+      "Customer and company data was fragmented across Pastel, Outlook, CPD systems, websites and spreadsheets.",
+      "Internal adoption varied by department, and there was no formal sales methodology to safely configure around.",
+      "Events, CPD feedback, campaign tracking and reporting were disconnected from the CRM.",
+    ],
+    solutionBullets: [
+      "Ran discovery in Miro to map journeys, service lines, behavioural flows, risks and the future-state ecosystem.",
+      "Rebuilt Contacts, Companies and Deals with logic-based layouts, segmentation and campaign structure.",
+      "Engineered Book Club automation, QR-based CPD feedback and reporting dashboards inside HubSpot.",
+    ],
     challenge:
       "Data lived across Pastel, Outlook, the CPD platform and spreadsheets — no single source of truth and inconsistent ownership. Adoption was uneven across departments, there was no formal sales methodology, websites and front ends were separate, and there was no centralised event or CPD feedback system. The real risk: HubSpot becoming another expensive, disconnected contact list.",
     approach: [
@@ -198,6 +234,7 @@ export const caseStudies: CaseStudy[] = [
     stream: "build",
     tag: "Portal Migration",
     client: "Magnisol",
+    logo: { text: "Magnisol", website: "https://www.magnisol.com/" },
     title: "A clean HubSpot portal and theme-based website, decided properly",
     status: null,
     summary:
@@ -214,6 +251,21 @@ export const caseStudies: CaseStudy[] = [
       services: ["HubSpot Advisory", "Portal Migration", "Website Strategy", "Discovery"],
       stack: ["HubSpot Content Hub", "HubSpot Marketing Hub"],
     },
+    champion: {
+      label: "Magnisol project stakeholders",
+      detail:
+        "The client-side champions needed a practical decision framework for HubSpot Hubs, portal setup, regional needs and website rollout before implementation moved too far.",
+    },
+    problemBullets: [
+      "The HubSpot and website scope was still evolving while product, regional and subscription decisions needed to be made.",
+      "The team needed a clean portal rather than layering new work into a messy environment.",
+      "A rushed website build risked overengineering the first version and creating avoidable maintenance pain.",
+    ],
+    solutionBullets: [
+      "Guided HubSpot Hub selection around actual requirements rather than licence-led assumptions.",
+      "Recommended a clean new portal with CRM foundations, marketing structure, reporting and website readiness.",
+      "Planned a theme-based website rollout to balance speed, cost control, content ownership and future scalability.",
+    ],
     challenge:
       "Evolving scope. Magnisol needed clarity on which HubSpot Hubs were actually required, whether Content Hub, Marketing Hub or a bundle made sense, how to stand up a clean portal rather than layer onto a messy one, and how to ship a website quickly without over-engineering v1 — all while supporting regional requirements. Buy the wrong package or rush the build, and the portal looks fine on day one but becomes a pain six months later.",
     approach: [
@@ -236,6 +288,7 @@ export const caseStudies: CaseStudy[] = [
     stream: "product",
     tag: "Website Platform",
     client: "W.consulting",
+    logo: { text: "W.consulting", website: "https://wconsulting.co.za/" },
     title: "A scalable HubSpot website, built agentically",
     status: "In delivery",
     summary:
@@ -252,6 +305,21 @@ export const caseStudies: CaseStudy[] = [
       services: ["HubSpot Architecture", "Discovery", "Design System", "AI-assisted Design", "Theme Build", "QA Handover"],
       stack: ["HubSpot", "Claude", "Gemini AI Studio"],
     },
+    champion: {
+      label: "W.consulting leadership and internal development team",
+      detail:
+        "The client champions are shaping the website goals, service architecture and handover requirements so the final HubSpot theme can be managed internally after launch.",
+    },
+    problemBullets: [
+      "W.consulting needed a website platform, not only a redesign.",
+      "The platform needed to connect directly into HubSpot CRM and marketing while avoiding unnecessary lock-in.",
+      "The delivery model had to move faster than a traditional custom build without sacrificing governance, security or maintainability.",
+    ],
+    solutionBullets: [
+      "Structured the project around architecture, onsite discovery, sitemap planning, content needs and HubSpot alignment.",
+      "Used AI-assisted design exploration as a controlled acceleration layer, followed by refinement with Sol Design.",
+      "Planned a reusable HubSpot theme system with design tokens, modules, QA, security review and handover readiness.",
+    ],
     challenge:
       "More than a nice-looking website: W.consulting needed a platform that supports clearer positioning, connects directly into HubSpot CRM and marketing, avoids platform lock-in, gives the internal team control after launch, supports governance, security and QA, moves faster than a traditional custom build, and creates reusable design and code foundations. The balance to strike: flexibility, speed, governance and long-term maintainability.",
     approach: [
@@ -267,6 +335,61 @@ export const caseStudies: CaseStudy[] = [
     ],
     outcome:
       "Expected: a modern, governed HubSpot website platform — a reusable theme foundation, a documented design and component system, stronger CRM and website alignment, better internal content control, and a safer long-term platform for marketing and sales. Build the system properly first, then accelerate delivery.",
+    quote: null,
+  },
+  {
+    id: "epi-use-regional-hubspot",
+    stream: "hub",
+    tag: "Operating Model",
+    client: "EPI-USE",
+    logo: { text: "EPI-USE", website: "https://www.epiuse.com/" },
+    title: "Designing a regional HubSpot operating model for global visibility",
+    status: "Strategic roadmap",
+    summary:
+      "EPI-USE was operating across multiple regions with different HubSpot portals, sales processes, marketing maturity levels and reporting expectations. Muloo reframed the challenge as a global operating model problem, with HubSpot governance and a Command Centre intelligence layer sitting underneath it.",
+    metrics: [
+      { value: "5", label: "Regions mapped" },
+      { value: "3", label: "Reporting layers" },
+      { value: "Multi-portal", label: "Governance model" },
+    ],
+    facts: {
+      industry: "Enterprise services and technology",
+      region: "Africa, UK, Australia, Brazil, USA",
+      timeline: "Roadmap and advisory phase",
+      services: ["HubSpot Operating Model", "Regional Audit", "Data Governance", "Reporting Architecture", "AI Readiness"],
+      stack: ["HubSpot", "Command Centre", "AI agents"],
+    },
+    champion: {
+      label: "Jac and regional EPI-USE stakeholders",
+      detail:
+        "The client-side champion needed a mature recommendation that balanced regional independence, global standards and leadership visibility without forcing a premature single-portal decision.",
+    },
+    problemBullets: [
+      "Each region had different HubSpot maturity, portal structure, sales process, marketing setup and reporting needs.",
+      "Global leadership needed visibility without flattening regional operating realities into one rigid CRM model.",
+      "AI and Command Centre use cases would only work if the underlying data model, lifecycle definitions and reporting rules were standardised.",
+    ],
+    solutionBullets: [
+      "Separated the future state into global standards, regional execution and a central intelligence layer.",
+      "Recommended a staged roadmap: audit regions, define global standards, clean Africa, showcase the UK, then connect portals.",
+      "Positioned the Command Centre above regional portals as the cross-portal reporting and AI-readiness layer.",
+    ],
+    challenge:
+      "EPI-USE was not facing one simple HubSpot setup issue. The business needed a regional operating model that could support Africa, the UK, Australia, Brazil and the USA, each with different levels of CRM maturity, sales motion, marketing activity and reporting expectations. The main risk was building too much before account planning, pipelines, lifecycle stages, ownership and global reporting definitions were clearly agreed.",
+    approach: [
+      "Regional breakdown — mapped the current reality across Africa, the UK, Australia, Brazil and the USA, including portal maturity, risks, campaign readiness and leadership reporting needs.",
+      "Global vs regional model — defined which properties, lifecycle definitions, reporting rules, account classifications and data quality requirements should be global, while leaving room for local pipelines, campaigns and service naming.",
+      "Reporting architecture — separated reporting into regional operational dashboards, regional leadership reporting and global intelligence for EPI-USE group leadership.",
+      "AI readiness — positioned clean, consistent data as the condition for useful account insights, stuck-deal detection, cross-sell recommendations and data-quality monitoring.",
+    ],
+    built: [
+      "A recommended global HubSpot operating model with central standards, regional execution and an intelligence layer.",
+      "A five-phase roadmap: regional audit, global standards, Africa clean-up, UK showcase and multi-portal Command Centre connection.",
+      "Pipeline governance guidance that allows regional stages while mapping them into shared global reporting groups.",
+      "A Command Centre role definition focused on account insights, portfolio recommendations, cross-portal reporting, AI agents and global performance dashboards.",
+    ],
+    outcome:
+      "Muloo recommended avoiding a rushed move into one global HubSpot portal. The better first move is to define the global EPI-USE operating model, prove it through Africa and the UK, and use the Command Centre as the intelligence layer across regions. Once the data and reporting model is proven, EPI-USE can make a more informed long-term consolidation decision.",
     quote: null,
   },
 ];
@@ -457,5 +580,4 @@ export const aboutContent = {
     }
   ]
 };
-
 

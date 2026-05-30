@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/accordion";
 
 const meetingUrl = "/contact/book/jarrud";
+const hubspotSolutionsDirectoryUrl = "https://ecosystem.hubspot.com/marketplace/solutions/muloo-co-za";
 const relatedHubspotServices = [
   { title: "HubSpot Implementation", href: "/muloo-hub/hubspot-implementation" },
   { title: "HubSpot Migration", href: "/muloo-hub/hubspot-migration" },
@@ -80,6 +81,7 @@ const guidedDeploymentTrustConfig = {
       src: "/assets/badges/hubspot-solutions-partner.png",
       alt: "HubSpot Solutions Partner badge",
       maxHeightClass: "h-8 md:h-10",
+      href: hubspotSolutionsDirectoryUrl,
     },
     {
       id: "hubspot-tenure",
@@ -173,6 +175,7 @@ const guidedDeploymentTrustConfig = {
       src: "/assets/badges/hubspot-solutions-partner.png",
       alt: "HubSpot Solutions Partner badge",
       maxHeightClass: "h-8 md:h-10",
+      href: hubspotSolutionsDirectoryUrl,
     },
     {
       id: "cred-hubspot-academy-admin",
@@ -180,6 +183,7 @@ const guidedDeploymentTrustConfig = {
       src: "/assets/badges/hubspot-academy-admin.png",
       alt: "HubSpot Academy certification badge",
       maxHeightClass: "h-8 md:h-10",
+      href: hubspotSolutionsDirectoryUrl,
     },
     {
       id: "cred-hubspot-academy-integration",
@@ -187,6 +191,7 @@ const guidedDeploymentTrustConfig = {
       src: "/assets/badges/hubspot-academy-integration.png",
       alt: "HubSpot Academy integration certification badge",
       maxHeightClass: "h-8 md:h-10",
+      href: hubspotSolutionsDirectoryUrl,
     },
   ],
   caseStudySnapshots: [
@@ -524,34 +529,48 @@ export function ServicesGuidedDeployment() {
       {guidedDeploymentTrustConfig.showCredibilityStrip && (
         <Section className="py-6 md:py-8 bg-section-soft border-t border-b border-white/5">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 md:gap-4">
-            {guidedDeploymentTrustConfig.credibilityItems.map((item) => (
-              <div
-                key={item.id}
-                className="rounded-lg border border-white/10 bg-white/[0.02] px-4 py-3 flex items-center gap-3 min-h-14"
-                data-testid={`credibility-item-${item.id}`}
-              >
-                {item.type === "badge" ? (
-                  item.src && !hiddenBadgeIds[item.id] ? (
-                    <img
-                      src={item.src}
-                      alt={item.alt}
-                      className={`${item.maxHeightClass} w-auto object-contain`}
-                      loading="lazy"
-                      onError={() => onBadgeError(item.id)}
-                    />
-                  ) : (
-                    <Badge variant="outline" className="border-brand-teal/30 text-brand-teal bg-brand-teal/5 text-xs">
-                      {item.label}
-                    </Badge>
-                  )
+            {guidedDeploymentTrustConfig.credibilityItems.map((item) => {
+              const itemHref = "href" in item ? item.href : undefined;
+              const className = "rounded-lg border border-white/10 bg-white/[0.02] px-4 py-3 flex items-center gap-3 min-h-14";
+              const content = item.type === "badge" ? (
+                item.src && !hiddenBadgeIds[item.id] ? (
+                  <img
+                    src={item.src}
+                    alt={item.alt}
+                    className={`${item.maxHeightClass} w-auto object-contain`}
+                    loading="lazy"
+                    onError={() => onBadgeError(item.id)}
+                  />
                 ) : (
-                  <>
-                    {item.icon && <item.icon className="h-4 w-4 text-brand-teal shrink-0" />}
-                    <span className="text-sm text-white/75 leading-[1.4]">{item.label}</span>
-                  </>
-                )}
-              </div>
-            ))}
+                  <Badge variant="outline" className="border-brand-teal/30 text-brand-teal bg-brand-teal/5 text-xs">
+                    {item.label}
+                  </Badge>
+                )
+              ) : (
+                <>
+                  {item.icon && <item.icon className="h-4 w-4 text-brand-teal shrink-0" />}
+                  <span className="text-sm text-white/75 leading-[1.4]">{item.label}</span>
+                </>
+              );
+
+              return itemHref ? (
+                <a
+                  key={item.id}
+                  href={itemHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="View Muloo on the HubSpot Solutions Directory"
+                  className={className}
+                  data-testid={`credibility-item-${item.id}`}
+                >
+                  {content}
+                </a>
+              ) : (
+                <div key={item.id} className={className} data-testid={`credibility-item-${item.id}`}>
+                  {content}
+                </div>
+              );
+            })}
           </div>
         </Section>
       )}
@@ -795,24 +814,46 @@ export function ServicesGuidedDeployment() {
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
-            {guidedDeploymentTrustConfig.credentialBadges.map((badge) => (
-              <div key={badge.id} className="rounded-lg border border-white/10 bg-white/[0.02] p-4 flex items-center gap-3 min-h-16" data-testid={`credential-badge-${badge.id}`}>
-                {badge.src && !hiddenBadgeIds[badge.id] ? (
-                  <img
-                    src={badge.src}
-                    alt={badge.alt}
-                    className={`${badge.maxHeightClass} w-auto object-contain`}
-                    loading="lazy"
-                    onError={() => onBadgeError(badge.id)}
-                  />
-                ) : (
-                  <Badge variant="outline" className="border-brand-teal/30 text-brand-teal bg-brand-teal/5 text-xs">
-                    {badge.label}
-                  </Badge>
-                )}
-                <span className="text-sm text-white/70">{badge.label}</span>
-              </div>
-            ))}
+            {guidedDeploymentTrustConfig.credentialBadges.map((badge) => {
+              const badgeHref = "href" in badge ? badge.href : undefined;
+              const className = "rounded-lg border border-white/10 bg-white/[0.02] p-4 flex items-center gap-3 min-h-16";
+              const content = (
+                <>
+                  {badge.src && !hiddenBadgeIds[badge.id] ? (
+                    <img
+                      src={badge.src}
+                      alt={badge.alt}
+                      className={`${badge.maxHeightClass} w-auto object-contain`}
+                      loading="lazy"
+                      onError={() => onBadgeError(badge.id)}
+                    />
+                  ) : (
+                    <Badge variant="outline" className="border-brand-teal/30 text-brand-teal bg-brand-teal/5 text-xs">
+                      {badge.label}
+                    </Badge>
+                  )}
+                  <span className="text-sm text-white/70">{badge.label}</span>
+                </>
+              );
+
+              return badgeHref ? (
+                <a
+                  key={badge.id}
+                  href={badgeHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="View Muloo on the HubSpot Solutions Directory"
+                  className={className}
+                  data-testid={`credential-badge-${badge.id}`}
+                >
+                  {content}
+                </a>
+              ) : (
+                <div key={badge.id} className={className} data-testid={`credential-badge-${badge.id}`}>
+                  {content}
+                </div>
+              );
+            })}
           </div>
 
           <div>

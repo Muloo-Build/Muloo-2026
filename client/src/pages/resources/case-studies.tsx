@@ -32,22 +32,32 @@ export function CaseStudies() {
           {caseStudies.map((c) => (
             <Link key={c.id} href={`/case-studies/${c.id}`}>
               <div
-                className="group h-full glass-card rounded-2xl p-7 md:p-8 flex flex-col gap-3.5 cursor-pointer hover:border-brand-teal/40 hover:-translate-y-1 transition-all duration-300"
+                className="group h-full glass-card rounded-2xl p-7 md:p-8 flex flex-col gap-4 cursor-pointer hover:border-brand-teal/40 hover:-translate-y-1 transition-all duration-300"
                 data-testid={`card-case-study-${c.id}`}
               >
-                <div className="flex items-center gap-3">
-                  <span className={cn("inline-flex items-center rounded-full border px-3 py-1.5 font-mono text-[11px] font-semibold uppercase tracking-wider whitespace-nowrap", streamChip[c.stream])}>
-                    {c.tag}
-                  </span>
+                <div className="flex items-start justify-between gap-4">
+                  <ClientLogo text={c.logo.text} />
                   {c.status && (
-                    <span className="ml-auto inline-flex items-center gap-1.5 font-mono text-[10.5px] uppercase tracking-wider text-stream-product">
+                    <span className="inline-flex items-center gap-1.5 font-mono text-[10.5px] uppercase tracking-wider text-stream-product whitespace-nowrap">
                       <span className="h-1.5 w-1.5 rounded-full bg-stream-product animate-pulse" /> {c.status}
                     </span>
                   )}
                 </div>
-                <div className="font-mono text-xs uppercase tracking-wider text-muted-foreground">{c.client}</div>
+
+                <div className="flex items-center gap-3">
+                  <span className={cn("inline-flex items-center rounded-full border px-3 py-1.5 font-mono text-[11px] font-semibold uppercase tracking-wider whitespace-nowrap", streamChip[c.stream])}>
+                    {c.tag}
+                  </span>
+                </div>
                 <h3 className="text-[22px] font-bold leading-snug tracking-tight text-white group-hover:text-brand-teal transition-colors">{c.title}</h3>
                 <p className="text-[14.5px] text-muted-foreground leading-[1.7] flex-grow">{c.summary}</p>
+
+                <div className="grid gap-3 pt-2">
+                  <CasePreview label="Problem" value={c.problemBullets[0]} />
+                  <CasePreview label="Solved by" value={c.solutionBullets[0]} />
+                  <CasePreview label="Champion" value={c.champion.label} />
+                </div>
+
                 <span className="inline-flex items-center gap-2 pt-1.5 text-[13px] font-semibold text-brand-teal">
                   Read case study <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </span>
@@ -56,6 +66,23 @@ export function CaseStudies() {
           ))}
         </div>
       </Section>
+    </div>
+  );
+}
+
+function ClientLogo({ text }: { text: string }) {
+  return (
+    <div className="inline-flex min-h-11 items-center rounded-lg border border-white/[0.08] bg-white/[0.03] px-4">
+      <span className="font-sans text-[18px] font-black tracking-tight text-white/85">{text}</span>
+    </div>
+  );
+}
+
+function CasePreview({ label, value }: { label: string; value: string }) {
+  return (
+    <div>
+      <div className="font-mono text-[10px] uppercase tracking-[0.14em] text-muted-foreground/60">{label}</div>
+      <p className="mt-1 text-[13.5px] leading-[1.55] text-white/72">{value}</p>
     </div>
   );
 }

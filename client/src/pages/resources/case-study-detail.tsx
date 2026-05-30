@@ -77,12 +77,23 @@ export function CaseStudyDetail() {
           <span className="font-mono text-xs text-muted-foreground tracking-wider">Case study {String(index + 1).padStart(2, "0")}</span>
         </div>
 
+        <div className="mb-7">
+          <ClientLogo text={study.logo.text} />
+        </div>
+
         <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight leading-[1.1] max-w-3xl mb-5">{study.title}</h1>
         <p className="text-lg md:text-xl text-muted-foreground max-w-3xl leading-relaxed">{study.summary}</p>
       </Section>
 
+      <Section className="py-10 md:py-12 border-t border-white/[0.06] mt-10">
+        <div className="grid md:grid-cols-2 gap-6">
+          <ProblemSolutionBlock title="The problem" items={study.problemBullets} />
+          <ProblemSolutionBlock title="How we solved it" items={study.solutionBullets} />
+        </div>
+      </Section>
+
       {/* Metrics band */}
-      <Section className="py-0 border-t border-b border-white/[0.06] mt-10">
+      <Section className="py-0 border-t border-b border-white/[0.06]">
         <div className="grid grid-cols-1 sm:grid-cols-3">
           {study.metrics.map((m, i) => (
             <div key={m.label} className={cn("py-7", i > 0 && "sm:border-l border-white/[0.06] sm:pl-8 max-sm:border-t")}>
@@ -121,6 +132,7 @@ export function CaseStudyDetail() {
             <h3 className="font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-muted-foreground mb-4">Project facts</h3>
             <dl className="divide-y divide-white/[0.06]">
               <FactRow label="Client" value={study.client} />
+              <FactRow label="Client champion" value={study.champion.label} />
               {study.facts.industry && study.facts.industry !== "—" && <FactRow label="Industry" value={study.facts.industry} />}
               <FactRow label="Region" value={study.facts.region} />
               <FactRow label="Timeline" value={study.facts.timeline} />
@@ -134,6 +146,10 @@ export function CaseStudyDetail() {
                 </dd>
               </div>
             </dl>
+            <div className="mt-5 rounded-xl border border-brand-teal/15 bg-brand-teal/5 p-4">
+              <div className="font-mono text-[10.5px] uppercase tracking-wider text-brand-teal mb-2">Champion note</div>
+              <p className="text-[13.5px] leading-[1.65] text-white/75">{study.champion.detail}</p>
+            </div>
           </aside>
         </div>
       </Section>
@@ -146,6 +162,30 @@ export function CaseStudyDetail() {
           </Button>
         </Link>
       </Section>
+    </div>
+  );
+}
+
+function ClientLogo({ text }: { text: string }) {
+  return (
+    <div className="inline-flex min-h-12 items-center rounded-lg border border-white/[0.08] bg-white/[0.03] px-5">
+      <span className="font-sans text-[20px] md:text-[22px] font-black tracking-tight text-white/88">{text}</span>
+    </div>
+  );
+}
+
+function ProblemSolutionBlock({ title, items }: { title: string; items: string[] }) {
+  return (
+    <div className="rounded-2xl border border-white/[0.08] bg-white/[0.02] p-6 md:p-7">
+      <h2 className="font-mono text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-teal mb-5">{title}</h2>
+      <ul className="space-y-3.5">
+        {items.map((item) => (
+          <li key={item} className="flex gap-3 text-[15px] leading-[1.7] text-muted-foreground">
+            <Check className="h-[18px] w-[18px] text-brand-teal shrink-0 mt-1" />
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

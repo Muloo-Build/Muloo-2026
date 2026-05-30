@@ -15,15 +15,18 @@ const rotatingPhrases = [
   "Embedded CTO & Sales Engineering",
 ];
 
+const hubspotSolutionsDirectoryUrl = "https://ecosystem.hubspot.com/marketplace/solutions/muloo-co-za";
+
 type HeroStackItem = {
   name: string;
   src: string;
   iconClassName: string;
   labelClassName?: string;
+  href?: string;
 };
 
 const heroStackItems: HeroStackItem[] = [
-  { name: "HubSpot", src: "/assets/stack-logos/hubspot.svg", iconClassName: "h-5 w-5" },
+  { name: "HubSpot", src: "/assets/stack-logos/hubspot.svg", iconClassName: "h-5 w-5", href: hubspotSolutionsDirectoryUrl },
   { name: "SQL Server", src: "/assets/stack-logos/microsoftsqlserver.svg", iconClassName: "h-5 w-5" },
   { name: "Dynamics 365", src: "/assets/stack-logos/microsoft-icon.svg", iconClassName: "h-4 w-4" },
   { name: "Azure", src: "/assets/stack-logos/azure.svg", iconClassName: "h-5 w-5" },
@@ -53,7 +56,7 @@ const pillarIcons: Record<string, React.ReactNode> = {
 };
 
 const platformLogos = [
-  { name: "HubSpot",      src: "/assets/stack-logos/hubspot.svg" },
+  { name: "HubSpot",      src: "/assets/stack-logos/hubspot.svg", href: hubspotSolutionsDirectoryUrl },
   { name: "Azure",        src: "/assets/stack-logos/azure.svg" },
   { name: "Microsoft",    src: "/assets/stack-logos/microsoft-icon.svg" },
   { name: "SQL Server",   src: "/assets/stack-logos/microsoftsqlserver.svg" },
@@ -121,23 +124,41 @@ function HeroStackStrip() {
   return (
     <div className="mt-12 md:mt-14">
       <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-4 md:gap-x-8">
-        {heroStackItems.map((item) => (
-          <div
-            key={item.name}
-            className="group inline-flex items-center gap-2.5 text-white/45 transition-colors duration-300"
-            data-testid={`hero-stack-logo-${item.name.toLowerCase().replace(/\s+/g, "-")}`}
-          >
-            <img
-              src={item.src}
-              alt={`${item.name} logo`}
-              loading="lazy"
-              className={`${item.iconClassName} w-auto object-contain opacity-60 grayscale brightness-150 contrast-125 transition-all duration-300 group-hover:opacity-90`}
-            />
-            <span className={`text-sm md:text-[15px] font-semibold text-white/45 group-hover:text-white/70 transition-colors duration-300 ${item.labelClassName ?? ""}`}>
-              {item.name}
-            </span>
-          </div>
-        ))}
+        {heroStackItems.map((item) => {
+          const className = "group inline-flex items-center gap-2.5 text-white/45 transition-colors duration-300";
+          const testId = `hero-stack-logo-${item.name.toLowerCase().replace(/\s+/g, "-")}`;
+          const content = (
+            <>
+              <img
+                src={item.src}
+                alt={`${item.name} logo`}
+                loading="lazy"
+                className={`${item.iconClassName} w-auto object-contain opacity-60 grayscale brightness-150 contrast-125 transition-all duration-300 group-hover:opacity-90`}
+              />
+              <span className={`text-sm md:text-[15px] font-semibold text-white/45 group-hover:text-white/70 transition-colors duration-300 ${item.labelClassName ?? ""}`}>
+                {item.name}
+              </span>
+            </>
+          );
+
+          return item.href ? (
+            <a
+              key={item.name}
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="View Muloo on the HubSpot Solutions Directory"
+              className={className}
+              data-testid={testId}
+            >
+              {content}
+            </a>
+          ) : (
+            <div key={item.name} className={className} data-testid={testId}>
+              {content}
+            </div>
+          );
+        })}
       </div>
     </div>
   );
@@ -543,12 +564,34 @@ export function Home() {
         </div>
 
         <div className="flex flex-wrap items-center gap-3.5">
-          {platformLogos.map((p) => (
-            <div key={p.name} className="group inline-flex items-center gap-2.5 rounded-xl border border-white/[0.06] bg-white/[0.02] px-5 py-4 hover:border-brand-teal/40 hover:-translate-y-0.5 hover:bg-white/[0.04] transition-all duration-300" data-testid={`logo-${p.name.toLowerCase().replace(/\s/g,'-')}`}>
-              <img src={p.src} alt={p.name} className="h-[22px] w-auto opacity-55 grayscale brightness-150 group-hover:opacity-100 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-300" />
-              <span className="font-sans text-[15px] font-semibold text-white/55 group-hover:text-white transition-colors">{p.name}</span>
-            </div>
-          ))}
+          {platformLogos.map((p) => {
+            const className = "group inline-flex items-center gap-2.5 rounded-xl border border-white/[0.06] bg-white/[0.02] px-5 py-4 hover:border-brand-teal/40 hover:-translate-y-0.5 hover:bg-white/[0.04] transition-all duration-300";
+            const testId = `logo-${p.name.toLowerCase().replace(/\s/g,'-')}`;
+            const content = (
+              <>
+                <img src={p.src} alt={p.name} className="h-[22px] w-auto opacity-55 grayscale brightness-150 group-hover:opacity-100 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-300" />
+                <span className="font-sans text-[15px] font-semibold text-white/55 group-hover:text-white transition-colors">{p.name}</span>
+              </>
+            );
+
+            return p.href ? (
+              <a
+                key={p.name}
+                href={p.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="View Muloo on the HubSpot Solutions Directory"
+                className={className}
+                data-testid={testId}
+              >
+                {content}
+              </a>
+            ) : (
+              <div key={p.name} className={className} data-testid={testId}>
+                {content}
+              </div>
+            );
+          })}
         </div>
       </Section>
 
@@ -592,7 +635,14 @@ function HeroCredibilityStrip() {
     <Section className="py-7 md:py-8 border-t border-b border-white/5 bg-section-soft">
       <div className="grid gap-4 lg:grid-cols-[minmax(330px,0.92fr)_1.55fr]">
         {/* Featured — HubSpot Gold partner */}
-        <div className="group relative overflow-hidden glass-card rounded-xl p-6 flex flex-col gap-4 hover:border-brand-teal/40 hover:-translate-y-0.5 transition-all duration-300">
+        <a
+          href={hubspotSolutionsDirectoryUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="View Muloo on the HubSpot Solutions Directory"
+          data-testid="hero-hubspot-partner"
+          className="group relative overflow-hidden glass-card rounded-xl p-6 flex flex-col gap-4 hover:border-brand-teal/40 hover:-translate-y-0.5 transition-all duration-300"
+        >
           <div className="pointer-events-none absolute inset-0 rounded-[inherit] bg-[radial-gradient(120%_130%_at_100%_0%,rgba(255,122,89,0.10),transparent_55%)]" />
           <div className="relative z-10 flex items-center justify-between">
             <span className="font-mono text-[11px] font-medium uppercase tracking-[0.16em] text-brand-teal whitespace-nowrap">// Accredited</span>
@@ -612,7 +662,7 @@ function HeroCredibilityStrip() {
           <span className="relative z-10 inline-flex items-center gap-1.5 self-start rounded-full border border-[#E4B85A]/40 bg-gradient-to-br from-[#E4B85A]/20 to-[#B8863A]/10 px-2.5 py-1 font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-[#EBCB7C] shadow-[0_0_14px_-6px_rgba(228,184,90,0.5)]">
             <Award className="h-3 w-3" /> Gold tier
           </span>
-        </div>
+        </a>
 
         {/* Supporting facts */}
         <div className="grid grid-cols-1 sm:grid-cols-3 glass-card rounded-xl overflow-hidden hover:border-brand-teal/25 transition-colors duration-300">
