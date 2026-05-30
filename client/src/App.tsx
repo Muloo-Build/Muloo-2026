@@ -25,6 +25,8 @@ import { CaseStudies } from "./pages/resources/case-studies";
 import { CaseStudyDetail } from "./pages/resources/case-study-detail";
 import { Blog } from "./pages/resources/blog";
 import { BlogPost } from "./pages/resources/blog-post";
+import { PrivacyPolicy } from "./pages/legal/privacy-policy";
+import { TermsOfService } from "./pages/legal/terms-of-service";
 import { MeetingBookingPage } from "./pages/meetings";
 import NotFound from "./pages/not-found";
 import { Switch, Route } from "wouter";
@@ -81,9 +83,12 @@ function Router() {
 
         <Route path="/resources" component={ResourcesIndex} />
         <Route path="/case-studies" component={CaseStudies} />
-        <Route path="/case-studies/:id" component={CaseStudyDetail} />
+        <Route path="/case-studies/:slug" component={CaseStudyDetail} />
         <Route path="/blog" component={Blog} />
         <Route path="/blog/:id" component={BlogPost} />
+
+        <Route path="/privacy-policy" component={PrivacyPolicy} />
+        <Route path="/terms-of-service" component={TermsOfService} />
 
         <Route component={NotFound} />
       </Switch>

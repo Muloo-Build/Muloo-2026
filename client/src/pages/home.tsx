@@ -1,5 +1,5 @@
 import { Section } from "@/components/ui/section";
-import { homeContent } from "@/lib/content";
+import { homeContent, caseStudies } from "@/lib/content";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Database, Cpu, Bot, Layout, ChevronRight, Server, Workflow, Check, TrendingUp, Zap, Award, Clock3, Layers3, Globe2, Terminal } from "lucide-react";
 import { Link } from "wouter";
@@ -51,11 +51,18 @@ const pillarIcons: Record<string, React.ReactNode> = {
   product: <Layout className="h-6 w-6" />,
 };
 
-const ecosystemLogos = {
-  "Engineering Stack": ["Azure", "Google Cloud", "Microsoft", "SQL Server", "SAP"],
-  "CRM & Sales Tools": ["HubSpot", "Apollo", "LinkedIn", "HubLink"],
-  "Data & Infrastructure": ["Snowflake", "Azure Data", "BigQuery"],
-};
+const platformLogos = [
+  { name: "HubSpot", src: "/assets/stack-logos/hubspot.svg" },
+  { name: "Microsoft Azure", src: "/assets/stack-logos/azure.svg" },
+  { name: "Google Cloud", src: "/assets/stack-logos/googlecloud.svg" },
+  { name: "Microsoft", src: "/assets/stack-logos/microsoft-icon.svg" },
+  { name: "SQL Server", src: "/assets/stack-logos/microsoftsqlserver.svg" },
+  { name: "SAP", src: "/assets/stack-logos/sap.svg" },
+  { name: "Snowflake", src: "/assets/stack-logos/snowflake.svg" },
+  { name: "BigQuery", src: "/assets/stack-logos/googlebigquery.svg" },
+  { name: "Apollo", src: "/assets/stack-logos/apollo.svg" },
+  { name: "Xero", src: "/assets/stack-logos/xero.svg" },
+];
 
 const processSteps = [
   { step: "01", title: "Discover", desc: "Full audit of systems, data flows, and bottlenecks — delivered as a documented findings report within 10 business days." },
@@ -355,6 +362,11 @@ export function Home() {
                     {homeContent.hero.primaryCta} <ArrowRight className="ml-2 h-5 w-5" />
                   </Button>
                 </Link>
+                <Link href="/case-studies">
+                  <Button size="lg" variant="outline" className="border-white/15 text-white hover:bg-white/5 hover:border-brand-teal/30 font-bold px-8 h-14 rounded-lg transition-all" data-testid="button-hero-secondary">
+                    {homeContent.hero.secondaryCta} <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
+                </Link>
               </div>
 
               <p className="text-sm font-mono text-muted-foreground/50 tracking-wider">
@@ -407,6 +419,10 @@ export function Home() {
           })}
         </div>
       </Section>
+
+      <ProofStatsBand />
+
+      <CaseStudyPreview />
 
       {/* ── 3. PAIN POINTS ── */}
       <Section className="py-20 md:py-[120px] border-t border-white/5">
@@ -520,21 +536,15 @@ export function Home() {
           <p className="text-sm text-muted-foreground leading-[1.8] max-w-xl">We architect on proven infrastructure — not trends.</p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-12 max-w-4xl">
-          {Object.entries(ecosystemLogos).map(([category, logos]) => (
-            <div key={category}>
-              <h4 className="text-xs font-mono text-muted-foreground uppercase tracking-wider mb-5 border-b border-white/5 pb-3">{category}</h4>
-              <div className="flex flex-wrap gap-3">
-                {logos.map(logo => (
-                  <span
-                    key={logo}
-                    className="px-3 py-1.5 rounded-md bg-white/[0.04] border border-white/[0.06] text-xs font-mono text-white/40 hover:text-brand-teal hover:border-brand-teal/20 hover:-translate-y-0.5 hover:shadow-[0_4px_12px_-4px_rgba(0,196,204,0.2)] transition-all duration-300 cursor-default"
-                    data-testid={`logo-${logo.toLowerCase().replace(/\s/g, '-')}`}
-                  >
-                    {logo}
-                  </span>
-                ))}
-              </div>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+          {platformLogos.map((logo) => (
+            <div
+              key={logo.name}
+              className="group flex flex-col items-center justify-center gap-3 rounded-xl bg-white/95 border border-white/10 px-4 py-6 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_-8px_rgba(0,196,204,0.25)] transition-all duration-300"
+              data-testid={`logo-${logo.name.toLowerCase().replace(/\s/g, '-')}`}
+            >
+              <img src={logo.src} alt={`${logo.name} logo`} loading="lazy" className="h-8 w-auto max-w-[80px] object-contain" />
+              <span className="text-[11px] font-mono uppercase tracking-wide text-[#030720]/55">{logo.name}</span>
             </div>
           ))}
         </div>
@@ -664,6 +674,59 @@ function FreeReviewCtaSection() {
             </Link>
           </div>
         </div>
+      </div>
+    </Section>
+  );
+}
+
+function ProofStatsBand() {
+  return (
+    <Section className="py-12 md:py-16 border-t border-white/5 bg-section-soft">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 md:gap-6">
+        {homeContent.stats.map((stat) => (
+          <div key={stat.label} className="text-center sm:text-left" data-testid={`proof-stat-${stat.label.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}>
+            <div className="text-4xl md:text-5xl font-extrabold text-gradient-muloo mb-2">{stat.value}</div>
+            <div className="text-sm text-muted-foreground uppercase tracking-wide font-mono">{stat.label}</div>
+          </div>
+        ))}
+      </div>
+    </Section>
+  );
+}
+
+function CaseStudyPreview() {
+  const featured = caseStudies.slice(0, 4);
+  return (
+    <Section className="py-20 md:py-[120px] border-t border-white/5">
+      <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
+        <div>
+          <h2 className="text-sm font-mono text-gradient-muloo uppercase tracking-widest mb-4">Selected work</h2>
+          <h3 className="text-4xl md:text-5xl font-bold text-white max-w-2xl">Real HubSpot outcomes, not slideware.</h3>
+        </div>
+        <Link href="/case-studies">
+          <Button variant="outline" size="lg" className="border-white/10 text-white hover:bg-white/5 hover:border-brand-teal/20 px-8 h-12 rounded-lg shrink-0" data-testid="button-view-all-case-studies">
+            View all case studies <ArrowRight className="ml-2 h-4 w-4" />
+          </Button>
+        </Link>
+      </div>
+
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {featured.map((c) => (
+          <Link key={c.slug} href={`/case-studies/${c.slug}`}>
+            <div className="group h-full glass-card rounded-2xl overflow-hidden flex flex-col cursor-pointer hover:-translate-y-1 hover:border-brand-teal/20 transition-all duration-300" data-testid={`home-case-study-${c.slug}`}>
+              <div className="h-24 bg-white flex items-center justify-center px-8">
+                <img src={c.logo} alt={`${c.client} logo`} loading="lazy" className="max-h-10 max-w-[150px] w-auto object-contain" />
+              </div>
+              <div className="p-6 flex flex-col flex-grow">
+                <span className="text-brand-teal text-[11px] font-mono uppercase tracking-wider mb-3">{c.tag}</span>
+                <h4 className="text-base font-bold text-white mb-3 leading-snug group-hover:text-brand-teal transition-colors">{c.title}</h4>
+                <span className="text-sm font-semibold text-brand-teal/70 group-hover:text-brand-teal flex items-center transition-colors mt-auto">
+                  Read more <ChevronRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </span>
+              </div>
+            </div>
+          </Link>
+        ))}
       </div>
     </Section>
   );
