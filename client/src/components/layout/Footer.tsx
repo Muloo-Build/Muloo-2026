@@ -58,16 +58,10 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-brand-teal transition-colors" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.linkedin.com/company/muloo-za/" className="hover:text-brand-teal transition-colors" target="_blank" rel="noopener noreferrer">
                   LinkedIn
                 </a>
               </li>
-              <li>
-                <a href="#" className="hover:text-brand-teal transition-colors" target="_blank" rel="noopener noreferrer">
-                  GitHub
-                </a>
-              </li>
-              <li><Link href="/styleguide" className="hover:text-brand-teal transition-colors">Styleguide</Link></li>
             </ul>
           </div>
 

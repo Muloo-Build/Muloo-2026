@@ -1,11 +1,12 @@
 import { Section } from "@/components/ui/section";
-import { homeContent, caseStudies } from "@/lib/content";
+import { homeContent } from "@/lib/content";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Database, Cpu, Bot, Layout, ChevronRight, Server, Workflow, Check, TrendingUp, Zap, Award, Clock3, Layers3, Globe2, Terminal } from "lucide-react";
+import { ArrowRight, Database, Cpu, Bot, Layout, ChevronRight, Server, Workflow, Check, TrendingUp, Zap, Award, Clock3, Layers3, Globe2, Terminal, BadgeCheck } from "lucide-react";
 import { Link } from "wouter";
 import { useState, useEffect } from "react";
 import { BookingCard } from "@/components/meetings/BookingCard";
 import { getMeetingBySlug } from "@/content/meetings";
+import { cn } from "@/lib/utils";
 
 const rotatingPhrases = [
   "Technical Partner for HubSpot",
@@ -52,16 +53,16 @@ const pillarIcons: Record<string, React.ReactNode> = {
 };
 
 const platformLogos = [
-  { name: "HubSpot", src: "/assets/stack-logos/hubspot.svg" },
-  { name: "Microsoft Azure", src: "/assets/stack-logos/azure.svg" },
+  { name: "HubSpot",      src: "/assets/stack-logos/hubspot.svg" },
+  { name: "Azure",        src: "/assets/stack-logos/azure.svg" },
+  { name: "Microsoft",    src: "/assets/stack-logos/microsoft-icon.svg" },
+  { name: "SQL Server",   src: "/assets/stack-logos/microsoftsqlserver.svg" },
+  { name: "SAP",          src: "/assets/stack-logos/sap.svg" },
+  { name: "Xero",         src: "/assets/stack-logos/xero.svg" },
   { name: "Google Cloud", src: "/assets/stack-logos/googlecloud.svg" },
-  { name: "Microsoft", src: "/assets/stack-logos/microsoft-icon.svg" },
-  { name: "SQL Server", src: "/assets/stack-logos/microsoftsqlserver.svg" },
-  { name: "SAP", src: "/assets/stack-logos/sap.svg" },
-  { name: "Snowflake", src: "/assets/stack-logos/snowflake.svg" },
-  { name: "BigQuery", src: "/assets/stack-logos/googlebigquery.svg" },
-  { name: "Apollo", src: "/assets/stack-logos/apollo.svg" },
-  { name: "Xero", src: "/assets/stack-logos/xero.svg" },
+  { name: "Snowflake",    src: "/assets/stack-logos/snowflake.svg" },
+  { name: "BigQuery",     src: "/assets/stack-logos/bigquery.svg" },
+  { name: "Apollo",       src: "/assets/stack-logos/apollo.svg" },
 ];
 
 const processSteps = [
@@ -71,12 +72,19 @@ const processSteps = [
   { step: "04", title: "Support", desc: "SLA-backed monitoring, quarterly reviews, and proactive recommendations as your business evolves." },
 ];
 
-const heroCredibilityItems = [
-  { label: "HubSpot Solutions Partner (Gold)", icon: Award },
-  { label: "10+ years HubSpot partner", icon: Clock3 },
-  { label: "CRM architecture specialists", icon: Layers3 },
-  { label: "Serving UK, AU and US companies", icon: Globe2 },
+const heroSupportFacts = [
+  { eyebrow: "Experience", icon: Clock3,  label: <><span className="text-brand-teal">10+ years</span> as a HubSpot partner</> },
+  { eyebrow: "Discipline", icon: Layers3, label: <>CRM architecture specialists</> },
+  { eyebrow: "Reach",      icon: Globe2,  label: <>Serving <span className="text-brand-teal">UK, AU &amp; US</span> companies</> },
 ];
+
+function HubSpotMark({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+      <path d="M18.164 7.93V5.084a2.198 2.198 0 0 0 1.267-1.978v-.067A2.2 2.2 0 0 0 17.238.845h-.067a2.2 2.2 0 0 0-2.193 2.193v.067a2.196 2.196 0 0 0 1.252 1.973l.013.006v2.852a6.22 6.22 0 0 0-2.969 1.31l.012-.01-7.828-6.095A2.497 2.497 0 1 0 4.3 4.656l-.012.006 7.697 5.991a6.176 6.176 0 0 0-1.038 3.446c0 1.343.425 2.588 1.147 3.607l-.013-.02-2.342 2.343a1.968 1.968 0 0 0-.58-.095h-.002a2.033 2.033 0 1 0 2.033 2.033 1.978 1.978 0 0 0-.1-.595l.005.014 2.317-2.317a6.247 6.247 0 1 0 4.782-11.134l-.036-.005Zm-.964 9.378a3.206 3.206 0 1 1 3.215-3.207v.002a3.206 3.206 0 0 1-3.207 3.207Z" />
+    </svg>
+  );
+}
 
 function RotatingBadge() {
   const [index, setIndex] = useState(0);
@@ -383,6 +391,8 @@ export function Home() {
 
       <HeroCredibilityStrip />
 
+      <ProofStats />
+
       <HelpSegmentSection />
 
       <ClientMarquee />
@@ -419,10 +429,6 @@ export function Home() {
           })}
         </div>
       </Section>
-
-      <ProofStatsBand />
-
-      <CaseStudyPreview />
 
       {/* ── 3. PAIN POINTS ── */}
       <Section className="py-20 md:py-[120px] border-t border-white/5">
@@ -536,59 +542,17 @@ export function Home() {
           <p className="text-sm text-muted-foreground leading-[1.8] max-w-xl">We architect on proven infrastructure — not trends.</p>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
-          {platformLogos.map((logo) => (
-            <div
-              key={logo.name}
-              className="group flex flex-col items-center justify-center gap-3 rounded-xl bg-white/95 border border-white/10 px-4 py-6 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_-8px_rgba(0,196,204,0.25)] transition-all duration-300"
-              data-testid={`logo-${logo.name.toLowerCase().replace(/\s/g, '-')}`}
-            >
-              <img src={logo.src} alt={`${logo.name} logo`} loading="lazy" className="h-8 w-auto max-w-[80px] object-contain" />
-              <span className="text-[11px] font-mono uppercase tracking-wide text-[#030720]/55">{logo.name}</span>
+        <div className="flex flex-wrap items-center gap-3.5">
+          {platformLogos.map((p) => (
+            <div key={p.name} className="group inline-flex items-center gap-2.5 rounded-xl border border-white/[0.06] bg-white/[0.02] px-5 py-4 hover:border-brand-teal/40 hover:-translate-y-0.5 hover:bg-white/[0.04] transition-all duration-300" data-testid={`logo-${p.name.toLowerCase().replace(/\s/g,'-')}`}>
+              <img src={p.src} alt={p.name} className="h-[22px] w-auto opacity-55 grayscale brightness-150 group-hover:opacity-100 group-hover:grayscale-0 group-hover:brightness-100 transition-all duration-300" />
+              <span className="font-sans text-[15px] font-semibold text-white/55 group-hover:text-white transition-colors">{p.name}</span>
             </div>
           ))}
         </div>
       </Section>
 
-      {/* ── 7. TESTIMONIALS ── */}
-      <Section className="py-20 md:py-[120px] border-t border-white/5">
-        <div className="mb-16">
-          <h2 className="text-sm font-mono text-gradient-muloo uppercase tracking-widest mb-4">What clients say</h2>
-          <h3 className="text-3xl md:text-4xl font-bold text-white">Trusted by teams who build seriously</h3>
-        </div>
-
-        <div className="space-y-14 max-w-4xl">
-          {[
-            {
-              quote: "Muloo brought clarity to a HubSpot instance that had become unmanageable. Within weeks, our reporting made sense and the sales team actually trusted the data again.",
-              name: "Sarah Mitchell",
-              title: "VP of Revenue Operations",
-              company: "TechScale Group",
-            },
-            {
-              quote: "We needed middleware that connected our ERP to HubSpot without breaking every time something changed. Muloo built it properly — and it's been running for over a year without a single issue.",
-              name: "James van der Berg",
-              title: "Head of Digital",
-              company: "Meridian Financial Services",
-            },
-          ].map((testimonial, i) => (
-            <div key={i} className="grid md:grid-cols-[80px_1fr] gap-8 md:gap-12" data-testid={`testimonial-${i}`}>
-              <div className="hidden md:block">
-                <svg viewBox="0 0 40 40" className="w-14 h-14 text-brand-teal/15" fill="currentColor">
-                  <path d="M0 25.6c0-6.4 4.48-12.16 11.2-16L13.12 12.8C9.6 15.36 7.68 18.56 7.04 22.4H11.2c2.24 0 4 1.76 4 4v9.6c0 2.24-1.76 4-4 4H4c-2.24 0-4-1.76-4-4V25.6zm21.6 0c0-6.4 4.48-12.16 11.2-16l1.92 3.2c-3.52 2.56-5.44 5.76-6.08 9.6h4.16c2.24 0 4 1.76 4 4v9.6c0 2.24-1.76 4-4 4h-7.2c-2.24 0-4-1.76-4-4V25.6z" />
-                </svg>
-              </div>
-              <div>
-                <p className="text-lg md:text-xl text-white/80 leading-[1.8] mb-8 font-light">{testimonial.quote}</p>
-                <div>
-                  <p className="text-sm font-semibold text-white">{testimonial.name}</p>
-                  <p className="text-sm text-muted-foreground">{testimonial.title}, {testimonial.company}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </Section>
+      <CaseStudiesPreview />
 
       {/* ── 8. BOOK A QUICK CALL ── */}
       {jarrudMeeting && morneMeeting && (
@@ -625,18 +589,43 @@ export function Home() {
 
 function HeroCredibilityStrip() {
   return (
-    <Section className="py-6 md:py-8 border-t border-b border-white/5 bg-section-soft">
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
-        {heroCredibilityItems.map((item) => (
-          <div
-            key={item.label}
-            className="rounded-lg border border-white/10 bg-white/[0.02] px-4 py-3 flex items-center gap-3 min-h-14"
-            data-testid={`hero-credibility-${item.label.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
-          >
-            <item.icon className="h-4 w-4 text-brand-teal shrink-0" />
-            <span className="text-sm text-white/75 leading-[1.4]">{item.label}</span>
+    <Section className="py-7 md:py-8 border-t border-b border-white/5 bg-section-soft">
+      <div className="grid gap-4 lg:grid-cols-[minmax(330px,0.92fr)_1.55fr]">
+        {/* Featured — HubSpot Gold partner */}
+        <div className="group relative overflow-hidden glass-card rounded-xl p-6 flex flex-col gap-4 hover:border-brand-teal/40 hover:-translate-y-0.5 transition-all duration-300">
+          <div className="pointer-events-none absolute inset-0 rounded-[inherit] bg-[radial-gradient(120%_130%_at_100%_0%,rgba(255,122,89,0.10),transparent_55%)]" />
+          <div className="relative z-10 flex items-center justify-between">
+            <span className="font-mono text-[11px] font-medium uppercase tracking-[0.16em] text-brand-teal whitespace-nowrap">// Accredited</span>
+            <span className="inline-flex items-center gap-1.5 font-mono text-[10.5px] uppercase tracking-wider text-muted-foreground">
+              <BadgeCheck className="h-3.5 w-3.5 text-brand-teal" /> Verified
+            </span>
           </div>
-        ))}
+          <div className="relative z-10 flex items-center gap-4">
+            <div className="flex h-[54px] w-[54px] shrink-0 items-center justify-center rounded-lg border border-[#FF7A59]/30 bg-[#FF7A59]/10 text-[#FF7A59]">
+              <HubSpotMark className="h-7 w-7" />
+            </div>
+            <div className="min-w-0">
+              <div className="font-sans text-[19px] font-bold leading-tight tracking-tight text-white">HubSpot Solutions Partner</div>
+              <div className="mt-0.5 text-[13.5px] leading-snug text-muted-foreground">Accredited &amp; audited implementation partner</div>
+            </div>
+          </div>
+          <span className="relative z-10 inline-flex items-center gap-1.5 self-start rounded-full border border-[#E4B85A]/40 bg-gradient-to-br from-[#E4B85A]/20 to-[#B8863A]/10 px-2.5 py-1 font-mono text-[11px] font-semibold uppercase tracking-[0.12em] text-[#EBCB7C] shadow-[0_0_14px_-6px_rgba(228,184,90,0.5)]">
+            <Award className="h-3 w-3" /> Gold tier
+          </span>
+        </div>
+
+        {/* Supporting facts */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 glass-card rounded-xl overflow-hidden hover:border-brand-teal/25 transition-colors duration-300">
+          {heroSupportFacts.map((fact, i) => (
+            <div key={fact.eyebrow} className={cn("group/f flex flex-col gap-3 p-5", i > 0 && "sm:border-l border-white/[0.06] max-sm:border-t")}>
+              <div className="flex h-[38px] w-[38px] items-center justify-center rounded-lg border border-brand-teal/20 bg-brand-teal/10 transition-colors group-hover/f:bg-brand-teal">
+                <fact.icon className="h-[18px] w-[18px] text-brand-teal transition-colors group-hover/f:text-background" />
+              </div>
+              <div className="font-mono text-[10.5px] font-medium uppercase tracking-[0.14em] text-muted-foreground">{fact.eyebrow}</div>
+              <div className="font-sans text-[15px] font-semibold leading-snug text-white">{fact.label}</div>
+            </div>
+          ))}
+        </div>
       </div>
     </Section>
   );
@@ -679,14 +668,14 @@ function FreeReviewCtaSection() {
   );
 }
 
-function ProofStatsBand() {
+function ProofStats() {
   return (
-    <Section className="py-12 md:py-16 border-t border-white/5 bg-section-soft">
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 md:gap-6">
-        {homeContent.stats.map((stat) => (
-          <div key={stat.label} className="text-center sm:text-left" data-testid={`proof-stat-${stat.label.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}>
-            <div className="text-4xl md:text-5xl font-extrabold text-gradient-muloo mb-2">{stat.value}</div>
-            <div className="text-sm text-muted-foreground uppercase tracking-wide font-mono">{stat.label}</div>
+    <Section className="py-12 border-b border-white/5">
+      <div className="grid grid-cols-1 sm:grid-cols-3">
+        {homeContent.stats.map((stat, i) => (
+          <div key={stat.label} className={cn("px-7 py-1.5", i > 0 && "sm:border-l border-white/[0.07] max-sm:border-t max-sm:pt-5 max-sm:mt-2")}>
+            <div className="text-gradient-muloo font-sans font-extrabold tracking-tight leading-none text-[clamp(2.4rem,4vw,3.1rem)]">{stat.value}</div>
+            <div className="mt-3 font-mono text-[12.5px] uppercase tracking-[0.1em] text-muted-foreground">{stat.label}</div>
           </div>
         ))}
       </div>
@@ -694,36 +683,45 @@ function ProofStatsBand() {
   );
 }
 
-function CaseStudyPreview() {
-  const featured = caseStudies.slice(0, 4);
+const caseStudies = [
+  { stream: "hub",   tag: "CRM Architecture",      num: "01", title: "Rescued and rebuilt for 20+ product lines",
+    desc: "Phillips Law — an 18-month HubSpot rescue: stabilised a failed implementation and rebuilt it into a scalable multi-pipeline platform.",
+    outcome: "18-month engagement", href: "/case-studies/phillips-law" },
+  { stream: "ai",    tag: "Digital Transformation", num: "02", title: "An underused portal becomes a growth platform",
+    desc: "W.consulting — rebuilt the CRM architecture, engineered custom Book Club automation, and centralised CPD feedback and reporting.",
+    outcome: "Foundational phase complete", href: "/case-studies/wconsulting-crm" },
+  { stream: "build", tag: "Portal Migration",       num: "03", title: "A clean portal and theme-based website",
+    desc: "Magnisol — HubSpot Hub selection, migration to a clean new portal, and a fast theme-based website rollout, discovery-led.",
+    outcome: "3 connected workstreams", href: "/case-studies/magnisol" },
+];
+
+const streamChip: Record<string, string> = {
+  hub: "text-stream-hub border-stream-hub/35 bg-stream-hub/10",
+  build: "text-stream-build border-stream-build/35 bg-stream-build/10",
+  ai: "text-stream-ai border-stream-ai/35 bg-stream-ai/10",
+  product: "text-stream-product border-stream-product/35 bg-stream-product/10",
+};
+
+function CaseStudiesPreview() {
   return (
     <Section className="py-20 md:py-[120px] border-t border-white/5">
-      <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
-        <div>
-          <h2 className="text-sm font-mono text-gradient-muloo uppercase tracking-widest mb-4">Selected work</h2>
-          <h3 className="text-4xl md:text-5xl font-bold text-white max-w-2xl">Real HubSpot outcomes, not slideware.</h3>
-        </div>
-        <Link href="/case-studies">
-          <Button variant="outline" size="lg" className="border-white/10 text-white hover:bg-white/5 hover:border-brand-teal/20 px-8 h-12 rounded-lg shrink-0" data-testid="button-view-all-case-studies">
-            View all case studies <ArrowRight className="ml-2 h-4 w-4" />
-          </Button>
-        </Link>
+      <div className="mb-12 max-w-2xl">
+        <h2 className="text-sm font-mono text-gradient-muloo uppercase tracking-widest mb-4">Selected work</h2>
+        <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">Proof, not promises.</h3>
+        <p className="text-muted-foreground text-lg leading-[1.8]">Real engagements, documented end to end — the technical challenge, what we built, and the measurable outcome.</p>
       </div>
-
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {featured.map((c) => (
-          <Link key={c.slug} href={`/case-studies/${c.slug}`}>
-            <div className="group h-full glass-card rounded-2xl overflow-hidden flex flex-col cursor-pointer hover:-translate-y-1 hover:border-brand-teal/20 transition-all duration-300" data-testid={`home-case-study-${c.slug}`}>
-              <div className="h-24 bg-white flex items-center justify-center px-8">
-                <img src={c.logo} alt={`${c.client} logo`} loading="lazy" className="max-h-10 max-w-[150px] w-auto object-contain" />
-              </div>
-              <div className="p-6 flex flex-col flex-grow">
-                <span className="text-brand-teal text-[11px] font-mono uppercase tracking-wider mb-3">{c.tag}</span>
-                <h4 className="text-base font-bold text-white mb-3 leading-snug group-hover:text-brand-teal transition-colors">{c.title}</h4>
-                <span className="text-sm font-semibold text-brand-teal/70 group-hover:text-brand-teal flex items-center transition-colors mt-auto">
-                  Read more <ChevronRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                </span>
-              </div>
+      <div className="grid md:grid-cols-3 gap-5 md:gap-6">
+        {caseStudies.map((c) => (
+          <Link key={c.num} href={c.href} className="group glass-card rounded-2xl p-7 flex flex-col gap-3.5 hover:border-brand-teal/35 hover:-translate-y-1 transition-all duration-300" data-testid={`card-case-${c.num}`}>
+            <div className="flex items-center justify-between">
+              <span className={cn("inline-flex items-center rounded-full border px-3 py-1.5 font-mono text-[11px] font-semibold uppercase tracking-wider whitespace-nowrap", streamChip[c.stream])}>{c.tag}</span>
+              <span className="font-sans text-[28px] font-extrabold text-white/[0.09]">{c.num}</span>
+            </div>
+            <h4 className="font-sans text-[19px] font-bold leading-tight tracking-tight text-white">{c.title}</h4>
+            <p className="text-sm text-muted-foreground leading-[1.7] flex-grow">{c.desc}</p>
+            <div className="flex flex-col items-start gap-2.5 pt-4 border-t border-white/[0.06]">
+              <span className="font-mono text-xs text-white/30">{c.outcome}</span>
+              <span className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-brand-teal">Read case study <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" /></span>
             </div>
           </Link>
         ))}
