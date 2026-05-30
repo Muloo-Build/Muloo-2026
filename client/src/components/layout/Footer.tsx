@@ -72,11 +72,26 @@ export function Footer() {
           </div>
 
           <div className="md:text-right">
-            <h4 className="font-bold mb-6 text-white text-sm">Accreditations</h4>
+            <h4 className="font-bold mb-6 text-white text-sm">Accreditations & Awards</h4>
             <div className="flex flex-col gap-5 items-start md:items-end">
               <img src={hubspotBadge} alt="HubSpot Gold Partner" className="h-16 w-auto drop-shadow-lg" data-testid="footer-hubspot-badge" />
               <img src={googleBadge} alt="Google Partner" className="h-8 w-auto opacity-50 grayscale hover:grayscale-0 transition-all duration-300" data-testid="footer-google-badge" />
-              <span className="text-[10px] text-muted-foreground/30 font-mono mt-1">More coming soon</span>
+              <a
+                href="https://50pros.com/agency/muloo"
+                target="_blank"
+                rel="nofollow sponsored noopener"
+                aria-label="Muloo on 50Pros"
+                className="inline-flex transition-opacity hover:opacity-90"
+                data-testid="footer-50pros-award"
+              >
+                <img
+                  src="https://50pros.com/api/award/top-sales-consulting-q2-2026/muloo?size=md"
+                  alt="Muloo on 50Pros"
+                  width={250}
+                  height={80}
+                  className="h-16 w-auto max-w-full"
+                />
+              </a>
             </div>
           </div>
         </div>
