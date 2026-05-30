@@ -7,7 +7,7 @@ export function Footer() {
   return (
     <footer className="border-t border-white/[0.06] bg-[#030720] pt-20 pb-10">
       <div className="container mx-auto px-6">
-        <div className="grid md:grid-cols-5 gap-12 mb-16">
+        <div className="grid gap-12 mb-16 md:grid-cols-2 lg:grid-cols-[1.35fr_0.9fr_0.9fr_0.9fr_3.1fr]">
           <div>
             <Link href="/" className="block mb-6 hover:opacity-90">
               <Logo className="text-xl md:text-2xl" />
@@ -71,11 +71,11 @@ export function Footer() {
             </ul>
           </div>
 
-          <div className="md:text-right">
+          <div className="lg:text-right">
             <h4 className="font-bold mb-6 text-white text-sm">Accreditations & Awards</h4>
-            <div className="flex flex-col gap-5 items-start md:items-end">
-              <img src={hubspotBadge} alt="HubSpot Gold Partner" className="h-16 w-auto drop-shadow-lg" data-testid="footer-hubspot-badge" />
-              <img src={googleBadge} alt="Google Partner" className="h-8 w-auto opacity-50 grayscale hover:grayscale-0 transition-all duration-300" data-testid="footer-google-badge" />
+            <div className="flex flex-wrap items-center gap-5 lg:justify-end">
+              <img src={hubspotBadge} alt="HubSpot Gold Partner" className="h-20 w-auto drop-shadow-lg" data-testid="footer-hubspot-badge" />
+              <img src={googleBadge} alt="Google Partner" className="h-14 w-auto opacity-70 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300" data-testid="footer-google-badge" />
               <a
                 href="https://50pros.com/agency/muloo"
                 target="_blank"
@@ -89,7 +89,7 @@ export function Footer() {
                   alt="Muloo on 50Pros"
                   width={250}
                   height={80}
-                  className="h-16 w-auto max-w-full"
+                  className="h-20 w-auto max-w-full"
                 />
               </a>
             </div>
