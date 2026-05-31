@@ -5,6 +5,7 @@ import { SEO } from "@/components/layout/SEO";
 import { caseStudies } from "@/lib/content";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
+import { useWebsiteContent } from "@/hooks/use-website-content";
 
 const streamChip: Record<string, string> = {
   hub: "text-stream-hub border-stream-hub/35 bg-stream-hub/10",
@@ -14,6 +15,9 @@ const streamChip: Record<string, string> = {
 };
 
 export function CaseStudies() {
+  const { data } = useWebsiteContent();
+  const editableCaseStudies = data?.caseStudies ?? caseStudies;
+
   return (
     <div className="flex flex-col">
       <SEO
@@ -30,7 +34,7 @@ export function CaseStudies() {
 
       <Section className="py-12 md:py-16">
         <div className="grid md:grid-cols-2 gap-6">
-          {caseStudies.map((c) => (
+          {editableCaseStudies.map((c) => (
             <Link key={c.id} href={`/case-studies/${c.id}`}>
               <div
                 className="group h-full glass-card rounded-2xl p-7 md:p-8 flex flex-col gap-4 cursor-pointer hover:border-brand-teal/40 hover:-translate-y-1 transition-all duration-300"

@@ -7,6 +7,7 @@ import { caseStudies } from "@/lib/content";
 import { cn } from "@/lib/utils";
 import NotFound from "@/pages/not-found";
 import { useState } from "react";
+import { useWebsiteContent } from "@/hooks/use-website-content";
 
 const streamChip: Record<string, string> = {
   hub: "text-stream-hub border-stream-hub/35 bg-stream-hub/10",
@@ -17,8 +18,10 @@ const streamChip: Record<string, string> = {
 
 export function CaseStudyDetail() {
   const [, params] = useRoute("/case-studies/:id");
-  const index = caseStudies.findIndex((c) => c.id === params?.id);
-  const study = index >= 0 ? caseStudies[index] : undefined;
+  const { data } = useWebsiteContent();
+  const editableCaseStudies = data?.caseStudies ?? caseStudies;
+  const index = editableCaseStudies.findIndex((c) => c.id === params?.id);
+  const study = index >= 0 ? editableCaseStudies[index] : undefined;
 
   if (!study) return <NotFound />;
 

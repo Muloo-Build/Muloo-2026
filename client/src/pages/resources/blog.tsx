@@ -3,13 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 import { SEO } from "@/components/layout/SEO";
+import { defaultResourcePosts } from "@shared/website-content";
+import { useWebsiteContent } from "@/hooks/use-website-content";
 
 export function Blog() {
-  const posts = [
-    { id: 1, title: "Why your HubSpot data is messy", date: "Oct 12, 2025", readTime: "5 min read" },
-    { id: 2, title: "Building custom React apps on HubSpot CMS", date: "Sep 28, 2025", readTime: "8 min read" },
-    { id: 3, title: "The modern revenue stack: 2026 Edition", date: "Sep 15, 2025", readTime: "6 min read" },
-  ];
+  const { data } = useWebsiteContent();
+  const posts = data?.resourcePosts ?? defaultResourcePosts;
 
   return (
     <div className="flex flex-col">
@@ -28,7 +27,7 @@ export function Blog() {
       <Section className="bg-white/5 py-20">
         <div className="max-w-4xl mx-auto space-y-8">
           {posts.map((post) => (
-            <Link key={post.id} href={`/blog/${post.id}`}>
+            <Link key={post.id} href={`/blog/${post.slug}`}>
               <div className="group cursor-pointer border-b border-white/10 pb-8 hover:border-brand-teal/50 transition-colors">
                 <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3 font-mono">
                     <span>{post.date}</span>
@@ -36,6 +35,7 @@ export function Blog() {
                     <span>{post.readTime}</span>
                 </div>
                 <h2 className="text-3xl font-bold mb-4 group-hover:text-brand-teal transition-colors">{post.title}</h2>
+                <p className="text-muted-foreground leading-relaxed mb-4">{post.excerpt}</p>
                 <div className="flex items-center text-brand-teal font-medium opacity-0 group-hover:opacity-100 transition-opacity transform translate-x-[-10px] group-hover:translate-x-0">
                     Read article <ArrowRight className="ml-2 h-4 w-4" />
                 </div>

@@ -25,6 +25,7 @@ import { CaseStudies } from "./pages/resources/case-studies";
 import { CaseStudyDetail } from "./pages/resources/case-study-detail";
 import { Blog } from "./pages/resources/blog";
 import { BlogPost } from "./pages/resources/blog-post";
+import { ContentAdmin } from "./pages/admin/content-admin";
 import { PrivacyPolicy } from "./pages/legal/privacy-policy";
 import { TermsOfService } from "./pages/legal/terms-of-service";
 import { MeetingBookingPage } from "./pages/meetings";
@@ -86,6 +87,7 @@ function Router() {
         <Route path="/case-studies/:id" component={CaseStudyDetail} />
         <Route path="/blog" component={Blog} />
         <Route path="/blog/:id" component={BlogPost} />
+        <Route path="/admin/content" component={ContentAdmin} />
 
         <Route path="/privacy-policy" component={PrivacyPolicy} />
         <Route path="/terms-of-service" component={TermsOfService} />

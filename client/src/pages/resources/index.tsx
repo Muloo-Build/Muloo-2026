@@ -4,8 +4,14 @@ import { Link } from "wouter";
 import { ArrowRight, BookOpen, FileCode2, Settings, Smartphone } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { SEO } from "@/components/layout/SEO";
+import { defaultResourcePosts } from "@shared/website-content";
+import { useWebsiteContent } from "@/hooks/use-website-content";
+import { caseStudies } from "@/lib/content";
 
 export function ResourcesIndex() {
+  const { data } = useWebsiteContent();
+  const posts = data?.resourcePosts ?? defaultResourcePosts;
+  const featuredCaseStudy = (data?.caseStudies ?? caseStudies)[0];
   const categories = [
     { title: "HubSpot Foundations", icon: Settings, desc: "Setup guides and best practices." },
     { title: "Integration Patterns", icon: FileCode2, desc: "Connecting systems securely." },
@@ -46,19 +52,19 @@ export function ResourcesIndex() {
           {/* Recent Articles */}
           <div className="space-y-8">
              <h2 className="text-2xl font-bold mb-8">Latest Articles</h2>
-             {[1, 2, 3].map((i) => (
-                <Link key={i} href={`/blog/${i}`}>
+             {posts.slice(0, 3).map((post) => (
+                <Link key={post.id} href={`/blog/${post.slug}`}>
                    <div className="group cursor-pointer block">
                       <div className="flex items-center gap-3 mb-2 text-xs font-mono text-brand-teal">
-                         <span>Oct 12, 2025</span>
+                         <span>{post.date}</span>
                          <span className="w-1 h-1 rounded-full bg-brand-teal/50" />
-                         <span>Architecture</span>
+                         <span>{post.category}</span>
                       </div>
                       <h3 className="text-2xl font-bold mb-3 group-hover:text-brand-teal transition-colors">
-                         Why your HubSpot data is messy (and how to fix it)
+                         {post.title}
                       </h3>
                       <p className="text-muted-foreground leading-relaxed mb-4">
-                         Data hygiene is the unsexy hero of revenue operations. Without clean data, your fancy automation is just scaling chaos.
+                         {post.excerpt}
                       </p>
                       <div className="flex items-center text-sm font-bold text-white group-hover:translate-x-2 transition-transform">
                          Read Article <ArrowRight className="ml-2 h-4 w-4" />
@@ -76,12 +82,12 @@ export function ResourcesIndex() {
                    <div className="text-4xl font-extrabold text-white/10">CASE STUDY</div>
                 </div>
                 <div className="p-8">
-                   <Badge className="mb-4">Migration</Badge>
-                   <h3 className="text-3xl font-bold mb-4">Migrating 50k contacts to HubSpot</h3>
+                   <Badge className="mb-4">{featuredCaseStudy.tag}</Badge>
+                   <h3 className="text-3xl font-bold mb-4">{featuredCaseStudy.title}</h3>
                    <p className="text-muted-foreground mb-8">
-                      How we helped a leading FinTech company consolidate 5 different CRM systems into a single source of truth.
+                      {featuredCaseStudy.summary}
                    </p>
-                   <Link href="/case-studies/1">
+                   <Link href={`/case-studies/${featuredCaseStudy.id}`}>
                       <Button variant="outline" className="w-full">Read Case Study</Button>
                    </Link>
                 </div>
