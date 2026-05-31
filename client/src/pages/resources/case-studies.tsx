@@ -37,7 +37,7 @@ export function CaseStudies() {
                 data-testid={`card-case-study-${c.id}`}
               >
                 <div className="flex items-start justify-between gap-4">
-                  <ClientLogo text={c.logo.text} src={c.logo.src} />
+                  <ClientLogo text={c.logo.text} src={c.logo.src} surface={c.logo.surface} />
                   {c.status && (
                     <span className="inline-flex items-center gap-1.5 font-mono text-[10.5px] uppercase tracking-wider text-stream-product whitespace-nowrap">
                       <span className="h-1.5 w-1.5 rounded-full bg-stream-product animate-pulse" /> {c.status}
@@ -71,11 +71,12 @@ export function CaseStudies() {
   );
 }
 
-function ClientLogo({ text, src }: { text: string; src?: string }) {
+function ClientLogo({ text, src, surface = "light" }: { text: string; src?: string; surface?: "light" | "dark" }) {
   const [imageFailed, setImageFailed] = useState(false);
+  const isDark = surface === "dark";
 
   return (
-    <div className="inline-flex h-12 min-w-[132px] items-center justify-center rounded-lg border border-white/[0.08] bg-white px-4">
+    <div className={cn("inline-flex h-12 min-w-[132px] items-center justify-center rounded-lg border px-4", isDark ? "border-white/[0.12] bg-[#0A0F2B]" : "border-white/[0.08] bg-white")}>
       {src && !imageFailed ? (
         <img
           src={src}
@@ -85,7 +86,7 @@ function ClientLogo({ text, src }: { text: string; src?: string }) {
           onError={() => setImageFailed(true)}
         />
       ) : (
-        <span className="font-sans text-[18px] font-black tracking-tight text-brand-navy">{text}</span>
+        <span className={cn("font-sans text-[18px] font-black tracking-tight", isDark ? "text-white" : "text-brand-navy")}>{text}</span>
       )}
     </div>
   );

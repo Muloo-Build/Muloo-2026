@@ -79,7 +79,7 @@ export function CaseStudyDetail() {
         </div>
 
         <div className="mb-7">
-          <ClientLogo text={study.logo.text} src={study.logo.src} />
+          <ClientLogo text={study.logo.text} src={study.logo.src} surface={study.logo.surface} />
         </div>
 
         <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight leading-[1.1] max-w-3xl mb-5">{study.title}</h1>
@@ -167,11 +167,12 @@ export function CaseStudyDetail() {
   );
 }
 
-function ClientLogo({ text, src }: { text: string; src?: string }) {
+function ClientLogo({ text, src, surface = "light" }: { text: string; src?: string; surface?: "light" | "dark" }) {
   const [imageFailed, setImageFailed] = useState(false);
+  const isDark = surface === "dark";
 
   return (
-    <div className="inline-flex h-14 min-w-[150px] items-center justify-center rounded-lg border border-white/[0.08] bg-white px-5">
+    <div className={cn("inline-flex h-14 min-w-[150px] items-center justify-center rounded-lg border px-5", isDark ? "border-white/[0.12] bg-[#0A0F2B]" : "border-white/[0.08] bg-white")}>
       {src && !imageFailed ? (
         <img
           src={src}
@@ -181,7 +182,7 @@ function ClientLogo({ text, src }: { text: string; src?: string }) {
           onError={() => setImageFailed(true)}
         />
       ) : (
-        <span className="font-sans text-[20px] md:text-[22px] font-black tracking-tight text-brand-navy">{text}</span>
+        <span className={cn("font-sans text-[20px] md:text-[22px] font-black tracking-tight", isDark ? "text-white" : "text-brand-navy")}>{text}</span>
       )}
     </div>
   );

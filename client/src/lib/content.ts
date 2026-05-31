@@ -104,7 +104,7 @@ export type CaseStudy = {
   stream: "hub" | "build" | "ai" | "product";
   tag: string;
   client: string;
-  logo: { text: string; src?: string; website?: string };
+  logo: { text: string; src?: string; website?: string; surface?: "light" | "dark" };
   title: string;
   status?: string | null;
   summary: string;
@@ -130,6 +130,7 @@ export const caseStudies: CaseStudy[] = [
       text: "Phillips Law",
       src: "https://phillips-law.co.uk/wp-content/themes/phillips_solicitors/images/logo-new.svg",
       website: "https://phillips-law.co.uk/",
+      surface: "dark",
     },
     title: "From a failed implementation to scalable multi-pipeline architecture",
     status: null,
