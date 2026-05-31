@@ -21,6 +21,7 @@ export async function registerRoutes(
     if (process.env.ADMIN_PASSWORD) return process.env.ADMIN_PASSWORD;
     return process.env.NODE_ENV === "production" ? null : "muloo-admin";
   };
+  const getAdminEmail = () => process.env.ADMIN_EMAIL ?? "jarrud@muloo.co";
 
   const parseCookies = (cookieHeader?: string) =>
     Object.fromEntries(
@@ -66,9 +67,10 @@ export async function registerRoutes(
       return res.status(503).json({ error: "ADMIN_PASSWORD is not configured" });
     }
 
+    const email = typeof req.body?.email === "string" ? req.body.email.trim().toLowerCase() : "";
     const password = typeof req.body?.password === "string" ? req.body.password : "";
-    if (!isPasswordMatch(password, adminPassword)) {
-      return res.status(401).json({ error: "Invalid password" });
+    if (email !== getAdminEmail().toLowerCase() || !isPasswordMatch(password, adminPassword)) {
+      return res.status(401).json({ error: "Invalid email or password" });
     }
 
     const session = randomBytes(32).toString("hex");

@@ -25,6 +25,7 @@ async function requestJson<T>(url: string, init?: RequestInit): Promise<T> {
 
 export function ContentAdmin() {
   const [authenticated, setAuthenticated] = useState(false);
+  const [email, setEmail] = useState("jarrud@muloo.co");
   const [password, setPassword] = useState("");
   const [caseStudiesText, setCaseStudiesText] = useState("");
   const [resourcePostsText, setResourcePostsText] = useState("");
@@ -58,7 +59,7 @@ export function ContentAdmin() {
     try {
       await requestJson("/api/admin/login", {
         method: "POST",
-        body: JSON.stringify({ password }),
+        body: JSON.stringify({ email, password }),
       });
       setAuthenticated(true);
       await loadContent();
@@ -109,6 +110,18 @@ export function ContentAdmin() {
       <Section className="py-10 md:py-12">
         {!authenticated ? (
           <form onSubmit={login} className="max-w-md rounded-2xl border border-white/10 bg-white/[0.02] p-6">
+            <label className="block text-sm font-semibold text-white mb-2" htmlFor="admin-email">
+              Admin email
+            </label>
+            <Input
+              id="admin-email"
+              type="email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              className="mb-4"
+              autoComplete="username"
+              required
+            />
             <label className="block text-sm font-semibold text-white mb-2" htmlFor="admin-password">
               Admin password
             </label>

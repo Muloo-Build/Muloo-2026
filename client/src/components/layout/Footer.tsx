@@ -68,7 +68,16 @@ export function Footer() {
           <div className="lg:text-right">
             <h4 className="font-bold mb-6 text-white text-sm">Accreditations & Awards</h4>
             <div className="flex flex-wrap items-center gap-5 lg:justify-end">
-              <img src={hubspotBadge} alt="HubSpot Gold Partner" className="h-20 w-auto drop-shadow-lg" data-testid="footer-hubspot-badge" />
+              <a
+                href="https://ecosystem.hubspot.com/marketplace/solutions/muloo-co-za"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Muloo on the HubSpot Solutions Directory"
+                className="inline-flex transition-opacity hover:opacity-90"
+                data-testid="footer-hubspot-badge"
+              >
+                <img src={hubspotBadge} alt="HubSpot Gold Partner — view Muloo on the HubSpot Solutions Directory" className="h-20 w-auto drop-shadow-lg" />
+              </a>
               <img src={googleBadge} alt="Google Partner" className="h-14 w-auto opacity-70 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300" data-testid="footer-google-badge" />
               <a
                 href="https://50pros.com/agency/muloo"
@@ -95,6 +104,7 @@ export function Footer() {
           <div className="flex gap-6">
             <Link href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
             <Link href="/terms-of-service" className="hover:text-white transition-colors">Terms of Service</Link>
+            <Link href="/admin/content" className="hover:text-white transition-colors">Login</Link>
           </div>
         </div>
       </div>
