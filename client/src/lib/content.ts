@@ -126,7 +126,11 @@ export const caseStudies: CaseStudy[] = [
     stream: "hub",
     tag: "CRM Architecture",
     client: "Phillips Law",
-    logo: { text: "Phillips Law", website: "https://phillips-law.co.uk/" },
+    logo: {
+      text: "Phillips Law",
+      src: "https://phillips-law.co.uk/wp-content/themes/phillips_solicitors/images/logo-new.svg",
+      website: "https://phillips-law.co.uk/",
+    },
     title: "From a failed implementation to scalable multi-pipeline architecture",
     status: null,
     summary:
@@ -179,7 +183,11 @@ export const caseStudies: CaseStudy[] = [
     stream: "ai",
     tag: "Digital Transformation",
     client: "W.consulting",
-    logo: { text: "W.consulting", website: "https://wconsulting.co.za/" },
+    logo: {
+      text: "W.consulting",
+      src: "https://wconsulting.co.za/assets/img/wconsulting_logo.png",
+      website: "https://wconsulting.co.za/",
+    },
     title: "Turning an underused HubSpot portal into a growth platform",
     status: null,
     summary:
@@ -234,7 +242,11 @@ export const caseStudies: CaseStudy[] = [
     stream: "build",
     tag: "Portal Migration",
     client: "Magnisol",
-    logo: { text: "Magnisol", website: "https://www.magnisol.com/" },
+    logo: {
+      text: "Magnisol",
+      src: "https://cdn.prod.website-files.com/673c4060b0dc76d703651043/67516c630d6e34fe6e0f8101_Magnisol_LogoRGB.png",
+      website: "https://www.magnisol.com/",
+    },
     title: "A clean HubSpot portal and theme-based website, decided properly",
     status: null,
     summary:
@@ -288,7 +300,11 @@ export const caseStudies: CaseStudy[] = [
     stream: "product",
     tag: "Website Platform",
     client: "W.consulting",
-    logo: { text: "W.consulting", website: "https://wconsulting.co.za/" },
+    logo: {
+      text: "W.consulting",
+      src: "https://wconsulting.co.za/assets/img/wconsulting_logo.png",
+      website: "https://wconsulting.co.za/",
+    },
     title: "A scalable HubSpot website, built agentically",
     status: "In delivery",
     summary:
@@ -342,7 +358,11 @@ export const caseStudies: CaseStudy[] = [
     stream: "hub",
     tag: "Operating Model",
     client: "EPI-USE",
-    logo: { text: "EPI-USE", website: "https://www.epiuse.com/" },
+    logo: {
+      text: "EPI-USE",
+      src: "https://8124098.fs1.hubspotusercontent-na1.net/hub/8124098/hubfs/EU%20Theme/EPI-USE-logo.png?width=854&height=221&name=EPI-USE-logo.png",
+      website: "https://www.epiuse.com/",
+    },
     title: "Designing a regional HubSpot operating model for global visibility",
     status: "Strategic roadmap",
     summary:
@@ -580,4 +600,3 @@ export const aboutContent = {
     }
   ]
 };
-

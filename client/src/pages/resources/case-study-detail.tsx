@@ -6,6 +6,7 @@ import { SEO } from "@/components/layout/SEO";
 import { caseStudies } from "@/lib/content";
 import { cn } from "@/lib/utils";
 import NotFound from "@/pages/not-found";
+import { useState } from "react";
 
 const streamChip: Record<string, string> = {
   hub: "text-stream-hub border-stream-hub/35 bg-stream-hub/10",
@@ -78,7 +79,7 @@ export function CaseStudyDetail() {
         </div>
 
         <div className="mb-7">
-          <ClientLogo text={study.logo.text} />
+          <ClientLogo text={study.logo.text} src={study.logo.src} />
         </div>
 
         <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight leading-[1.1] max-w-3xl mb-5">{study.title}</h1>
@@ -166,10 +167,22 @@ export function CaseStudyDetail() {
   );
 }
 
-function ClientLogo({ text }: { text: string }) {
+function ClientLogo({ text, src }: { text: string; src?: string }) {
+  const [imageFailed, setImageFailed] = useState(false);
+
   return (
-    <div className="inline-flex min-h-12 items-center rounded-lg border border-white/[0.08] bg-white/[0.03] px-5">
-      <span className="font-sans text-[20px] md:text-[22px] font-black tracking-tight text-white/88">{text}</span>
+    <div className="inline-flex h-14 min-w-[150px] items-center justify-center rounded-lg border border-white/[0.08] bg-white px-5">
+      {src && !imageFailed ? (
+        <img
+          src={src}
+          alt={`${text} logo`}
+          loading="lazy"
+          className="max-h-9 max-w-[180px] object-contain"
+          onError={() => setImageFailed(true)}
+        />
+      ) : (
+        <span className="font-sans text-[20px] md:text-[22px] font-black tracking-tight text-brand-navy">{text}</span>
+      )}
     </div>
   );
 }
