@@ -7,6 +7,8 @@ import { defaultResourcePosts } from "@shared/website-content";
 import { useWebsiteContent } from "@/hooks/use-website-content";
 import NotFound from "@/pages/not-found";
 
+const siteUrl = "https://www.wearemuloo.com";
+
 export function BlogPost() {
   const [, params] = useRoute("/blog/:id");
   const id = params?.id;
@@ -21,7 +23,20 @@ export function BlogPost() {
       <SEO
         title={`${post.title} | Muloo`}
         description={post.excerpt}
-        robots="noindex,nofollow"
+        canonicalUrl={`${siteUrl}/blog/${post.slug}`}
+        ogType="article"
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          headline: post.title,
+          description: post.excerpt,
+          url: `${siteUrl}/blog/${post.slug}`,
+          datePublished: post.date,
+          articleSection: post.category,
+          author: { "@type": "Organization", name: "Muloo", url: siteUrl },
+          publisher: { "@type": "Organization", name: "Muloo", url: siteUrl },
+          mainEntityOfPage: `${siteUrl}/blog/${post.slug}`,
+        }}
       />
        <Section className="pt-20 pb-10 md:pt-24 md:pb-12 max-w-3xl mx-auto">
         <Link href="/blog">

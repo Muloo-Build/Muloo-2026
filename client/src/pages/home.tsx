@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { BookingCard } from "@/components/meetings/BookingCard";
 import { getMeetingBySlug } from "@/content/meetings";
 import { cn } from "@/lib/utils";
+import { SEO } from "@/components/layout/SEO";
 
 const rotatingPhrases = [
   "Technical Partner for HubSpot",
@@ -16,6 +17,7 @@ const rotatingPhrases = [
 ];
 
 const hubspotSolutionsDirectoryUrl = "https://ecosystem.hubspot.com/marketplace/solutions/muloo-co-za";
+const siteUrl = "https://www.wearemuloo.com";
 
 type HeroStackItem = {
   name: string;
@@ -364,9 +366,74 @@ function DashboardMock() {
 export function Home() {
   const jarrudMeeting = getMeetingBySlug("jarrud");
   const morneMeeting = getMeetingBySlug("morne");
+  const structuredData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: "Muloo",
+      url: siteUrl,
+      logo: `${siteUrl}/favicon.png`,
+      sameAs: [
+        "https://www.linkedin.com/company/muloo-za/",
+        hubspotSolutionsDirectoryUrl,
+        "https://50pros.com/agency/muloo",
+      ],
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Cape Town",
+        addressCountry: "ZA",
+      },
+      description:
+        "Muloo is a technical systems and AI acceleration partner specialising in HubSpot architecture, custom engineering, integrations, CRM rescue, and AI automation.",
+      areaServed: ["South Africa", "United Kingdom", "Australia", "United States"],
+      knowsAbout: [
+        "HubSpot implementation",
+        "HubSpot migration",
+        "HubSpot architecture",
+        "CRM governance",
+        "Revenue operations",
+        "AI automation",
+        "Custom software engineering",
+      ],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: "Muloo",
+      url: siteUrl,
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      name: "Muloo",
+      url: siteUrl,
+      telephone: "+27 68 634 3652",
+      priceRange: "$$$",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Cape Town",
+        addressCountry: "ZA",
+      },
+      serviceType: [
+        "HubSpot implementation",
+        "HubSpot migration",
+        "HubSpot audit",
+        "HubSpot optimisation",
+        "CRM architecture",
+        "AI automation",
+        "Custom software development",
+      ],
+    },
+  ];
 
   return (
     <div className="flex flex-col">
+      <SEO
+        title="Muloo | Technical Systems & AI Acceleration Partner"
+        description="Cape Town-based HubSpot technical partner for CRM architecture, HubSpot implementation, migrations, custom engineering, and AI automation."
+        canonicalUrl={siteUrl}
+        structuredData={structuredData}
+      />
       {/* ── HERO ── */}
       <div className="relative pt-20 pb-20 md:pt-32 md:pb-24 overflow-hidden bg-hero-gradient">
         <div className="absolute inset-0 bg-grid-pattern-fade pointer-events-none" />

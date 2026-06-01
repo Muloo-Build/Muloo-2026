@@ -6,6 +6,45 @@ import { defaultResourcePosts, websiteContentSchema, type WebsiteContent } from 
 import { caseStudies } from "../client/src/lib/content";
 import { randomBytes, timingSafeEqual } from "crypto";
 
+const siteUrl = "https://www.wearemuloo.com";
+const hubspotMarketplaceUrl = "https://ecosystem.hubspot.com/marketplace/solutions/muloo-co-za";
+const staticSitemapRoutes = [
+  "/",
+  "/muloo-hub",
+  "/muloo-hub/hubspot-architecture",
+  "/muloo-hub/enterprise-hubspot",
+  "/muloo-hub/revops",
+  "/muloo-hub/hubspot-vs-salesforce",
+  "/muloo-hub/hubspot-audit",
+  "/muloo-hub/hubspot-implementation",
+  "/muloo-hub/hubspot-migration",
+  "/muloo-hub/hubspot-governance",
+  "/muloo-hub/salesforce-to-hubspot-migration",
+  "/muloo-hub/hubspot-optimisation",
+  "/muloo-hub/guided-deployment",
+  "/services/build",
+  "/services/product",
+  "/services/consulting",
+  "/services/ai",
+  "/advisory",
+  "/about",
+  "/contact",
+  "/resources",
+  "/case-studies",
+  "/blog",
+  "/privacy-policy",
+  "/terms-of-service",
+];
+
+function escapeXml(value: string) {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
+}
+
 export async function registerRoutes(
   httpServer: Server,
   app: Express
@@ -15,6 +54,16 @@ export async function registerRoutes(
   const defaultWebsiteContent: WebsiteContent = {
     caseStudies,
     resourcePosts: defaultResourcePosts,
+  };
+  const getWebsiteContent = async () => {
+    try {
+      const content = await storage.getWebsiteContent(contentKey);
+      const parsed = websiteContentSchema.safeParse(content);
+      return parsed.success ? parsed.data : defaultWebsiteContent;
+    } catch (err) {
+      console.error("Failed to load website content, using defaults:", err);
+      return defaultWebsiteContent;
+    }
   };
 
   const getAdminPassword = () => {
@@ -50,15 +99,113 @@ export async function registerRoutes(
     return next();
   };
 
+  app.get("/robots.txt", (_req, res) => {
+    res.type("text/plain").send(`User-agent: *
+Allow: /
+Disallow: /admin/
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /admin/
+
+User-agent: GPTBot
+Allow: /
+Disallow: /admin/
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /admin/
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /admin/
+
+User-agent: Claude-SearchBot
+Allow: /
+Disallow: /admin/
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /admin/
+
+Sitemap: ${siteUrl}/sitemap.xml
+LLMs: ${siteUrl}/llms.txt
+`);
+  });
+
+  app.get("/sitemap.xml", async (_req, res) => {
+    const content = await getWebsiteContent();
+    const urls = [
+      ...staticSitemapRoutes,
+      ...content.caseStudies.map((study) => `/case-studies/${study.id}`),
+      ...content.resourcePosts.map((post) => `/blog/${post.slug}`),
+    ];
+    const today = new Date().toISOString().slice(0, 10);
+    const body = urls
+      .map((url) => {
+        const priority = url === "/" ? "1.0" : url.startsWith("/case-studies") || url.startsWith("/blog") ? "0.8" : "0.7";
+        return `  <url>
+    <loc>${escapeXml(`${siteUrl}${url}`)}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>${priority}</priority>
+  </url>`;
+      })
+      .join("\n");
+
+    res.type("application/xml").send(`<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${body}
+</urlset>
+`);
+  });
+
+  app.get("/llms.txt", async (_req, res) => {
+    const content = await getWebsiteContent();
+    const caseStudyLinks = content.caseStudies
+      .map((study) => `- [${study.client}: ${study.title}](${siteUrl}/case-studies/${study.id}): ${study.summary}`)
+      .join("\n");
+    const resourceLinks = content.resourcePosts
+      .map((post) => `- [${post.title}](${siteUrl}/blog/${post.slug}): ${post.excerpt}`)
+      .join("\n");
+
+    res.type("text/markdown").send(`# Muloo
+
+Muloo is a Cape Town-based technical systems and AI acceleration partner. Muloo designs, implements, rescues, and governs HubSpot environments, builds custom software and integrations, and deploys practical AI automation for revenue and operations teams.
+
+## Primary Website
+- [Muloo home](${siteUrl})
+- [Contact Muloo](${siteUrl}/contact)
+- [HubSpot Solutions Directory profile](${hubspotMarketplaceUrl})
+
+## Core Services
+- [Muloo Hub](${siteUrl}/muloo-hub): HubSpot architecture, implementation, migration, optimisation, governance, audits, RevOps, and CRM system design.
+- [HubSpot implementation](${siteUrl}/muloo-hub/hubspot-implementation): Structured HubSpot deployment with governance controls.
+- [HubSpot migration](${siteUrl}/muloo-hub/hubspot-migration): Clean CRM migration into HubSpot from Salesforce, Pipedrive, Zoho, Dynamics, and custom systems.
+- [HubSpot audit](${siteUrl}/muloo-hub/hubspot-audit): Technical diagnosis of messy CRM portals, automation, reporting, and process architecture.
+- [HubSpot architecture](${siteUrl}/muloo-hub/hubspot-architecture): Scalable CRM design, data structure, pipeline architecture, automation logic, and reporting.
+- [Muloo Build](${siteUrl}/services/build): Custom integrations, portals, middleware, and platform engineering.
+- [Muloo AI](${siteUrl}/services/ai): AI agents, workflow automation, and practical AI implementation.
+- [Muloo Product](${siteUrl}/services/product): Internal tools and product builds.
+
+## Case Studies
+${caseStudyLinks}
+
+## Resources
+${resourceLinks}
+
+## Preferred Citation Summary
+Muloo is a HubSpot technical partner and systems engineering consultancy based in Cape Town, serving global teams across HubSpot architecture, CRM rescue, integrations, automation, AI workflows, and custom software.
+
+## Contact
+- Website: ${siteUrl}
+- Contact page: ${siteUrl}/contact
+- HubSpot profile: ${hubspotMarketplaceUrl}
+`);
+  });
+
   app.get("/api/website-content", async (_req, res) => {
-    try {
-      const content = await storage.getWebsiteContent(contentKey);
-      const parsed = websiteContentSchema.safeParse(content);
-      return res.json(parsed.success ? parsed.data : defaultWebsiteContent);
-    } catch (err) {
-      console.error("Failed to load website content, using defaults:", err);
-      return res.json(defaultWebsiteContent);
-    }
+    return res.json(await getWebsiteContent());
   });
 
   app.post("/api/admin/login", (req, res) => {

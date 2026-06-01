@@ -8,6 +8,8 @@ import { defaultResourcePosts } from "@shared/website-content";
 import { useWebsiteContent } from "@/hooks/use-website-content";
 import { caseStudies } from "@/lib/content";
 
+const siteUrl = "https://www.wearemuloo.com";
+
 export function ResourcesIndex() {
   const { data } = useWebsiteContent();
   const posts = data?.resourcePosts ?? defaultResourcePosts;
@@ -23,8 +25,22 @@ export function ResourcesIndex() {
     <div className="flex flex-col">
       <SEO
         title="Resources | Muloo"
-        description="Muloo resources and insights."
-        robots="noindex,nofollow"
+        description="Muloo resources, case studies, and practical insights on HubSpot architecture, CRM rescue, integrations, AI automation, and technical revenue systems."
+        canonicalUrl={`${siteUrl}/resources`}
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          name: "Muloo Resources",
+          url: `${siteUrl}/resources`,
+          description:
+            "Resources and case studies from Muloo covering HubSpot architecture, CRM rescue, integrations, AI automation, and technical revenue systems.",
+          mainEntity: posts.slice(0, 3).map((post) => ({
+            "@type": "Article",
+            headline: post.title,
+            url: `${siteUrl}/blog/${post.slug}`,
+            description: post.excerpt,
+          })),
+        }}
       />
       <Section className="pt-20 pb-16 md:pt-28 md:pb-20 bg-hero-gradient">
         <h1 className="text-5xl md:text-7xl font-extrabold mb-8">Technical Insights.</h1>

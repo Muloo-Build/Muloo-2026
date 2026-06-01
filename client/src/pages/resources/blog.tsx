@@ -6,6 +6,8 @@ import { SEO } from "@/components/layout/SEO";
 import { defaultResourcePosts } from "@shared/website-content";
 import { useWebsiteContent } from "@/hooks/use-website-content";
 
+const siteUrl = "https://www.wearemuloo.com";
+
 export function Blog() {
   const { data } = useWebsiteContent();
   const posts = data?.resourcePosts ?? defaultResourcePosts;
@@ -14,8 +16,23 @@ export function Blog() {
     <div className="flex flex-col">
       <SEO
         title="Insights | Muloo"
-        description="Muloo insights."
-        robots="noindex,nofollow"
+        description="Practical Muloo insights on HubSpot architecture, CRM data, integrations, custom software, and AI automation."
+        canonicalUrl={`${siteUrl}/blog`}
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "Blog",
+          name: "Muloo Insights",
+          url: `${siteUrl}/blog`,
+          blogPost: posts.map((post) => ({
+            "@type": "BlogPosting",
+            headline: post.title,
+            url: `${siteUrl}/blog/${post.slug}`,
+            description: post.excerpt,
+            datePublished: post.date,
+            author: { "@type": "Organization", name: "Muloo" },
+            publisher: { "@type": "Organization", name: "Muloo", url: siteUrl },
+          })),
+        }}
       />
       <Section className="pt-20 pb-16 md:pt-28 md:pb-20">
         <h1 className="text-5xl md:text-7xl font-extrabold mb-8">Insights.</h1>

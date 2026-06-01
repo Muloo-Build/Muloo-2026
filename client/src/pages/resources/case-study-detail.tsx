@@ -9,6 +9,8 @@ import NotFound from "@/pages/not-found";
 import { useState } from "react";
 import { useWebsiteContent } from "@/hooks/use-website-content";
 
+const siteUrl = "https://www.wearemuloo.com";
+
 const streamChip: Record<string, string> = {
   hub: "text-stream-hub border-stream-hub/35 bg-stream-hub/10",
   build: "text-stream-build border-stream-build/35 bg-stream-build/10",
@@ -60,7 +62,30 @@ export function CaseStudyDetail() {
 
   return (
     <div className="flex flex-col">
-      <SEO title={`${study.client} — ${study.tag} | Muloo`} description={study.summary} />
+      <SEO
+        title={`${study.client} — ${study.tag} | Muloo`}
+        description={study.summary}
+        canonicalUrl={`${siteUrl}/case-studies/${study.id}`}
+        ogType="article"
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "Article",
+          headline: study.title,
+          name: `${study.client} case study`,
+          description: study.summary,
+          url: `${siteUrl}/case-studies/${study.id}`,
+          about: [study.tag, ...study.facts.services],
+          articleSection: "Case studies",
+          author: { "@type": "Organization", name: "Muloo", url: siteUrl },
+          publisher: { "@type": "Organization", name: "Muloo", url: siteUrl },
+          mainEntityOfPage: `${siteUrl}/case-studies/${study.id}`,
+          mentions: {
+            "@type": "Organization",
+            name: study.client,
+            url: study.logo.website,
+          },
+        }}
+      />
 
       <Section className="pt-20 pb-3 md:pt-24">
         <Link href="/case-studies">

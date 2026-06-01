@@ -7,6 +7,8 @@ import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { useWebsiteContent } from "@/hooks/use-website-content";
 
+const siteUrl = "https://www.wearemuloo.com";
+
 const streamChip: Record<string, string> = {
   hub: "text-stream-hub border-stream-hub/35 bg-stream-hub/10",
   build: "text-stream-build border-stream-build/35 bg-stream-build/10",
@@ -23,6 +25,22 @@ export function CaseStudies() {
       <SEO
         title="Case Studies | Muloo"
         description="Real engagements, documented end to end — HubSpot architecture, rescue, automation and platform builds."
+        canonicalUrl={`${siteUrl}/case-studies`}
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "CollectionPage",
+          name: "Muloo Case Studies",
+          url: `${siteUrl}/case-studies`,
+          description:
+            "Real Muloo engagements across HubSpot architecture, CRM rescue, automation, integrations, and platform builds.",
+          mainEntity: editableCaseStudies.map((study) => ({
+            "@type": "CreativeWork",
+            name: study.title,
+            url: `${siteUrl}/case-studies/${study.id}`,
+            description: study.summary,
+            about: study.tag,
+          })),
+        }}
       />
       <Section className="pt-20 pb-2 md:pt-28">
         <span className="text-sm font-mono text-gradient-muloo uppercase tracking-widest">// Selected work</span>

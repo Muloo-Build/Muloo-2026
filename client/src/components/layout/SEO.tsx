@@ -7,6 +7,7 @@ interface SEOProps {
   ogType?: string;
   canonicalUrl?: string;
   robots?: string;
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const DEFAULT_TITLE = "Muloo | Technical Systems & AI Acceleration Partner";
@@ -39,6 +40,19 @@ function setOrCreateLink(selector: string, attrs: Record<string, string>) {
   Object.entries(attrs).forEach(([key, value]) => tag!.setAttribute(key, value));
 }
 
+function setStructuredData(data?: SEOProps["structuredData"]) {
+  const id = "muloo-structured-data";
+  document.getElementById(id)?.remove();
+
+  if (!data) return;
+
+  const script = document.createElement("script");
+  script.id = id;
+  script.type = "application/ld+json";
+  script.textContent = JSON.stringify(data);
+  document.head.appendChild(script);
+}
+
 export function SEO({
   title = DEFAULT_TITLE,
   description = DEFAULT_DESCRIPTION,
@@ -46,6 +60,7 @@ export function SEO({
   ogType = DEFAULT_OG_TYPE,
   canonicalUrl,
   robots,
+  structuredData,
 }: SEOProps) {
   useEffect(() => {
     const robotsContent = robots ?? "index,follow";
@@ -98,7 +113,8 @@ export function SEO({
       name: "robots",
       content: robotsContent,
     });
-  }, [title, description, ogImage, ogType, canonicalUrl, robots]);
+    setStructuredData(structuredData);
+  }, [title, description, ogImage, ogType, canonicalUrl, robots, structuredData]);
 
   return null;
 }
