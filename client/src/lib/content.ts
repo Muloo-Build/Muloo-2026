@@ -434,13 +434,13 @@ export const serviceHubContent = {
   }
 };
 export const serviceBuildContent = {
-  h1: "Full-stack delivery engine.",
-  intro: "We design and ship production-grade software across backend systems, integrations, middleware, and application architecture. We also stabilise and refactor broken builds already in market.",
+  h1: "Agentic full-stack builds.",
+  intro: "We use human-led, AI-assisted delivery to design, build, harden, and ship production software across apps, APIs, integrations, data layers, and operational workflows.",
   approach: [
-    { step: "01", title: "Diagnose", desc: "Audit the current stack, isolate failure points, and define scope with explicit technical constraints." },
-    { step: "02", title: "Architect", desc: "Design backend services, integration contracts, middleware flows, and infrastructure boundaries." },
-    { step: "03", title: "Build", desc: "Implement and refactor with tested code, CI/CD, and controlled releases across environments." },
-    { step: "04", title: "Operate", desc: "Harden runtime behaviour with monitoring, incident response, performance tuning, and maintenance plans." }
+    { step: "01", title: "Frame", desc: "Map the product goal, user workflow, data boundaries, and technical constraints before code generation starts." },
+    { step: "02", title: "Architect", desc: "Design the application, integration contracts, data model, and release path with human review at every decision point." },
+    { step: "03", title: "Build", desc: "Use agentic delivery to accelerate implementation while keeping code standards, QA, and deployment control in place." },
+    { step: "04", title: "Harden", desc: "Stabilise runtime behaviour with monitoring, security checks, rollback paths, and production support plans." }
   ]
 };
 export const serviceProductContent = {
@@ -465,21 +465,21 @@ export const serviceProductContent = {
   ]
 };
 export const serviceAiContent = {
-  h1: "AI that ships.",
-  intro: "We build AI systems with guardrails, accelerate delivery with vibe coding, and harden outputs for secure production release.",
+  h1: "AI that ships inside real systems.",
+  intro: "We design agent workflows, AI-assisted build processes, and production guardrails that support full-stack delivery instead of staying trapped in demo mode.",
   services: [
     {
       title: "Guardrailed AI Agents",
-      desc: "Task-specific agents with scoped permissions, approval paths, and audit trails for customer and internal operations.",
+      desc: "Task-specific agents with scoped permissions, approval paths, tool boundaries, and audit trails for real operational workflows.",
       lead: "Operations"
     },
     {
-      title: "Vibe Coding Acceleration",
-      desc: "Practical AI coding workflows that speed delivery while preserving code standards, test coverage, and architectural discipline.",
+      title: "Agentic Build Acceleration",
+      desc: "AI-assisted engineering workflows that speed delivery while preserving architecture, code standards, review discipline, and deployment control.",
       lead: "Engineering"
     },
     {
-      title: "Vibe-Coded App Hardening",
+      title: "AI-Built App Hardening",
       desc: "Refactoring and stabilisation for AI-generated applications, including reliability fixes, data integrity checks, and runtime controls.",
       lead: "Engineering"
     },

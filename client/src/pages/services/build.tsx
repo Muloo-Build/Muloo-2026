@@ -1,14 +1,40 @@
 import { Section } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Webhook, Code2, Shield, Zap, Database, Terminal, RefreshCw, Lock, Activity, Layers, Server, HardDrive, CheckCircle2 } from "lucide-react";
+import { ArrowRight, Webhook, Code2, Shield, Zap, Database, Terminal, RefreshCw, Lock, Activity, Layers, Server, HardDrive } from "lucide-react";
 import { Link } from "wouter";
 import { Badge } from "@/components/ui/badge";
 import { serviceBuildContent } from "@/lib/content";
 import { BookingCard } from "@/components/meetings/BookingCard";
 import { getMeetingBySlug } from "@/content/meetings";
 import { useWebsiteContent } from "@/hooks/use-website-content";
+import { SEO } from "@/components/layout/SEO";
 
 const streamBlue = "#155DFC";
+const siteUrl = "https://www.wearemuloo.com";
+
+const buildPlatformLogos = [
+  { name: "HubSpot", src: "/assets/stack-logos/hubspot.svg" },
+  { name: "Azure", src: "/assets/stack-logos/azure.svg" },
+  { name: "SQL Server", src: "/assets/stack-logos/microsoftsqlserver.svg" },
+  { name: "SAP", src: "/assets/stack-logos/sap.svg" },
+  { name: "Google Cloud", src: "/assets/stack-logos/googlecloud.svg" },
+  { name: "Snowflake", src: "/assets/stack-logos/snowflake.svg" },
+];
+
+const serviceBuildStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Muloo Build agentic full-stack builds",
+  description: serviceBuildContent.intro,
+  serviceType: "Agentic full-stack software development, API integration, platform engineering, and production hardening",
+  provider: {
+    "@type": "Organization",
+    name: "Muloo",
+    url: siteUrl,
+  },
+  areaServed: ["South Africa", "United Kingdom", "Australia", "United States"],
+  url: `${siteUrl}/services/build`,
+};
 
 function getFirstName(name: string) {
   return name.split(" ")[0] ?? name;
@@ -21,6 +47,13 @@ export function ServicesBuild() {
 
   return (
     <div className="flex flex-col">
+      <SEO
+        title="Muloo Build | Agentic Full-Stack Builds"
+        description="Muloo Build uses human-led, AI-assisted delivery to design, build, harden, and ship full-stack software, APIs, integrations, data layers, and operational workflows."
+        canonicalUrl={`${siteUrl}/services/build`}
+        structuredData={serviceBuildStructuredData}
+      />
+
       {/* Hero */}
       <Section className="pt-20 pb-20 md:pt-28 md:pb-24 bg-hero-gradient glow-build relative overflow-hidden">
         <div className="absolute inset-0 bg-grid-pattern-fade pointer-events-none" />
@@ -40,66 +73,55 @@ export function ServicesBuild() {
               <p className="text-xl md:text-2xl text-muted-foreground leading-[1.8] border-l-4 border-[#155DFC] pl-6">
                 {serviceBuildContent.intro}
               </p>
+              <div className="mt-8 flex flex-col sm:flex-row gap-3">
+                <Link href={meetingUrl}>
+                  <Button
+                    size="lg"
+                    className="font-bold h-12 px-7 text-white rounded-lg"
+                    style={{ backgroundColor: streamBlue }}
+                    data-testid="button-scope-agentic-build"
+                  >
+                    Scope an Agentic Build <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+                <a
+                  href="#build-capabilities"
+                  className="inline-flex h-12 items-center justify-center rounded-lg border border-white/15 px-7 text-sm font-bold text-white/80 transition-colors hover:border-[#155DFC]/40 hover:text-white"
+                  data-testid="link-build-capabilities"
+                >
+                  See What We Build
+                </a>
+              </div>
             </div>
 
             <div className="hidden lg:block flex-1">
-              <div className="relative w-full max-w-md mx-auto h-[320px]" data-testid="build-hero-visual">
+              <div className="relative w-full max-w-lg mx-auto" data-testid="build-hero-visual">
                 <div className="absolute inset-0 bg-[#155DFC] opacity-[0.04] blur-[100px] rounded-full pointer-events-none" />
 
-                {/* Top Card: API Gateway */}
-                <div className="absolute top-4 right-0 w-56 glass-card rounded-xl p-3 border-white/10 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)] z-20 animate-float-medium">
-                  <div className="flex items-center justify-between mb-3 border-b border-white/5 pb-2">
-                    <div className="flex items-center gap-2 text-white">
-                      <Shield className="h-4 w-4 text-[#155DFC]" />
-                      <span className="text-xs font-semibold">API Gateway</span>
-                    </div>
-                    <span className="text-[10px] text-green-400 font-mono bg-green-400/10 px-1.5 py-0.5 rounded">200 OK</span>
+                <img
+                  src="/assets/hero-ui-cascade-clean.png"
+                  alt="Agentic build dashboard showing a deployed coding agent, revenue analytics, and data sync status"
+                  className="relative z-10 w-full rounded-2xl border border-white/10 shadow-[0_35px_90px_rgba(0,0,0,0.45)]"
+                  loading="eager"
+                />
+
+                <div className="absolute -top-5 right-5 z-20 w-56 glass-card rounded-xl border-white/10 p-3 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)] animate-float-medium">
+                  <div className="mb-2 flex items-center gap-2 text-white">
+                    <Shield className="h-4 w-4 text-[#155DFC]" />
+                    <span className="text-xs font-semibold">Human Review Gate</span>
                   </div>
-                  <div className="space-y-1 font-mono text-[8px] text-muted-foreground bg-black/40 p-1.5 rounded border border-white/5">
-                    <div><span className="text-purple-400">POST</span> /api/v2/webhooks/stripe</div>
-                    <div><span className="text-blue-400">Authorization:</span> Bearer token_***</div>
-                    <div><span className="text-orange-400">Content-Type:</span> application/json</div>
-                  </div>
+                  <p className="text-[10px] leading-relaxed text-white/50">AI-generated work is checked against scope, architecture, and release standards.</p>
                 </div>
 
-                {/* Middle Left: Data Pipeline */}
-                <div className="absolute top-24 -left-6 w-52 glass-card rounded-xl p-3 border-white/10 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)] z-10 animate-float-slow">
-                  <div className="flex flex-col gap-3">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <Database className="h-4 w-4 text-[#155DFC]" />
-                        <span className="text-xs font-medium text-white">Data Pipeline</span>
-                      </div>
-                      <div className="flex gap-1 items-end h-4">
-                        {[40, 70, 45, 90, 60].map((h, i) => (
-                          <div key={i} className="w-1 bg-[#155DFC]/60 rounded-t-sm" style={{ height: `${h}%` }} />
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <div className="text-[10px] text-white/50 flex justify-between">
-                        <span>Transforming Payload</span>
-                        <span>42ms</span>
-                      </div>
-                      <div className="h-1 w-full bg-white/10 rounded-full overflow-hidden">
-                        <div className="h-full bg-[#155DFC] rounded-full w-[65%] animate-pulse" />
-                      </div>
-                    </div>
+                <div className="absolute -bottom-5 left-8 z-20 w-52 glass-card rounded-xl border-white/10 p-3 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)] animate-float-slow">
+                  <div className="mb-2 flex items-center gap-2 text-white">
+                    <Terminal className="h-4 w-4 text-[#155DFC]" />
+                    <span className="text-xs font-semibold">Full-Stack Sprint</span>
                   </div>
-                </div>
-
-                {/* Bottom Right: Middleware Success */}
-                <div className="absolute bottom-6 right-8 w-52 glass-card rounded-xl p-3 border-white/10 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)] z-30 animate-float-fast">
-                  <div className="flex items-center gap-3">
-                    <div className="h-8 w-8 rounded-full bg-green-500/10 flex items-center justify-center">
-                      <CheckCircle2 className="h-4 w-4 text-green-400" />
-                    </div>
-                    <div>
-                      <div className="text-[11px] font-semibold text-white">ERP Sync Complete</div>
-                      <div className="text-[9px] text-muted-foreground">1,204 records updated</div>
-                    </div>
+                  <div className="h-1.5 w-full rounded-full bg-white/10">
+                    <div className="h-full w-[72%] rounded-full bg-[#155DFC]" />
                   </div>
+                  <p className="mt-2 text-[10px] text-white/45">Design - build - harden - ship</p>
                 </div>
 
               </div>
@@ -114,10 +136,10 @@ export function ServicesBuild() {
         <div className="max-w-2xl">
           <span className="text-sm font-mono text-[#155DFC] uppercase tracking-widest mb-6 block">The challenge</span>
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 leading-tight">
-            Disconnected systems quietly erode performance.
+            Agentic delivery belongs at the centre of the build.
           </h2>
           <p className="text-lg text-muted-foreground leading-[1.8]">
-            APIs exist. Tools exist. Data exists. But when architecture is fragmented, reporting breaks, automations misfire, and change becomes expensive. Modern businesses don’t need more tools. They need systems that are designed to work together.
+            AI can accelerate delivery, but only when the product goal, architecture, data model, and release controls are clear. We use agentic workflows to move faster without losing the engineering discipline required for production software.
           </p>
         </div>
       </Section>
@@ -288,20 +310,23 @@ export function ServicesBuild() {
       </Section>
 
       {/* What We Build */}
-      <Section className="py-20 md:py-[120px] border-t border-white/5">
+      <Section id="build-capabilities" className="py-20 md:py-[120px] border-t border-white/5">
         <div className="mb-16 max-w-2xl">
           <span className="text-sm font-mono text-[#155DFC] uppercase tracking-widest mb-4 block">What we build</span>
-          <h2 className="text-3xl md:text-5xl font-bold text-white">Engineering that ships</h2>
+          <h2 className="text-3xl md:text-5xl font-bold text-white">Full-stack systems that ship</h2>
+          <p className="mt-5 text-muted-foreground leading-[1.8]">
+            We build the product surface, backend logic, integrations, data flows, and production controls together so the final system behaves like one product.
+          </p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">
           {[
-            { icon: Code2, title: "API Development", desc: "Production APIs with typed contracts, versioning, observability, and documentation your team can actually use." },
-            { icon: Webhook, title: "Middleware Architecture", desc: "Reliable integration layers that sync, transform, and route data with retries, dead-letter handling, and clear error reporting." },
-            { icon: Lock, title: "Client Portals", desc: "Secure customer and internal portals with role-based access, audit trails, and clean UX for self-service." },
-            { icon: Zap, title: "Event-Based Integrations", desc: "Event-driven systems using webhooks, queues, and background workers to react in real time without breaking under load." },
-            { icon: Database, title: "Data Sync & Governance", desc: "Schema mapping, validation, deduplication, and incremental sync so data stays consistent across every platform." },
-            { icon: RefreshCw, title: "Platform Connectivity", desc: "Connect CRMs, ERPs, payments, shipping, and internal tools — including legacy systems and custom APIs." },
+            { icon: Code2, title: "Full-Stack Applications", desc: "Production web apps, internal tools, and workflow products with usable interfaces, backend services, and clean release paths." },
+            { icon: Webhook, title: "APIs & Integration Layers", desc: "Typed APIs, middleware, webhooks, and platform connections that move data reliably between business systems." },
+            { icon: Zap, title: "Agentic Build Workflows", desc: "AI-assisted delivery loops for scaffolding, implementation, QA support, and documentation with human review gates." },
+            { icon: Lock, title: "Client & Internal Portals", desc: "Secure portals with role-based access, audit trails, data views, and self-service workflows for teams or customers." },
+            { icon: Database, title: "Data Systems & Reporting", desc: "Schema mapping, validation, sync logic, and reporting foundations so teams can trust operational data." },
+            { icon: RefreshCw, title: "Production Hardening", desc: "Refactoring, observability, deployment support, and runtime controls for builds that need to survive real usage." },
           ].map((item, i) => (
             <div
               key={i}
@@ -326,26 +351,23 @@ export function ServicesBuild() {
         <div className="mb-14 max-w-2xl">
           <span className="text-sm font-mono text-[#155DFC] uppercase tracking-widest mb-4 block">Ecosystem</span>
           <h2 className="text-3xl md:text-4xl font-bold text-white">Platforms we engineer across</h2>
+          <p className="mt-5 text-muted-foreground leading-[1.8]">
+            We connect into the systems that already run the business, then build the custom product and automation layer around them.
+          </p>
         </div>
 
-        <div className="flex flex-wrap gap-3 max-w-3xl">
-          {[
-            "Microsoft Azure",
-            "Google Cloud",
-            "SAP",
-            "SQL Server",
-            "Snowflake",
-            "HubSpot",
-            "Salesforce",
-            "Custom APIs",
-          ].map((platform) => (
-            <span
-              key={platform}
-              className="px-4 py-2 rounded-lg bg-white/[0.03] border border-white/[0.06] text-sm font-mono text-white/50 hover:text-[#155DFC] hover:border-[#155DFC]/20 transition-all duration-300"
-              data-testid={`tag-platform-${platform.toLowerCase().replace(/\s/g, '-')}`}
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+          {buildPlatformLogos.map((platform) => (
+            <div
+              key={platform.name}
+              className="glass-card rounded-xl border-white/10 p-5 flex flex-col items-center justify-center gap-3 min-h-28"
+              data-testid={`logo-platform-${platform.name.toLowerCase().replace(/\s/g, '-')}`}
             >
-              {platform}
-            </span>
+              <div className="h-12 w-12 rounded-lg bg-white p-2 flex items-center justify-center">
+                <img src={platform.src} alt={platform.name} className="h-full w-full object-contain" loading="lazy" />
+              </div>
+              <span className="text-xs font-mono text-white/55 text-center">{platform.name}</span>
+            </div>
           ))}
         </div>
       </Section>
@@ -385,7 +407,7 @@ export function ServicesBuild() {
           {[
             { title: "Idempotent APIs", desc: "Every request produces the same result, no matter how many times it's sent." },
             { title: "Event-driven architecture", desc: "Systems react to changes in real time instead of polling for updates." },
-            { title: "Data integrity first", desc: "Validation at every boundary â€” nothing enters a system unchecked." },
+            { title: "Data integrity first", desc: "Validation at every boundary - nothing enters a system unchecked." },
             { title: "Observable systems", desc: "Structured logging, tracing, and alerting from day one." },
           ].map((item, i) => (
             <div
@@ -427,7 +449,7 @@ export function ServicesBuild() {
             },
             {
               title: "Embedded Engineering",
-              desc: "Our engineers integrate directly into your team â€” attending standups, shipping code, and owning outcomes alongside your people.",
+              desc: "Our engineers integrate directly into your team - attending standups, shipping code, and owning outcomes alongside your people.",
             },
             {
               title: "Optimisation Retainers",
@@ -505,9 +527,9 @@ export function ServicesBuild() {
       <Section className="py-20 md:py-[120px] text-center bg-hero-gradient glow-build border-t border-white/5 relative overflow-hidden">
         <div className="absolute inset-0 bg-grid-pattern-fade pointer-events-none opacity-50" />
         <div className="relative z-10 max-w-3xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">Ready to stabilise your architecture?</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">Ready to ship an agentic full-stack build?</h2>
           <p className="text-xl text-muted-foreground mb-10 leading-[1.8]">
-            We’ll map the current stack, identify breakpoints, and ship a clear build plan.
+            We'll map the product, architecture, data flows, and release path before the first sprint starts.
           </p>
           <Link href={meetingUrl}>
             <Button
@@ -516,7 +538,7 @@ export function ServicesBuild() {
               style={{ backgroundColor: streamBlue }}
               data-testid="button-book-architecture-call"
             >
-              Book a Technical Scoping Session <ArrowRight className="ml-2" />
+              Book a Build Scoping Session <ArrowRight className="ml-2" />
             </Button>
           </Link>
         </div>
@@ -524,4 +546,3 @@ export function ServicesBuild() {
     </div>
   );
 }
-

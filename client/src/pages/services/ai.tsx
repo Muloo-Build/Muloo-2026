@@ -18,11 +18,27 @@ import { serviceAiContent } from "@/lib/content";
 import { BookingCard } from "@/components/meetings/BookingCard";
 import { getMeetingBySlug } from "@/content/meetings";
 import { useWebsiteContent } from "@/hooks/use-website-content";
+import { SEO } from "@/components/layout/SEO";
 
 const streamPurple = "#C140FF";
-const meetingUrl = "/contact/book/jarrud";
+const siteUrl = "https://www.wearemuloo.com";
 
 const serviceIcons = [Bot, Code2, Workflow, ShieldCheck];
+
+const serviceAiStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Muloo AI production agent workflows",
+  description: serviceAiContent.intro,
+  serviceType: "AI agents, agentic build workflows, AI-generated app hardening, and production guardrails",
+  provider: {
+    "@type": "Organization",
+    name: "Muloo",
+    url: siteUrl,
+  },
+  areaServed: ["South Africa", "United Kingdom", "Australia", "United States"],
+  url: `${siteUrl}/services/ai`,
+};
 
 function getFirstName(name: string) {
   return name.split(" ")[0] ?? name;
@@ -30,10 +46,18 @@ function getFirstName(name: string) {
 
 export function ServicesAi() {
   const { data: websiteContent } = useWebsiteContent();
-  const planningMeeting = getMeetingBySlug("morne", websiteContent?.meetings) ?? getMeetingBySlug("jarrud", websiteContent?.meetings);
+  const planningMeeting = getMeetingBySlug("jarrud", websiteContent?.meetings) ?? getMeetingBySlug("morne", websiteContent?.meetings);
+  const meetingUrl = planningMeeting ? `/contact/book/${planningMeeting.slug}` : "/contact";
 
   return (
     <div className="flex flex-col">
+      <SEO
+        title="Muloo AI | Production Agent Workflows"
+        description="Muloo AI designs agent workflows, AI-assisted build processes, app hardening, and production guardrails that support full-stack delivery."
+        canonicalUrl={`${siteUrl}/services/ai`}
+        structuredData={serviceAiStructuredData}
+      />
+
       {/* Hero */}
       <Section className="pt-20 pb-20 md:pt-28 md:pb-24 bg-hero-gradient glow-ai relative overflow-hidden">
         <div className="absolute inset-0 bg-grid-pattern-fade pointer-events-none" />
@@ -53,7 +77,7 @@ export function ServicesAi() {
               <p className="text-xl md:text-2xl text-muted-foreground leading-[1.8] border-l-4 border-[#C140FF] pl-6">
                 {serviceAiContent.intro}
               </p>
-              <p className="text-sm text-white/40 font-mono mt-6">We ship AI inside defined boundaries: guardrails, observability, rollback.</p>
+              <p className="text-sm text-white/40 font-mono mt-6">Agent workflows, code acceleration, hardening, observability, rollback.</p>
             </div>
 
             <div className="hidden lg:block flex-1">
@@ -126,10 +150,10 @@ export function ServicesAi() {
         <div className="max-w-2xl">
           <span className="text-sm font-mono text-[#C140FF] uppercase tracking-widest mb-6 block">The problem</span>
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 leading-tight">
-            Most AI projects never leave the demo.
+            AI is useful when it becomes part of delivery.
           </h2>
           <p className="text-lg text-muted-foreground leading-[1.8]">
-            Most AI projects are demos. Some are fragile agents. Others are vibe-coded prototypes that never survive production. AI only creates value when it runs inside real workflows with guardrails, monitoring, and measurable outcomes.
+            Most AI projects are demos. Some are fragile agents. Others are AI-generated prototypes that never survive production. AI creates value when it is attached to real workflows, reviewed by humans, monitored in production, and measured against business outcomes.
           </p>
         </div>
       </Section>
@@ -138,7 +162,10 @@ export function ServicesAi() {
       <Section className="py-20 md:py-[120px] bg-section-soft border-t border-white/5">
         <div className="mb-16 max-w-2xl">
           <span className="text-sm font-mono text-[#C140FF] uppercase tracking-widest mb-4 block">What we deploy</span>
-          <h2 className="text-3xl md:text-5xl font-bold text-white">Four Production AI Patterns</h2>
+          <h2 className="text-3xl md:text-5xl font-bold text-white">AI capabilities for production systems</h2>
+          <p className="mt-5 text-muted-foreground leading-[1.8]">
+            These capabilities support agentic full-stack builds, internal automation, and product workflows that need controls from day one.
+          </p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">
@@ -170,9 +197,9 @@ export function ServicesAi() {
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           <div className="max-w-xl">
             <span className="text-sm font-mono text-[#C140FF] uppercase tracking-widest mb-4 block">How it works</span>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">Agent Workflow Loop</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">Controlled agent workflow loop</h2>
             <p className="text-muted-foreground leading-[1.8] mb-8 max-w-lg">
-              Every agent follows a disciplined loop: a trigger fires, the agent reasons and acts, results are logged, and performance is reviewed. No black boxes.
+              Every agent follows a disciplined loop: a trigger fires, the agent reasons and acts, results are logged, and performance is reviewed. The system is designed so people can approve, inspect, and roll back where needed.
             </p>
             <ul className="space-y-4">
               {[
@@ -408,10 +435,10 @@ export function ServicesAi() {
         <div className="absolute inset-0 bg-grid-pattern-fade pointer-events-none opacity-50" />
         <div className="relative z-10 max-w-3xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
-            Ready to deploy applied AI?
+            Ready to add a controlled agent workflow?
           </h2>
           <p className="text-xl text-muted-foreground mb-10 leading-[1.8]">
-            We'll identify one workflow worth automating, ship a scoped pilot, and measure impact with clear guardrails.
+            We'll identify one workflow worth automating, define the guardrails, and ship it through the same production discipline as the rest of your stack.
           </p>
           <Link href={meetingUrl}>
             <Button
@@ -420,7 +447,7 @@ export function ServicesAi() {
               style={{ backgroundColor: streamPurple }}
               data-testid="button-explore-ai"
             >
-              Ship an AI Pilot <ArrowRight className="ml-2" />
+              Scope an AI Workflow <ArrowRight className="ml-2" />
             </Button>
           </Link>
         </div>
