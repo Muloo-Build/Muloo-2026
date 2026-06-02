@@ -17,14 +17,20 @@ import { Badge } from "@/components/ui/badge";
 import { serviceAiContent } from "@/lib/content";
 import { BookingCard } from "@/components/meetings/BookingCard";
 import { getMeetingBySlug } from "@/content/meetings";
+import { useWebsiteContent } from "@/hooks/use-website-content";
 
 const streamPurple = "#C140FF";
 const meetingUrl = "/contact/book/jarrud";
 
 const serviceIcons = [Bot, Code2, Workflow, ShieldCheck];
 
+function getFirstName(name: string) {
+  return name.split(" ")[0] ?? name;
+}
+
 export function ServicesAi() {
-  const morneMeeting = getMeetingBySlug("morne");
+  const { data: websiteContent } = useWebsiteContent();
+  const planningMeeting = getMeetingBySlug("morne", websiteContent?.meetings) ?? getMeetingBySlug("jarrud", websiteContent?.meetings);
 
   return (
     <div className="flex flex-col">
@@ -387,13 +393,13 @@ export function ServicesAi() {
         </div>
       </Section>
 
-      {morneMeeting && (
+      {planningMeeting && (
         <Section className="py-12 md:py-16 border-t border-white/5">
           <div className="mb-6">
             <span className="text-sm font-mono text-[#C140FF] uppercase tracking-widest mb-3 block">Need a plan?</span>
-            <h2 className="text-2xl md:text-3xl font-bold text-white">Talk directly with Morne</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-white">Talk directly with {getFirstName(planningMeeting.name)}</h2>
           </div>
-          <BookingCard meeting={morneMeeting} />
+          <BookingCard meeting={planningMeeting} />
         </Section>
       )}
 

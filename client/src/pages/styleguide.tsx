@@ -112,7 +112,7 @@ const defaultSignatureProfiles: SignatureProfile[] = [
     whatsapp: "+27 68 634 3652",
     website: "https://www.wearemuloo.com",
     bookingUrl: "https://www.wearemuloo.com/contact",
-    ctaLabel: "Book with Morne",
+    ctaLabel: "Contact Muloo",
   },
 ];
 

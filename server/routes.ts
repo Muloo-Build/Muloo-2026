@@ -2,7 +2,7 @@ import type { Express, RequestHandler } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertInquirySchema } from "@shared/schema";
-import { defaultResourcePosts, websiteContentSchema, type WebsiteContent } from "@shared/website-content";
+import { defaultMeetingProfiles, defaultResourcePosts, websiteContentSchema, type WebsiteContent } from "@shared/website-content";
 import { caseStudies } from "../client/src/lib/content";
 import { randomBytes, timingSafeEqual } from "crypto";
 
@@ -54,6 +54,7 @@ export async function registerRoutes(
   const defaultWebsiteContent: WebsiteContent = {
     caseStudies,
     resourcePosts: defaultResourcePosts,
+    meetings: defaultMeetingProfiles,
   };
   const getWebsiteContent = async () => {
     try {

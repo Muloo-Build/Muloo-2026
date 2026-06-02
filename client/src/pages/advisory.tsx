@@ -7,6 +7,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import jarrudImg from "@assets/d1bde727-2cda-4a05-ad55-08a4eeb1c30f_1771492083207.png";
 import morneImg from "@assets/Morne_1771492100987.png";
 import paulImg from "@assets/e03647df-fb65-4c59-b350-b505eb0fd17b_1771492117754.png";
+import { getMeetingBySlug } from "@/content/meetings";
+import { useWebsiteContent } from "@/hooks/use-website-content";
 
 const getImage = (imageName: string) => {
   if (imageName.includes("jarrud")) return jarrudImg;
@@ -23,6 +25,15 @@ const serviceIcons: Record<string, React.ReactNode> = {
 };
 
 export function Advisory() {
+  const { data: websiteContent } = useWebsiteContent();
+  const getLeaderMeeting = (name: string) => {
+    const normalizedName = name.toLowerCase();
+    const slug = normalizedName.includes("jarrud") ? "jarrud" : normalizedName.includes("morne") ? "morne" : "";
+    return getMeetingBySlug(slug, websiteContent?.meetings);
+  };
+  const advisoryMeeting = getMeetingBySlug("morne", websiteContent?.meetings) ?? getMeetingBySlug("jarrud", websiteContent?.meetings);
+  const advisoryMeetingUrl = advisoryMeeting ? `/contact/book/${advisoryMeeting.slug}` : "/contact";
+
   return (
     <div className="flex flex-col">
       {/* Hero */}
@@ -192,70 +203,72 @@ export function Advisory() {
         </div>
 
         <div className="flex flex-col gap-10 w-full max-w-6xl">
-          {advisoryContent.leaders.map((leader, i) => (
-            <div key={i} className="glass-card p-8 md:p-10 rounded-2xl flex flex-col md:flex-row items-start md:items-center gap-8 group" data-testid={`card-leader-${i}`}>
-              <div className="shrink-0 relative">
-                <div
-                  className="h-32 w-32 md:h-48 md:w-48 rounded-full p-[3px] transition-all duration-300 shadow-2xl"
-                  style={{
-                    background: `linear-gradient(135deg, ${leader.accent}50, transparent 70%)`,
-                  }}
-                >
-                  <div className="h-full w-full rounded-full overflow-hidden border-2 border-[#030614]">
-                    <Avatar className="h-full w-full">
-                      <AvatarImage src={getImage(leader.image)} alt={leader.name} className="object-cover" />
-                      <AvatarFallback className="text-2xl font-bold">{leader.name.substring(0, 2).toUpperCase()}</AvatarFallback>
-                    </Avatar>
+          {advisoryContent.leaders.map((leader, i) => {
+            const leaderMeeting = getLeaderMeeting(leader.name);
+            const isBookableLeader = leader.name.toLowerCase().includes("jarrud") || leader.name.toLowerCase().includes("morne");
+            const meetingHref = leaderMeeting ? `/contact/book/${leaderMeeting.slug}` : isBookableLeader ? "" : "/contact";
+
+            return (
+              <div key={i} className="glass-card p-8 md:p-10 rounded-2xl flex flex-col md:flex-row items-start md:items-center gap-8 group" data-testid={`card-leader-${i}`}>
+                <div className="shrink-0 relative">
+                  <div
+                    className="h-32 w-32 md:h-48 md:w-48 rounded-full p-[3px] transition-all duration-300 shadow-2xl"
+                    style={{
+                      background: `linear-gradient(135deg, ${leader.accent}50, transparent 70%)`,
+                    }}
+                  >
+                    <div className="h-full w-full rounded-full overflow-hidden border-2 border-[#030614]">
+                      <Avatar className="h-full w-full">
+                        <AvatarImage src={getImage(leader.image)} alt={leader.name} className="object-cover" />
+                        <AvatarFallback className="text-2xl font-bold">{leader.name.substring(0, 2).toUpperCase()}</AvatarFallback>
+                      </Avatar>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex flex-col flex-grow">
+                  <h3 className="text-2xl font-bold text-white mb-1">{leader.name}</h3>
+                  <p className="text-sm font-mono mb-4" style={{ color: leader.accent }}>{leader.title}</p>
+
+                  <div className="flex flex-wrap gap-2 mb-5">
+                    {leader.roles.map((role, ri) => (
+                      <span
+                        key={ri}
+                        className="text-[12px] px-2.5 py-1 rounded border font-mono"
+                        style={{
+                          borderColor: `${leader.accent}20`,
+                          backgroundColor: `${leader.accent}08`,
+                          color: `${leader.accent}99`,
+                        }}
+                      >
+                        {role}
+                      </span>
+                    ))}
+                  </div>
+
+                  <p className="text-base text-muted-foreground leading-[1.8] mb-8 lg:pr-6">{leader.bio}</p>
+
+                  <div className="flex flex-wrap gap-3">
+                    <a href={leader.linkedin} target="_blank" rel="noopener noreferrer" data-testid={`link-linkedin-${i}`}>
+                      <Button variant="outline" size="sm" className="bg-white/5 border-white/10 hover:bg-white/10 hover:text-white transition-colors border">
+                        <Linkedin className="h-4 w-4 mr-2" style={{ color: leader.accent }} /> View Profile
+                      </Button>
+                    </a>
+                    {meetingHref && (
+                      <Link
+                        href={meetingHref}
+                        data-testid={`link-meeting-${i}`}
+                      >
+                        <Button size="sm" className="text-white hover:opacity-90 font-bold transition-opacity" style={{ backgroundColor: leader.accent }}>
+                          <Calendar className="h-4 w-4 mr-2" /> Book an Advisory Call
+                        </Button>
+                      </Link>
+                    )}
                   </div>
                 </div>
               </div>
-
-              <div className="flex flex-col flex-grow">
-                <h3 className="text-2xl font-bold text-white mb-1">{leader.name}</h3>
-                <p className="text-sm font-mono mb-4" style={{ color: leader.accent }}>{leader.title}</p>
-
-                <div className="flex flex-wrap gap-2 mb-5">
-                  {leader.roles.map((role, ri) => (
-                    <span
-                      key={ri}
-                      className="text-[12px] px-2.5 py-1 rounded border font-mono"
-                      style={{
-                        borderColor: `${leader.accent}20`,
-                        backgroundColor: `${leader.accent}08`,
-                        color: `${leader.accent}99`,
-                      }}
-                    >
-                      {role}
-                    </span>
-                  ))}
-                </div>
-
-                <p className="text-base text-muted-foreground leading-[1.8] mb-8 lg:pr-6">{leader.bio}</p>
-
-                <div className="flex flex-wrap gap-3">
-                  <a href={leader.linkedin} target="_blank" rel="noopener noreferrer" data-testid={`link-linkedin-${i}`}>
-                    <Button variant="outline" size="sm" className="bg-white/5 border-white/10 hover:bg-white/10 hover:text-white transition-colors border">
-                      <Linkedin className="h-4 w-4 mr-2" style={{ color: leader.accent }} /> View Profile
-                    </Button>
-                  </a>
-                  <Link
-                    href={
-                      leader.name.toLowerCase().includes("jarrud")
-                        ? "/contact/book/jarrud"
-                        : leader.name.toLowerCase().includes("morne")
-                          ? "/contact/book/morne"
-                          : "/contact"
-                    }
-                    data-testid={`link-meeting-${i}`}
-                  >
-                    <Button size="sm" className="text-white hover:opacity-90 font-bold transition-opacity" style={{ backgroundColor: leader.accent }}>
-                      <Calendar className="h-4 w-4 mr-2" /> Book an Advisory Call
-                    </Button>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </Section>
 
@@ -373,7 +386,7 @@ export function Advisory() {
           <p className="text-xl text-muted-foreground mb-10 leading-[1.8]">
             Let's discuss how embedded leadership can accelerate your business.
           </p>
-          <Link href="/contact/book/morne">
+          <Link href={advisoryMeetingUrl}>
             <Button size="lg" className="bg-brand-teal text-white hover:bg-brand-teal/90 font-bold px-10 h-14 rounded-lg" data-testid="button-advisory-cta">
               Book an Advisory Call <ArrowRight className="ml-2" />
             </Button>

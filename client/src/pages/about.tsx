@@ -8,6 +8,7 @@ import morneImg from "@assets/Morne_1771492100987.png";
 import cultureImg from "@assets/happiness-at-workplace-GettyImages-1129332568_1771487221441.jpg";
 import { getMeetingBySlug } from "@/content/meetings";
 import { usePopup } from "@/components/popups/usePopup";
+import { useWebsiteContent } from "@/hooks/use-website-content";
 
 const getImage = (imageName: string) => {
     if (imageName.includes("jarrud")) return jarrudImg;
@@ -17,8 +18,7 @@ const getImage = (imageName: string) => {
 
 export function About() {
   const { openPopup } = usePopup();
-  const jarrudMeeting = getMeetingBySlug("jarrud");
-  const morneMeeting = getMeetingBySlug("morne");
+  const { data: websiteContent } = useWebsiteContent();
 
   return (
     <div className="flex flex-col">
@@ -84,9 +84,9 @@ export function About() {
             {aboutContent.team && aboutContent.team.map((member, i) => {
                 const meeting =
                   member.name.includes("Jarrud")
-                    ? jarrudMeeting
+                    ? getMeetingBySlug("jarrud", websiteContent?.meetings)
                     : member.name.includes("Morne")
-                      ? morneMeeting
+                      ? getMeetingBySlug("morne", websiteContent?.meetings)
                       : undefined;
 
                 return (

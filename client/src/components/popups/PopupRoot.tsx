@@ -3,10 +3,12 @@ import { createPortal } from "react-dom";
 import { HubSpotMeetingsPopup } from "./HubSpotMeetingsPopup";
 import { usePopup } from "./usePopup";
 import { getPopupByKey } from "@/content/popups";
+import { useWebsiteContent } from "@/hooks/use-website-content";
 
 export function PopupRoot() {
   const { activePopupKey, closePopup } = usePopup();
-  const popup = activePopupKey ? getPopupByKey(activePopupKey) : undefined;
+  const { data: websiteContent } = useWebsiteContent();
+  const popup = activePopupKey ? getPopupByKey(activePopupKey, websiteContent?.meetings) : undefined;
 
   useEffect(() => {
     if (!popup) return;

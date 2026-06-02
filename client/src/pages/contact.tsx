@@ -4,34 +4,17 @@ import { ContactForm } from "@/components/sections/contact-form";
 import { MapPin, ArrowRight, LayoutDashboard } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { usePopup } from "@/components/popups/usePopup";
-import jarrudImg from "@assets/d1bde727-2cda-4a05-ad55-08a4eeb1c30f_1771492083207.png";
-import morneImg from "@assets/Morne_1771492100987.png";
+import { getActiveMeetings } from "@/content/meetings";
+import { useWebsiteContent } from "@/hooks/use-website-content";
 
-const bookingOptions = [
-  {
-    name: "Jarrud van der Merwe",
-    title: "Lead HubSpot Architect & Sales Engineer",
-    description: "CRM strategy, architecture, growth systems.",
-    buttonLabel: "Book with Jarrud",
-    popupKey: "meeting link popup jarrud",
-    image: jarrudImg,
-    accent: "rgba(244, 118, 33, 0.7)",
-    testId: "booking-jarrud",
-  },
-  {
-    name: "Morne Visagie",
-    title: "Partner & Outsourced CTO",
-    description: "Technical architecture, integrations, scale systems.",
-    buttonLabel: "Book with Morne",
-    popupKey: "meeting link popup morne",
-    image: morneImg,
-    accent: "rgba(21, 93, 252, 0.7)",
-    testId: "booking-morne",
-  },
-];
+function getFirstName(name: string) {
+  return name.split(" ")[0] ?? name;
+}
 
 export function Contact() {
   const { openPopup } = usePopup();
+  const { data: websiteContent } = useWebsiteContent();
+  const bookingOptions = getActiveMeetings(websiteContent);
 
   return (
     <div className="flex flex-col">
@@ -91,62 +74,64 @@ export function Contact() {
         </div>
       </Section>
 
-      <Section className="py-8 md:py-10 border-b border-white/5 relative">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute left-1/2 top-10 h-44 w-[80%] -translate-x-1/2 rounded-full bg-brand-teal/5 blur-3xl" />
-        </div>
-        <div className="max-w-5xl mx-auto relative z-10">
-          <p className="text-xs md:text-sm font-mono text-brand-teal/75 uppercase tracking-widest text-center mb-3">
-            Trusted by global teams across UK, US, AU and SA.
-          </p>
-          <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-3">
-            Speak to a Human. Not a Form.
-          </h2>
-          <p className="text-muted-foreground text-center mb-8 md:mb-9">
-            Choose who you&apos;d like to connect with.
-          </p>
-
-          <div className="grid md:grid-cols-2 gap-5">
-            {bookingOptions.map((person) => (
-              <div
-                key={person.name}
-                className="group relative rounded-2xl p-[1px] bg-white/10 transition-all duration-300"
-                data-testid={person.testId}
-              >
-                <div
-                  className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  style={{
-                    backgroundImage: `linear-gradient(130deg, ${person.accent}, rgba(0, 196, 204, 0.35), rgba(255, 255, 255, 0.08))`,
-                  }}
-                  aria-hidden="true"
-                />
-                <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#060E2B] p-6 md:p-7 h-full">
-                  <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-brand-teal/10 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <div className="flex items-start gap-4 mb-5">
-                    <Avatar className="h-16 w-16 border border-white/15">
-                      <AvatarImage src={person.image} alt={person.name} className="object-cover" />
-                      <AvatarFallback>{person.name.substring(0, 2).toUpperCase()}</AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <h3 className="text-xl font-bold text-white leading-tight">{person.name}</h3>
-                      <p className="text-sm text-brand-teal/85 mt-1">{person.title}</p>
-                    </div>
-                  </div>
-                  <p className="text-sm text-muted-foreground mb-6">{person.description}</p>
-                  <Button
-                    skipContactRedirect
-                    className="w-full bg-gradient-muloo border-none text-white font-bold h-11 rounded-xl transition-all duration-300 hover:brightness-110 hover:-translate-y-0.5"
-                    data-testid={`button-${person.testId}`}
-                    onClick={() => openPopup(person.popupKey)}
-                  >
-                    {person.buttonLabel}
-                  </Button>
-                </div>
-              </div>
-            ))}
+      {bookingOptions.length > 0 && (
+        <Section className="py-8 md:py-10 border-b border-white/5 relative">
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute left-1/2 top-10 h-44 w-[80%] -translate-x-1/2 rounded-full bg-brand-teal/5 blur-3xl" />
           </div>
-        </div>
-      </Section>
+          <div className="max-w-5xl mx-auto relative z-10">
+            <p className="text-xs md:text-sm font-mono text-brand-teal/75 uppercase tracking-widest text-center mb-3">
+              Trusted by global teams across UK, US, AU and SA.
+            </p>
+            <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-3">
+              Speak to a Human. Not a Form.
+            </h2>
+            <p className="text-muted-foreground text-center mb-8 md:mb-9">
+              Choose who you&apos;d like to connect with.
+            </p>
+
+            <div className={bookingOptions.length === 1 ? "grid gap-5" : "grid md:grid-cols-2 gap-5"}>
+              {bookingOptions.map((person) => (
+                <div
+                  key={person.slug}
+                  className="group relative rounded-2xl p-[1px] bg-white/10 transition-all duration-300"
+                  data-testid={`booking-${person.slug}`}
+                >
+                  <div
+                    className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    style={{
+                      backgroundImage: `linear-gradient(130deg, ${person.accent ?? "rgba(0, 196, 204, 0.7)"}, rgba(0, 196, 204, 0.35), rgba(255, 255, 255, 0.08))`,
+                    }}
+                    aria-hidden="true"
+                  />
+                  <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#060E2B] p-6 md:p-7 h-full">
+                    <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-brand-teal/10 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="flex items-start gap-4 mb-5">
+                      <Avatar className="h-16 w-16 border border-white/15">
+                        <AvatarImage src={person.imagePath} alt={person.name} className="object-cover" />
+                        <AvatarFallback>{person.name.substring(0, 2).toUpperCase()}</AvatarFallback>
+                      </Avatar>
+                      <div>
+                        <h3 className="text-xl font-bold text-white leading-tight">{person.name}</h3>
+                        <p className="text-sm text-brand-teal/85 mt-1">{person.roleLine}</p>
+                      </div>
+                    </div>
+                    <p className="text-sm text-muted-foreground mb-6">{person.summary}</p>
+                    <Button
+                      skipContactRedirect
+                      className="w-full bg-gradient-muloo border-none text-white font-bold h-11 rounded-xl transition-all duration-300 hover:brightness-110 hover:-translate-y-0.5"
+                      data-testid={`button-booking-${person.slug}`}
+                      onClick={() => openPopup(person.popupKey)}
+                    >
+                      Book with {getFirstName(person.name)}
+                    </Button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Section>
+      )}
 
       <Section className="py-8 md:py-10">
         <div className="max-w-3xl mx-auto">

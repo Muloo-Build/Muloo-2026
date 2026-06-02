@@ -1,3 +1,6 @@
+import { resolveMeetings } from "@/content/meetings";
+import type { MeetingProfileContent } from "@shared/website-content";
+
 export type PopupConfig = {
   key: string;
   type: "hubspot-meetings";
@@ -12,14 +15,27 @@ export const popups: PopupConfig[] = [
     title: "Meet with Jarrud",
     dataSrc: "https://hub.wearemuloo.com/meetings/jarrud2/jarrud?embed=true",
   },
-  {
-    key: "meeting link popup morne",
-    type: "hubspot-meetings",
-    title: "Meet with Morn\u00e9",
-    dataSrc: "https://meetings.hubspot.com/morne-visagie?embed=true",
-  },
 ];
 
-export function getPopupByKey(key: string) {
+function getFirstName(name: string) {
+  return name.split(" ")[0] ?? name;
+}
+
+export function getPopupByKey(key: string, meetings?: MeetingProfileContent[]) {
+  const meetingPopup = resolveMeetings(meetings)
+    .filter((meeting) => meeting.active)
+    .find((meeting) => meeting.popupKey === key);
+
+  if (meetingPopup) {
+    return {
+      key: meetingPopup.popupKey,
+      type: "hubspot-meetings" as const,
+      title: `Meet with ${getFirstName(meetingPopup.name)}`,
+      dataSrc: meetingPopup.embedUrl,
+    };
+  }
+
+  if (meetings) return undefined;
+
   return popups.find((popup) => popup.key === key);
 }

@@ -1,5 +1,5 @@
 import { useEffect, useState, type FormEvent, type ReactNode } from "react";
-import { BriefcaseBusiness, FileText, LogOut, Plus, Save, Trash2 } from "lucide-react";
+import { BriefcaseBusiness, CalendarDays, FileText, LogOut, Plus, Save, Trash2 } from "lucide-react";
 import { Section } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -15,10 +15,11 @@ import { SEO } from "@/components/layout/SEO";
 import type { ResourcePost, WebsiteContent } from "@shared/website-content";
 
 type Status = "idle" | "loading" | "saving" | "error" | "saved";
-type AdminView = "case-studies" | "resources";
+type AdminView = "case-studies" | "resources" | "meetings";
 type CaseStudyContent = WebsiteContent["caseStudies"][number];
 type CaseMetric = CaseStudyContent["metrics"][number];
 type BodySection = ResourcePost["body"][number];
+type MeetingContent = WebsiteContent["meetings"][number];
 
 const emptyMetric: CaseMetric = { value: "", label: "" };
 const streamOptions: CaseStudyContent["stream"][] = ["hub", "build", "ai", "product"];
@@ -128,6 +129,26 @@ function newResourcePost(): ResourcePost {
   };
 }
 
+function newMeetingProfile(): MeetingContent {
+  const slug = makeId("meeting");
+  return {
+    slug,
+    active: true,
+    name: "New meeting profile",
+    roleLine: "Role or focus area",
+    image: "",
+    meetingUrl: "",
+    embedUrl: "",
+    duration: "45 minutes",
+    location: "Google Meet",
+    timezoneNote: "Automatically detects your timezone",
+    bullets: ["What the call should cover"],
+    summary: "Short summary for this meeting profile.",
+    smallNote: "Short reassurance note shown below the booking button.",
+    accent: "rgba(0, 196, 204, 0.7)",
+  };
+}
+
 export function ContentAdmin() {
   const [authenticated, setAuthenticated] = useState(false);
   const [email, setEmail] = useState("jarrud@muloo.co");
@@ -136,11 +157,13 @@ export function ContentAdmin() {
   const [view, setView] = useState<AdminView>("case-studies");
   const [selectedCaseStudyId, setSelectedCaseStudyId] = useState("");
   const [selectedResourceId, setSelectedResourceId] = useState("");
+  const [selectedMeetingSlug, setSelectedMeetingSlug] = useState("");
   const [status, setStatus] = useState<Status>("loading");
   const [message, setMessage] = useState("");
 
   const selectedCaseStudy = content?.caseStudies.find((study) => study.id === selectedCaseStudyId);
   const selectedResource = content?.resourcePosts.find((post) => post.id === selectedResourceId);
+  const selectedMeeting = content?.meetings.find((meeting) => meeting.slug === selectedMeetingSlug);
 
   const loadContent = async () => {
     const loaded = await requestJson<WebsiteContent>("/api/website-content");
@@ -150,6 +173,9 @@ export function ContentAdmin() {
     );
     setSelectedResourceId((current) =>
       loaded.resourcePosts.some((post) => post.id === current) ? current : loaded.resourcePosts[0]?.id ?? "",
+    );
+    setSelectedMeetingSlug((current) =>
+      loaded.meetings.some((meeting) => meeting.slug === current) ? current : loaded.meetings[0]?.slug ?? "",
     );
   };
 
@@ -235,6 +261,17 @@ export function ContentAdmin() {
     );
   };
 
+  const updateMeeting = (slug: string, update: (meeting: MeetingContent) => MeetingContent) => {
+    setContent((current) =>
+      current
+        ? {
+            ...current,
+            meetings: current.meetings.map((meeting) => (meeting.slug === slug ? update(meeting) : meeting)),
+          }
+        : current,
+    );
+  };
+
   const addCaseStudy = () => {
     const study = newCaseStudy();
     setContent((current) => (current ? { ...current, caseStudies: [...current.caseStudies, study] } : current));
@@ -247,6 +284,13 @@ export function ContentAdmin() {
     setContent((current) => (current ? { ...current, resourcePosts: [...current.resourcePosts, post] } : current));
     setSelectedResourceId(post.id);
     setView("resources");
+  };
+
+  const addMeetingProfile = () => {
+    const meeting = newMeetingProfile();
+    setContent((current) => (current ? { ...current, meetings: [...current.meetings, meeting] } : current));
+    setSelectedMeetingSlug(meeting.slug);
+    setView("meetings");
   };
 
   const deleteCaseStudy = (id: string) => {
@@ -263,6 +307,13 @@ export function ContentAdmin() {
     setSelectedResourceId(next[0]?.id ?? "");
   };
 
+  const deleteMeetingProfile = (slug: string) => {
+    if (!content || !window.confirm("Delete this meeting profile?")) return;
+    const next = content.meetings.filter((meeting) => meeting.slug !== slug);
+    setContent({ ...content, meetings: next });
+    setSelectedMeetingSlug(next[0]?.slug ?? "");
+  };
+
   return (
     <div className="flex flex-col">
       <SEO title="Content Admin | Muloo" description="Muloo content admin." robots="noindex,nofollow" />
@@ -271,7 +322,7 @@ export function ContentAdmin() {
         <span className="text-sm font-mono text-gradient-muloo uppercase tracking-widest">// Admin</span>
         <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mt-4 mb-5">Content editor.</h1>
         <p className="text-lg text-muted-foreground max-w-2xl leading-relaxed">
-          Edit the case study and resource templates without touching JSON.
+          Edit case studies, resources, and meeting profiles without touching JSON.
         </p>
       </Section>
 
@@ -336,6 +387,10 @@ export function ContentAdmin() {
                 <FileText className="h-4 w-4" />
                 Resources / blogs
               </ModuleButton>
+              <ModuleButton active={view === "meetings"} onClick={() => setView("meetings")}>
+                <CalendarDays className="h-4 w-4" />
+                Meetings
+              </ModuleButton>
             </div>
 
             {content && view === "case-studies" && (
@@ -363,6 +418,35 @@ export function ContentAdmin() {
                   />
                 ) : (
                   <EmptyState label="Create a case study to start editing." />
+                )}
+              </div>
+            )}
+
+            {content && view === "meetings" && (
+              <div className="grid gap-6 lg:grid-cols-[320px_1fr]">
+                <ContentList
+                  title="Meetings"
+                  actionLabel="New meeting"
+                  onAdd={addMeetingProfile}
+                  items={content.meetings.map((meeting) => ({
+                    id: meeting.slug,
+                    title: meeting.name,
+                    meta: meeting.active ? "Active" : "Hidden",
+                  }))}
+                  selectedId={selectedMeetingSlug}
+                  onSelect={setSelectedMeetingSlug}
+                />
+                {selectedMeeting ? (
+                  <MeetingEditor
+                    meeting={selectedMeeting}
+                    onChange={(next) => {
+                      updateMeeting(selectedMeeting.slug, () => next);
+                      setSelectedMeetingSlug(next.slug);
+                    }}
+                    onDelete={() => deleteMeetingProfile(selectedMeeting.slug)}
+                  />
+                ) : (
+                  <EmptyState label="Create a meeting profile to start editing." />
                 )}
               </div>
             )}
@@ -659,6 +743,84 @@ function CaseStudyEditor({
           </div>
         </div>
         <Button variant="outline" onClick={() => set({ quote: null })}>Clear quote</Button>
+      </Panel>
+    </div>
+  );
+}
+
+function MeetingEditor({
+  meeting,
+  onChange,
+  onDelete,
+}: {
+  meeting: MeetingContent;
+  onChange: (meeting: MeetingContent) => void;
+  onDelete: () => void;
+}) {
+  const set = (patch: Partial<MeetingContent>) => onChange({ ...meeting, ...patch });
+
+  return (
+    <div className="space-y-6">
+      <EditorHeader title={meeting.name || "Meeting profile"} meta={meeting.slug} onDelete={onDelete} />
+
+      <Panel title="Profile">
+        <div className="grid gap-4 md:grid-cols-2">
+          <Field label="Name">
+            <Input value={meeting.name} onChange={(event) => set({ name: event.target.value })} />
+          </Field>
+          <Field label="Slug">
+            <Input value={meeting.slug} onChange={(event) => set({ slug: slugify(event.target.value) })} />
+          </Field>
+          <Field label="Status">
+            <Select value={meeting.active ? "active" : "hidden"} onValueChange={(value) => set({ active: value === "active" })}>
+              <SelectTrigger className="bg-[#090E33] border-white/10">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent className="bg-[#0A1236] border-white/15 text-white">
+                <SelectItem value="active">Active on site</SelectItem>
+                <SelectItem value="hidden">Hidden from site</SelectItem>
+              </SelectContent>
+            </Select>
+          </Field>
+          <Field label="Image key or URL">
+            <Input value={meeting.image ?? ""} onChange={(event) => set({ image: event.target.value })} />
+          </Field>
+          <Field label="Role line">
+            <Input value={meeting.roleLine} onChange={(event) => set({ roleLine: event.target.value })} />
+          </Field>
+          <Field label="Accent CSS colour">
+            <Input value={meeting.accent ?? ""} onChange={(event) => set({ accent: event.target.value })} />
+          </Field>
+        </div>
+        <Field label="Summary">
+          <Textarea value={meeting.summary} onChange={(event) => set({ summary: event.target.value })} className="min-h-28" />
+        </Field>
+      </Panel>
+
+      <Panel title="Booking details">
+        <div className="grid gap-4 md:grid-cols-2">
+          <Field label="Meeting URL">
+            <Input value={meeting.meetingUrl} onChange={(event) => set({ meetingUrl: event.target.value })} />
+          </Field>
+          <Field label="Embed URL">
+            <Input value={meeting.embedUrl} onChange={(event) => set({ embedUrl: event.target.value })} />
+          </Field>
+          <Field label="Duration">
+            <Input value={meeting.duration} onChange={(event) => set({ duration: event.target.value })} />
+          </Field>
+          <Field label="Location">
+            <Input value={meeting.location} onChange={(event) => set({ location: event.target.value })} />
+          </Field>
+          <Field label="Timezone note">
+            <Input value={meeting.timezoneNote} onChange={(event) => set({ timezoneNote: event.target.value })} />
+          </Field>
+        </div>
+        <Field label="What we'll cover">
+          <Textarea value={listToLines(meeting.bullets)} onChange={(event) => set({ bullets: linesToList(event.target.value) })} className="min-h-36" />
+        </Field>
+        <Field label="Small note">
+          <Input value={meeting.smallNote} onChange={(event) => set({ smallNote: event.target.value })} />
+        </Field>
       </Panel>
     </div>
   );

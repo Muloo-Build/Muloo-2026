@@ -5,9 +5,10 @@ import { ArrowRight, Database, Cpu, Bot, Layout, ChevronRight, Server, Workflow,
 import { Link } from "wouter";
 import { useState, useEffect } from "react";
 import { BookingCard } from "@/components/meetings/BookingCard";
-import { getMeetingBySlug } from "@/content/meetings";
+import { getActiveMeetings } from "@/content/meetings";
 import { cn } from "@/lib/utils";
 import { SEO } from "@/components/layout/SEO";
+import { useWebsiteContent } from "@/hooks/use-website-content";
 
 const rotatingPhrases = [
   "Technical Partner for HubSpot",
@@ -364,8 +365,8 @@ function DashboardMock() {
 }
 
 export function Home() {
-  const jarrudMeeting = getMeetingBySlug("jarrud");
-  const morneMeeting = getMeetingBySlug("morne");
+  const { data: websiteContent } = useWebsiteContent();
+  const activeMeetings = getActiveMeetings(websiteContent);
   const structuredData = [
     {
       "@context": "https://schema.org",
@@ -665,31 +666,29 @@ export function Home() {
       <CaseStudiesPreview />
 
       {/* ── 8. BOOK A QUICK CALL ── */}
-      {jarrudMeeting && morneMeeting && (
+      {activeMeetings.length > 0 && (
         <Section className="py-14 md:py-16 border-t border-white/5">
           <div className="mb-8">
             <h2 className="text-sm font-mono text-gradient-muloo uppercase tracking-widest mb-4">Book a quick call</h2>
             <h3 className="text-3xl md:text-4xl font-bold text-white">Speak directly with Muloo leadership</h3>
           </div>
 
-          <div className="md:grid md:grid-cols-2 md:gap-6">
+          <div className={cn("md:grid md:gap-6", activeMeetings.length === 1 ? "md:grid-cols-1" : "md:grid-cols-2")}>
             <div className="md:hidden overflow-x-auto">
               <div className="flex gap-4 snap-x snap-mandatory pb-2">
-                <div className="snap-start min-w-[92%]">
-                  <BookingCard meeting={jarrudMeeting} compact className="h-full" />
-                </div>
-                <div className="snap-start min-w-[92%]">
-                  <BookingCard meeting={morneMeeting} compact className="h-full" />
-                </div>
+                {activeMeetings.map((meeting) => (
+                  <div key={meeting.slug} className="snap-start min-w-[92%]">
+                    <BookingCard meeting={meeting} compact className="h-full" />
+                  </div>
+                ))}
               </div>
             </div>
 
-            <div className="hidden md:block">
-              <BookingCard meeting={jarrudMeeting} compact className="h-full" />
-            </div>
-            <div className="hidden md:block">
-              <BookingCard meeting={morneMeeting} compact className="h-full" />
-            </div>
+            {activeMeetings.map((meeting) => (
+              <div key={meeting.slug} className="hidden md:block">
+                <BookingCard meeting={meeting} compact className="h-full" />
+              </div>
+            ))}
           </div>
         </Section>
       )}

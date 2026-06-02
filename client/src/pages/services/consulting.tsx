@@ -4,8 +4,14 @@ import { ArrowRight, BrainCircuit, LineChart, Settings } from "lucide-react";
 import { Link } from "wouter";
 import { Badge } from "@/components/ui/badge";
 import { serviceConsultingContent } from "@/lib/content";
+import { getMeetingBySlug } from "@/content/meetings";
+import { useWebsiteContent } from "@/hooks/use-website-content";
 
 export function ServicesConsulting() {
+  const { data: websiteContent } = useWebsiteContent();
+  const advisoryMeeting = getMeetingBySlug("morne", websiteContent?.meetings) ?? getMeetingBySlug("jarrud", websiteContent?.meetings);
+  const advisoryMeetingUrl = advisoryMeeting ? `/contact/book/${advisoryMeeting.slug}` : "/contact";
+
   return (
     <div className="flex flex-col">
       <Section className="pt-20 pb-16 md:pt-28 md:pb-20 bg-hero-cosmic">
@@ -61,7 +67,7 @@ export function ServicesConsulting() {
       <Section className="py-32 text-center bg-[#050A15] border-t border-white/5">
         <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white">Need senior support without the overhead?</h2>
         <p className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto">Bring us in to diagnose, prioritise, and guide delivery with clear decisions.</p>
-        <Link href="/contact/book/morne">
+        <Link href={advisoryMeetingUrl}>
           <Button size="lg" className="bg-brand-orange text-white hover:bg-brand-orange/90 font-bold px-10 h-14 rounded-full shadow-[0_0_30px_-5px_hsl(24,90%,54%,0.4)]">
             Book an Advisory Call <ArrowRight className="ml-2" />
           </Button>

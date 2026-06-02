@@ -1,5 +1,22 @@
 import { z } from "zod";
 
+export const meetingProfileSchema = z.object({
+  slug: z.string(),
+  active: z.boolean().default(true),
+  name: z.string(),
+  roleLine: z.string(),
+  image: z.string().optional(),
+  meetingUrl: z.string(),
+  embedUrl: z.string(),
+  duration: z.string(),
+  location: z.string(),
+  timezoneNote: z.string(),
+  bullets: z.array(z.string()),
+  summary: z.string(),
+  smallNote: z.string(),
+  accent: z.string().optional(),
+});
+
 export const resourcePostSchema = z.object({
   id: z.string(),
   title: z.string(),
@@ -56,12 +73,58 @@ export const caseStudySchema = z.object({
     .optional(),
 });
 
+export type MeetingProfileContent = z.infer<typeof meetingProfileSchema>;
+export type ResourcePost = z.infer<typeof resourcePostSchema>;
+
+export const defaultMeetingProfiles: MeetingProfileContent[] = [
+  {
+    slug: "jarrud",
+    active: true,
+    name: "Jarrud van der Merwe",
+    roleLine: "Lead HubSpot Architect and Sales Engineer",
+    image: "jarrud",
+    meetingUrl: "https://www.wearemuloo.com/meetings/jarrud2/jarrud",
+    embedUrl: "https://hub.wearemuloo.com/meetings/jarrud2/jarrud?embed=true",
+    duration: "45 minutes",
+    location: "Google Meet",
+    timezoneNote: "Automatically detects your timezone",
+    bullets: [
+      "Your current HubSpot setup and growth priorities",
+      "Where your revenue operations are losing momentum",
+      "A practical next step your team can execute quickly",
+    ],
+    summary: "Schedule time to discuss CRM strategy, architecture, and practical growth systems.",
+    smallNote: "No hard pitch. Just focused technical and strategic direction.",
+    accent: "rgba(244, 118, 33, 0.7)",
+  },
+  {
+    slug: "morne",
+    active: false,
+    name: "Morne Visagie",
+    roleLine: "Partner and Outsourced CTO",
+    image: "morne",
+    meetingUrl: "https://meetings.hubspot.com/morne-visagie",
+    embedUrl: "https://meetings.hubspot.com/morne-visagie?embed=true",
+    duration: "45 minutes",
+    location: "Google Meet",
+    timezoneNote: "Automatically detects your timezone",
+    bullets: [
+      "Technical architecture and integration constraints",
+      "How to reduce friction between systems and teams",
+      "A practical implementation path for scale",
+    ],
+    summary: "Schedule time to discuss technical architecture, integrations, and scalable systems.",
+    smallNote: "Bring your constraints. We will map options clearly.",
+    accent: "rgba(21, 93, 252, 0.7)",
+  },
+];
+
 export const websiteContentSchema = z.object({
   caseStudies: z.array(caseStudySchema),
   resourcePosts: z.array(resourcePostSchema),
+  meetings: z.array(meetingProfileSchema).default(defaultMeetingProfiles),
 });
 
-export type ResourcePost = z.infer<typeof resourcePostSchema>;
 export type WebsiteContent = z.infer<typeof websiteContentSchema>;
 
 export const defaultResourcePosts: ResourcePost[] = [

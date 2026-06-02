@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { getMeetingBySlug } from "@/content/meetings";
 import NotFound from "@/pages/not-found";
 import { BookingCard } from "@/components/meetings/BookingCard";
+import { useWebsiteContent } from "@/hooks/use-website-content";
 
 export function MeetingBookingPage() {
   const [, contactParams] = useRoute("/contact/book/:person");
@@ -14,9 +15,11 @@ export function MeetingBookingPage() {
     () => (contactParams?.person ?? legacyParams?.person ?? "").toLowerCase(),
     [contactParams?.person, legacyParams?.person],
   );
-  const meetingProfile = getMeetingBySlug(slug);
+  const { data: websiteContent, isLoading } = useWebsiteContent();
+  const meetingProfile = getMeetingBySlug(slug, websiteContent?.meetings);
 
   if (!meetingProfile) {
+    if (isLoading) return null;
     return <NotFound />;
   }
 

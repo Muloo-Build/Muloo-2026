@@ -6,12 +6,14 @@ import { Badge } from "@/components/ui/badge";
 import { serviceProductContent } from "@/lib/content";
 import { BookingCard } from "@/components/meetings/BookingCard";
 import { getMeetingBySlug } from "@/content/meetings";
+import { useWebsiteContent } from "@/hooks/use-website-content";
 
 const streamGreen = "#59BF96";
-const meetingUrl = "/contact/book/morne";
 
 export function ServicesProduct() {
-  const jarrudMeeting = getMeetingBySlug("jarrud");
+  const { data: websiteContent } = useWebsiteContent();
+  const jarrudMeeting = getMeetingBySlug("jarrud", websiteContent?.meetings);
+  const meetingUrl = jarrudMeeting ? `/contact/book/${jarrudMeeting.slug}` : "/contact";
 
   return (
     <div className="flex flex-col">

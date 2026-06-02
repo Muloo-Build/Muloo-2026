@@ -6,12 +6,18 @@ import { Badge } from "@/components/ui/badge";
 import { serviceBuildContent } from "@/lib/content";
 import { BookingCard } from "@/components/meetings/BookingCard";
 import { getMeetingBySlug } from "@/content/meetings";
+import { useWebsiteContent } from "@/hooks/use-website-content";
 
 const streamBlue = "#155DFC";
-const meetingUrl = "/contact/book/morne";
+
+function getFirstName(name: string) {
+  return name.split(" ")[0] ?? name;
+}
 
 export function ServicesBuild() {
-  const morneMeeting = getMeetingBySlug("morne");
+  const { data: websiteContent } = useWebsiteContent();
+  const planningMeeting = getMeetingBySlug("morne", websiteContent?.meetings) ?? getMeetingBySlug("jarrud", websiteContent?.meetings);
+  const meetingUrl = planningMeeting ? `/contact/book/${planningMeeting.slug}` : "/contact";
 
   return (
     <div className="flex flex-col">
@@ -485,13 +491,13 @@ export function ServicesBuild() {
         </div>
       </Section>
 
-      {morneMeeting && (
+      {planningMeeting && (
         <Section className="py-12 md:py-16 border-t border-white/5">
           <div className="mb-6">
             <span className="text-sm font-mono text-[#155DFC] uppercase tracking-widest mb-3 block">Need a plan?</span>
-            <h2 className="text-2xl md:text-3xl font-bold text-white">Talk directly with Morne</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-white">Talk directly with {getFirstName(planningMeeting.name)}</h2>
           </div>
-          <BookingCard meeting={morneMeeting} />
+          <BookingCard meeting={planningMeeting} />
         </Section>
       )}
 
@@ -518,5 +524,4 @@ export function ServicesBuild() {
     </div>
   );
 }
-
 
