@@ -548,8 +548,8 @@ export function Home() {
         </div>
       </Section>
 
-      {/* ── 4. OUTCOMES ── */}
-      <FreeReviewCtaSection />
+      {/* ── 4. TOP-OF-FUNNEL OFFER ── */}
+      <FunnelOfferSection offer={funnelOffers.audit} />
 
       <Section className="py-20 md:py-[120px] bg-section-soft border-t border-white/5">
         <div className="mb-16">
@@ -666,6 +666,8 @@ export function Home() {
 
       <CaseStudiesPreview />
 
+      <FunnelOfferSection offer={funnelOffers.architecture} />
+
       {/* ── 8. BOOK A QUICK CALL ── */}
       {activeMeetings.length > 0 && (
         <Section className="py-14 md:py-16 border-t border-white/5">
@@ -748,82 +750,81 @@ function HeroCredibilityStrip() {
   );
 }
 
-function FreeReviewCtaSection() {
-  const freeResources = [
-    {
-      eyebrow: "Top of funnel",
-      title: "Deep-dive HubSpot audit",
-      desc: "Start with a quick diagnostic to find the issues behind messy reports, broken workflows, unreliable pipeline data, and portal complexity.",
-      chips: ["Portal Health", "Workflow Risk", "Data Hygiene"],
-      cta: "Run your free HubSpot audit",
-      href: hubspotAuditUrl,
-      external: true,
-      testId: "button-free-hubspot-audit",
-    },
-    {
-      eyebrow: "Bottom of funnel",
-      title: "Free CRM architecture review",
-      desc: "For teams closer to a platform decision, get a structured review of your CRM architecture, pipelines, operational risks, and next build path.",
-      chips: ["Architecture Findings", "Priority Fixes", "Roadmap Advice"],
-      cta: "Free CRM architecture review",
-      href: "/contact",
-      external: false,
-      testId: "button-free-crm-architecture-review",
-    },
-  ];
+const funnelOffers = {
+  audit: {
+    eyebrow: "Top of funnel",
+    title: "Deep-dive HubSpot audit",
+    desc: "Start with a quick diagnostic to find the issues behind messy reports, broken workflows, unreliable pipeline data, and portal complexity.",
+    chips: ["Portal Health", "Workflow Risk", "Data Hygiene"],
+    cta: "Run your free HubSpot audit",
+    href: hubspotAuditUrl,
+    external: true,
+    testId: "button-free-hubspot-audit",
+  },
+  architecture: {
+    eyebrow: "Bottom of funnel",
+    title: "Free CRM architecture review",
+    desc: "For teams closer to a platform decision, get a structured review of your CRM architecture, pipelines, operational risks, and next build path.",
+    chips: ["Architecture Findings", "Priority Fixes", "Roadmap Advice"],
+    cta: "Free CRM architecture review",
+    href: "/contact",
+    external: false,
+    testId: "button-free-crm-architecture-review",
+  },
+};
 
+type FunnelOffer = typeof funnelOffers.audit;
+
+function FunnelOfferSection({ offer }: { offer: FunnelOffer }) {
   return (
     <Section className="py-16 md:py-24 border-t border-white/5 relative overflow-hidden">
       <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 60% 70% at 50% 45%, rgba(193,64,255,0.07), transparent)" }} />
-      <div className="relative z-10 grid gap-6 lg:grid-cols-2">
-        {freeResources.map((resource) => {
-          const button = (
-            <Button
-              size="lg"
-              className="w-full bg-gradient-muloo border-none text-white hover:brightness-110 font-bold px-6 h-12 rounded-xl glow-muloo-sm text-base"
-              data-testid={resource.testId}
-            >
-              {resource.cta} <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          );
-
-          return (
-            <div key={resource.title} className="relative rounded-3xl p-[1px] bg-gradient-muloo">
-              <div className="flex h-full flex-col rounded-3xl bg-[#060E2B]/95 border border-white/10 px-6 py-8 md:px-8 md:py-9 text-center shadow-[0_30px_70px_-35px_rgba(193,64,255,0.45)]">
-                <span className="inline-flex self-center items-center rounded-full border border-brand-teal/25 bg-brand-teal/10 px-3 py-1 text-[10px] font-mono uppercase tracking-widest text-brand-teal mb-5">
-                  {resource.eyebrow}
-                </span>
-                <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-4 leading-tight">
-                  {resource.title}
-                </h2>
-                <p className="text-base md:text-lg text-white/75 max-w-xl mx-auto mb-7 leading-[1.7]">
-                  {resource.desc}
-                </p>
-                <div className="flex flex-wrap items-center justify-center gap-2 mb-8 text-[10px] font-mono uppercase tracking-wider">
-                  {resource.chips.map((chip) => (
-                    <span key={chip} className="px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-white/70">{chip}</span>
-                  ))}
-                </div>
-                <div className="mt-auto mx-auto w-full max-w-sm">
-                  {resource.external ? (
-                    <a href={resource.href} target="_blank" rel="noopener noreferrer">
-                      {button}
-                    </a>
-                  ) : (
-                    <Link href={resource.href}>
-                      {button}
-                    </Link>
-                  )}
-                </div>
-              </div>
+      <div className="relative z-10 max-w-4xl mx-auto">
+        <div className="relative rounded-3xl p-[1px] bg-gradient-muloo">
+          <div className="flex h-full flex-col rounded-3xl bg-[#060E2B]/95 border border-white/10 px-6 py-8 md:px-10 md:py-10 text-center shadow-[0_30px_70px_-35px_rgba(193,64,255,0.45)]">
+            <span className="inline-flex self-center items-center rounded-full border border-brand-teal/25 bg-brand-teal/10 px-3 py-1 text-[10px] font-mono uppercase tracking-widest text-brand-teal mb-5">
+              {offer.eyebrow}
+            </span>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-4 leading-tight">
+              {offer.title}
+            </h2>
+            <p className="text-base md:text-lg text-white/75 max-w-2xl mx-auto mb-7 leading-[1.7]">
+              {offer.desc}
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-2 mb-8 text-[10px] font-mono uppercase tracking-wider">
+              {offer.chips.map((chip) => (
+                <span key={chip} className="px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-white/70">{chip}</span>
+              ))}
             </div>
-          );
-        })}
+            <div className="mx-auto w-full max-w-sm">
+              {offer.external ? (
+                <a href={offer.href} target="_blank" rel="noopener noreferrer">
+                  <Button
+                    size="lg"
+                    className="w-full bg-gradient-muloo border-none text-white hover:brightness-110 font-bold px-6 h-12 rounded-xl glow-muloo-sm text-base"
+                    data-testid={offer.testId}
+                  >
+                    {offer.cta} <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </a>
+              ) : (
+                <Link href={offer.href}>
+                  <Button
+                    size="lg"
+                    className="w-full bg-gradient-muloo border-none text-white hover:brightness-110 font-bold px-6 h-12 rounded-xl glow-muloo-sm text-base"
+                    data-testid={offer.testId}
+                  >
+                    {offer.cta} <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+              )}
+            </div>
+          </div>
+        </div>
       </div>
     </Section>
   );
 }
-
 function ProofStats() {
   return (
     <Section className="py-12 border-b border-white/5">
