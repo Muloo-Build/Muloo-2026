@@ -22,6 +22,15 @@ app.use(
 
 app.use(express.urlencoded({ extended: false }));
 
+app.use((req, res, next) => {
+  const host = req.headers.host?.toLowerCase();
+  if (host === "wearemuloo.com") {
+    return res.redirect(301, `https://www.wearemuloo.com${req.originalUrl}`);
+  }
+
+  return next();
+});
+
 export function log(message: string, source = "express") {
   const formattedTime = new Date().toLocaleTimeString("en-US", {
     hour: "numeric",
