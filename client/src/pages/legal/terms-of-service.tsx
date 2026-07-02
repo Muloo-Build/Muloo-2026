@@ -5,7 +5,7 @@ const sections = [
   {
     heading: "1. Agreement to terms",
     body: [
-      "These Terms of Service govern your use of the Muloo website. By accessing or using the site, you agree to be bound by these terms. If you do not agree, please do not use the site.",
+      "These Terms of Service govern your use of the Muloo website, operated by Muloo (Pty) Ltd (\"Muloo\", \"we\", \"us\"), a company registered in South Africa (registration number 2020/546441/07). By accessing or using the site, you agree to be bound by these terms. If you do not agree, please do not use the site.",
     ],
   },
   {
@@ -39,7 +39,13 @@ const sections = [
     ],
   },
   {
-    heading: "7. Contact",
+    heading: "7. Governing law",
+    body: [
+      "These terms are governed by the laws of the Republic of South Africa, and any dispute arising from them or from your use of the site is subject to the jurisdiction of the South African courts.",
+    ],
+  },
+  {
+    heading: "8. Contact",
     body: [
       "Questions about these terms can be sent to jarrud@muloo.co.",
     ],
@@ -52,7 +58,7 @@ export function TermsOfService() {
       <SEO title="Terms of Service | Muloo" description="The terms that govern your use of the Muloo website." />
       <Section className="pt-20 pb-10 md:pt-28 md:pb-12">
         <h1 className="text-4xl md:text-6xl font-extrabold mb-4">Terms of Service</h1>
-        <p className="text-muted-foreground">Last updated 30 May 2026</p>
+        <p className="text-muted-foreground">Last updated 2 July 2026</p>
       </Section>
       <Section className="pb-24">
         <div className="max-w-3xl space-y-10">

@@ -487,6 +487,69 @@ export function ServicesProduct() {
         </div>
       </Section>
 
+      {/* Live Product — Reporting Platform */}
+      <Section className="py-20 md:py-[120px] bg-section-soft border-t border-white/5">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="max-w-xl">
+            <div className="flex items-center gap-3 mb-4">
+              <span className="text-sm font-mono text-[#59BF96] uppercase tracking-widest">Live now</span>
+              <Badge
+                variant="outline"
+                className="border-[#59BF96]/30 text-[#59BF96] bg-[#59BF96]/5"
+                data-testid="badge-reporting-live"
+              >
+                In production
+              </Badge>
+            </div>
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Muloo Reporting Platform</h2>
+            <p className="text-lg text-muted-foreground leading-[1.8] mb-6">
+              One reporting platform for every marketing and revenue signal. The Muloo Reporting Platform connects HubSpot, Google Analytics, Google Ads and LinkedIn into unified, client-ready dashboards — attributing pipeline and revenue back to the campaigns that drove it.
+            </p>
+            <p className="text-muted-foreground leading-[1.8] mb-8">
+              Purpose-built for agencies and RevOps teams reporting across multiple platforms. Secure OAuth connections, read-only reporting scopes, and branded, access-controlled dashboards.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <a href="https://reporting.wearemuloo.com/platform/" target="_blank" rel="noopener noreferrer">
+                <Button
+                  size="lg"
+                  className="font-bold px-8 h-14 text-white"
+                  style={{ backgroundColor: streamGreen }}
+                  data-testid="button-reporting-platform"
+                >
+                  Explore the Platform <ArrowRight className="ml-2" />
+                </Button>
+              </a>
+            </div>
+          </div>
+
+          <div
+            className="glass-card rounded-2xl p-8 md:p-10"
+            style={{ borderLeft: `4px solid ${streamGreen}` }}
+            data-testid="card-reporting-features"
+          >
+            <div className="flex items-center gap-3 mb-6">
+              <div className="h-10 w-10 rounded-lg bg-[#59BF96]/10 flex items-center justify-center shrink-0">
+                <BarChart3 className="h-5 w-5 text-[#59BF96]" />
+              </div>
+              <span className="text-white font-bold">What it does</span>
+            </div>
+            <ul className="space-y-4">
+              {[
+                "Connect your sources — HubSpot, Google Analytics & Ads, and LinkedIn via secure OAuth",
+                "Unify the metrics — cross-channel data normalised into one consistent model",
+                "Report on revenue — pipeline and revenue attributed to campaigns, with targets and pacing",
+                "Share with clients — branded, access-controlled dashboards and scheduled reports",
+              ].map((item, i) => (
+                <li key={i} className="flex items-start gap-3 text-sm text-white/70 leading-[1.7]">
+                  <span className="h-1.5 w-1.5 rounded-full shrink-0 mt-2" style={{ backgroundColor: streamGreen }} />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </Section>
+
       {/* Products We Are Building */}
       <Section className="py-20 md:py-[120px] border-t border-white/5">
         <div className="mb-16 max-w-2xl">

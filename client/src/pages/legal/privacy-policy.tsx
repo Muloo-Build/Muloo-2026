@@ -5,7 +5,8 @@ const sections = [
   {
     heading: "1. Who we are",
     body: [
-      "Muloo is a technical partner for HubSpot, custom engineering and AI, based in Cape Town and serving global teams. This policy explains what personal information we collect, how we use it, and the choices you have.",
+      "Muloo is a technical partner for HubSpot, custom engineering and AI, based in Cape Town and serving global teams. This website and our services are operated by Muloo (Pty) Ltd (\"Muloo\", \"we\", \"us\", \"our\"), a company registered in South Africa (registration number 2020/546441/07).",
+      "For the personal information we process, Muloo (Pty) Ltd is the responsible party under the Protection of Personal Information Act, 2013 (POPIA), and the data controller under the EU/UK GDPR where it applies. This policy explains what personal information we collect, how we use it, and the choices you have.",
       "For any privacy question, contact us at jarrud@muloo.co.",
     ],
   },
@@ -29,19 +30,33 @@ const sections = [
     ],
   },
   {
-    heading: "5. Data retention & security",
+    heading: "5. International transfers",
     body: [
-      "We keep personal information only for as long as necessary for the purposes set out in this policy, and apply appropriate technical and organisational measures to protect it.",
+      "Some of our service providers (for example, HubSpot and analytics providers) may process data outside South Africa or the EEA. Where they do, we rely on lawful transfer mechanisms — such as adequacy decisions or Standard Contractual Clauses — and on the conditions for trans-border information flows under section 72 of POPIA.",
     ],
   },
   {
-    heading: "6. Your rights",
+    heading: "6. Data retention & security",
     body: [
-      "Depending on your location, you may have the right to access, correct, delete or restrict the use of your personal information, and to withdraw consent. To exercise any right, contact jarrud@muloo.co.",
+      "We keep personal information only for as long as necessary for the purposes set out in this policy, and apply appropriate technical and organisational measures to protect it — including encrypted transport (TLS), least-privilege access, and access controls.",
     ],
   },
   {
-    heading: "7. Changes to this policy",
+    heading: "7. Your rights",
+    body: [
+      "Depending on your location, you may have the right to access, correct, delete, restrict or object to our processing of your personal information, to data portability, and to withdraw consent. To exercise any right, contact jarrud@muloo.co.",
+      "You may also lodge a complaint with the Information Regulator (South Africa) under POPIA, or with your local supervisory authority under the GDPR.",
+    ],
+  },
+  {
+    heading: "8. Muloo Hub reporting platform",
+    body: [
+      "The Muloo Hub reporting platform is governed by a separate, platform-specific privacy policy. It covers the data we access from the platforms you connect (such as HubSpot, Google Analytics, Google Ads and LinkedIn) to produce reporting, and the sub-processors involved.",
+      "See the Muloo Hub Privacy Policy at https://reporting.wearemuloo.com/platform/privacy.html.",
+    ],
+  },
+  {
+    heading: "9. Changes to this policy",
     body: [
       "We may update this policy from time to time. Material changes will be reflected on this page with a revised effective date.",
     ],
@@ -54,7 +69,7 @@ export function PrivacyPolicy() {
       <SEO title="Privacy Policy | Muloo" description="How Muloo collects, uses and protects your personal information." />
       <Section className="pt-20 pb-10 md:pt-28 md:pb-12">
         <h1 className="text-4xl md:text-6xl font-extrabold mb-4">Privacy Policy</h1>
-        <p className="text-muted-foreground">Last updated 30 May 2026</p>
+        <p className="text-muted-foreground">Last updated 2 July 2026</p>
       </Section>
       <Section className="pb-24">
         <div className="max-w-3xl space-y-10">
