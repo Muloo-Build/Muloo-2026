@@ -79,21 +79,33 @@ export function Header() {
                       const isActive = isSubItemActive(sub as { href: string; links?: Array<{ href: string; external?: boolean }> });
 
                       if (!hasNestedLinks) {
+                        const isExternal = (sub as { external?: boolean }).external;
+                        const itemInner = (
+                          <>
+                            <span className={cn(
+                              "font-semibold group-hover:text-brand-teal transition-colors flex items-center w-full justify-between",
+                              isActive ? "text-brand-teal" : "text-white"
+                            )}>
+                              {sub.name}
+                              <ArrowRight className={cn(
+                                "h-3 w-3 -translate-x-2 group-hover:translate-x-0 transition-all text-brand-teal",
+                                isActive ? "opacity-100 translate-x-0" : "opacity-0 group-hover:opacity-100"
+                              )} />
+                            </span>
+                            <span className="text-xs text-muted-foreground">{sub.desc}</span>
+                          </>
+                        );
                         return (
                           <DropdownMenuItem key={sub.name} asChild className="cursor-pointer focus:bg-white/5 rounded-lg my-1">
-                            <Link href={sub.href} className="flex flex-col items-start gap-1 p-3 w-full group">
-                              <span className={cn(
-                                "font-semibold group-hover:text-brand-teal transition-colors flex items-center w-full justify-between",
-                                isActive ? "text-brand-teal" : "text-white"
-                              )}>
-                                {sub.name}
-                                <ArrowRight className={cn(
-                                  "h-3 w-3 -translate-x-2 group-hover:translate-x-0 transition-all text-brand-teal",
-                                  isActive ? "opacity-100 translate-x-0" : "opacity-0 group-hover:opacity-100"
-                                )} />
-                              </span>
-                              <span className="text-xs text-muted-foreground">{sub.desc}</span>
-                            </Link>
+                            {isExternal ? (
+                              <a href={sub.href} target="_blank" rel="noopener noreferrer" className="flex flex-col items-start gap-1 p-3 w-full group">
+                                {itemInner}
+                              </a>
+                            ) : (
+                              <Link href={sub.href} className="flex flex-col items-start gap-1 p-3 w-full group">
+                                {itemInner}
+                              </Link>
+                            )}
                           </DropdownMenuItem>
                         );
                       }
@@ -193,11 +205,17 @@ export function Header() {
                         const isActive = isSubItemActive(sub as { href: string; links?: Array<{ href: string; external?: boolean }> });
 
                         if (!hasNestedLinks) {
-                          return (
-                            <Link key={sub.name} href={sub.href} onClick={() => setIsMobileMenuOpen(false)} className={cn(
-                              "text-xl font-medium pl-4 border-l-2 hover:border-brand-teal hover:text-brand-teal transition-all",
-                              isActive ? "border-brand-teal text-brand-teal" : "border-transparent text-white"
-                            )}>
+                          const isExternal = (sub as { external?: boolean }).external;
+                          const mobileClass = cn(
+                            "text-xl font-medium pl-4 border-l-2 hover:border-brand-teal hover:text-brand-teal transition-all",
+                            isActive ? "border-brand-teal text-brand-teal" : "border-transparent text-white"
+                          );
+                          return isExternal ? (
+                            <a key={sub.name} href={sub.href} target="_blank" rel="noopener noreferrer" onClick={() => setIsMobileMenuOpen(false)} className={mobileClass}>
+                              {sub.name}
+                            </a>
+                          ) : (
+                            <Link key={sub.name} href={sub.href} onClick={() => setIsMobileMenuOpen(false)} className={mobileClass}>
                               {sub.name}
                             </Link>
                           );

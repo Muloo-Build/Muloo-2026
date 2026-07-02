@@ -22,6 +22,14 @@ export const navLinks = [
     ]
   },
   {
+    name: "Products", href: "/services/product",
+    subItems: [
+      { name: "Muloo Deploy", href: "https://deploy.wearemuloo.com/client/login", desc: "Client delivery & deployment portal", external: true },
+      { name: "Muloo Reporting", href: "https://reporting.wearemuloo.com/platform/", desc: "Unified client reporting platform", external: true },
+      { name: "Muloo Signals", href: "https://signals.wearemuloo.com/", desc: "Personalised LinkedIn outbound that lands in HubSpot", external: true }
+    ]
+  },
+  {
     name: "Advisory", href: "/advisory",
     subItems: [
       { name: "Advisory Overview", href: "/advisory", desc: "Fractional technical leadership" },
