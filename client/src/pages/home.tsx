@@ -520,6 +520,64 @@ export function Home() {
         </div>
       </Section>
 
+      {/* ── PRODUCTS & TOOLS ── */}
+      <Section className="py-20 md:py-[120px] border-t border-white/5">
+        <div className="mb-14 max-w-2xl">
+          <h2 className="text-sm font-mono text-gradient-muloo uppercase tracking-widest mb-4">Products &amp; tools</h2>
+          <h3 className="text-4xl md:text-5xl font-bold text-white">Software we build and run.</h3>
+          <p className="text-lg text-muted-foreground leading-[1.8] mt-5">
+            Beyond services, we ship our own platforms — live and in production for agencies and revenue teams.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-6">
+          {[
+            {
+              name: "Muloo Reporting",
+              icon: <TrendingUp className="h-6 w-6" />,
+              tagline: "Unified client reporting platform",
+              desc: "Connect HubSpot, Google Analytics, Google Ads and LinkedIn into client-ready dashboards, with pipeline and revenue attributed back to every campaign.",
+              href: "https://reporting.wearemuloo.com/platform/",
+              accent: "#59BF96",
+            },
+            {
+              name: "Muloo Signals",
+              icon: <Zap className="h-6 w-6" />,
+              tagline: "Personalised LinkedIn outbound into HubSpot",
+              desc: "Human-supervised LinkedIn prospecting that stays safe from account restrictions and syncs qualified leads straight into HubSpot.",
+              href: "https://signals.wearemuloo.com/",
+              accent: "#F47621",
+            },
+          ].map((p) => (
+            <a
+              key={p.name}
+              href={p.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group glass-card rounded-2xl p-8 flex flex-col hover:-translate-y-1 transition-all duration-300"
+              style={{ borderTop: `2px solid ${p.accent}` }}
+              data-testid={`card-product-${p.name.split(" ")[1].toLowerCase()}`}
+            >
+              <div className="mb-6 p-3 rounded-xl w-fit" style={{ backgroundColor: `${p.accent}1a`, color: p.accent }}>
+                {p.icon}
+              </div>
+              <h3 className="text-2xl font-bold mb-1 text-white">{p.name}</h3>
+              <p className="text-sm font-semibold mb-3" style={{ color: p.accent }}>{p.tagline}</p>
+              <p className="text-base text-muted-foreground leading-[1.8] mb-8 flex-grow">{p.desc}</p>
+              <div className="flex items-center text-sm font-semibold mt-auto text-white/80 group-hover:text-white">
+                Visit platform <ArrowRight className="ml-1.5 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              </div>
+            </a>
+          ))}
+        </div>
+
+        <div className="mt-8">
+          <Link href="/services/product" className="inline-flex items-center text-sm font-semibold text-brand-teal hover:text-brand-teal/80 transition-colors" data-testid="link-all-products">
+            See all products <ArrowRight className="ml-1.5 h-4 w-4" />
+          </Link>
+        </div>
+      </Section>
+
       {/* ── 3. PAIN POINTS ── */}
       <Section className="py-20 md:py-[120px] border-t border-white/5">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">

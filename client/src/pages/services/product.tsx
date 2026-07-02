@@ -1,14 +1,55 @@
 import { Section } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Wrench, Laptop, Rocket, BarChart3, Settings, Lightbulb, Users, CreditCard, Server, HeadphonesIcon, Activity, Star, Cloud } from "lucide-react";
+import { ArrowRight, Wrench, Laptop, Rocket, BarChart3, Settings, Lightbulb, Users, CreditCard, Server, HeadphonesIcon, Activity, Star, Cloud, Zap } from "lucide-react";
 import { Link } from "wouter";
 import { Badge } from "@/components/ui/badge";
+import { SEO } from "@/components/layout/SEO";
 import { serviceProductContent } from "@/lib/content";
 import { BookingCard } from "@/components/meetings/BookingCard";
 import { getMeetingBySlug } from "@/content/meetings";
 import { useWebsiteContent } from "@/hooks/use-website-content";
 
 const streamGreen = "#59BF96";
+const signalsOrange = "#F47621";
+
+const liveProducts = [
+  {
+    name: "Muloo Reporting",
+    tagline: "Unified client reporting platform",
+    description:
+      "Connects HubSpot, Google Analytics, Google Ads and LinkedIn into client-ready dashboards, with pipeline and revenue attributed back to every campaign.",
+    href: "https://reporting.wearemuloo.com/platform/",
+  },
+  {
+    name: "Muloo Signals",
+    tagline: "Personalised LinkedIn outbound into HubSpot",
+    description:
+      "Human-supervised LinkedIn prospecting that stays safe from account restrictions and syncs qualified leads straight into HubSpot.",
+    href: "https://signals.wearemuloo.com/",
+  },
+  {
+    name: "Muloo Deploy",
+    tagline: "Client delivery & deployment portal",
+    description:
+      "The client portal where Muloo engagements are delivered, tracked and deployed.",
+    href: "https://deploy.wearemuloo.com/client/login",
+  },
+];
+
+const productStructuredData = liveProducts.map((p) => ({
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: p.name,
+  applicationCategory: "BusinessApplication",
+  operatingSystem: "Web",
+  url: p.href,
+  description: p.description,
+  publisher: {
+    "@type": "Organization",
+    name: "Muloo",
+    url: "https://www.wearemuloo.com",
+  },
+}));
 
 export function ServicesProduct() {
   const { data: websiteContent } = useWebsiteContent();
@@ -17,6 +58,12 @@ export function ServicesProduct() {
 
   return (
     <div className="flex flex-col">
+      <SEO
+        title="Products & Platforms | Muloo"
+        description="Muloo builds and runs its own software: Muloo Reporting (unified client reporting across HubSpot, GA4, Google Ads and LinkedIn) and Muloo Signals (personalised LinkedIn outbound into HubSpot), plus custom product engineering."
+        canonicalUrl="https://www.wearemuloo.com/services/product"
+        structuredData={productStructuredData}
+      />
       {/* Hero */}
       <Section className="pt-20 pb-20 md:pt-28 md:pb-24 bg-hero-gradient glow-product relative overflow-hidden">
         <div className="absolute inset-0 bg-grid-pattern-fade pointer-events-none" />
@@ -547,6 +594,96 @@ export function ServicesProduct() {
               ))}
             </ul>
           </div>
+        </div>
+      </Section>
+
+      {/* Live Product — Signals */}
+      <Section className="py-20 md:py-[120px] border-t border-white/5">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div
+            className="glass-card rounded-2xl p-8 md:p-10 order-2 lg:order-1"
+            style={{ borderLeft: `4px solid ${signalsOrange}` }}
+            data-testid="card-signals-features"
+          >
+            <div className="flex items-center gap-3 mb-6">
+              <div className="h-10 w-10 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: `${signalsOrange}1a` }}>
+                <Zap className="h-5 w-5" style={{ color: signalsOrange }} />
+              </div>
+              <span className="text-white font-bold">What it does</span>
+            </div>
+            <ul className="space-y-4">
+              {[
+                "Personalised LinkedIn outreach at scale, with a human in the loop",
+                "Stays within safe limits to protect the sending account",
+                "Qualified replies and leads sync straight into HubSpot",
+                "Full visibility of sequences, activity and outcomes",
+              ].map((item, i) => (
+                <li key={i} className="flex items-start gap-3 text-sm text-white/70 leading-[1.7]">
+                  <span className="h-1.5 w-1.5 rounded-full shrink-0 mt-2" style={{ backgroundColor: signalsOrange }} />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="max-w-xl order-1 lg:order-2">
+            <div className="flex items-center gap-3 mb-4">
+              <span className="text-sm font-mono uppercase tracking-widest" style={{ color: signalsOrange }}>Live now</span>
+              <Badge
+                variant="outline"
+                className="border-[#F47621]/30 text-[#F47621] bg-[#F47621]/5"
+                data-testid="badge-signals-live"
+              >
+                In production
+              </Badge>
+            </div>
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Muloo Signals</h2>
+            <p className="text-lg text-muted-foreground leading-[1.8] mb-6">
+              Personalised LinkedIn outbound that lands in HubSpot. Muloo Signals runs human-supervised LinkedIn prospecting for B2B teams — safely, without triggering account restrictions — and syncs qualified leads directly into your CRM.
+            </p>
+            <p className="text-muted-foreground leading-[1.8] mb-8">
+              Built for revenue teams that want reliable outbound signal without the risk of automation that gets accounts flagged.
+            </p>
+            <a href="https://signals.wearemuloo.com/" target="_blank" rel="noopener noreferrer">
+              <Button
+                size="lg"
+                className="font-bold px-8 h-14 text-white"
+                style={{ backgroundColor: signalsOrange }}
+                data-testid="button-signals-platform"
+              >
+                Explore Muloo Signals <ArrowRight className="ml-2" />
+              </Button>
+            </a>
+          </div>
+        </div>
+      </Section>
+
+      {/* Deploy callout */}
+      <Section className="py-16 md:py-20 bg-section-soft border-t border-white/5">
+        <div
+          className="glass-card rounded-2xl p-8 md:p-10 flex flex-col md:flex-row md:items-center gap-6 md:justify-between"
+          data-testid="card-deploy-callout"
+        >
+          <div className="flex items-start gap-5 max-w-2xl">
+            <div className="h-12 w-12 rounded-lg flex items-center justify-center shrink-0 bg-[#59BF96]/10">
+              <Cloud className="h-6 w-6 text-[#59BF96]" />
+            </div>
+            <div>
+              <h3 className="text-xl font-bold text-white mb-2">Muloo Deploy</h3>
+              <p className="text-muted-foreground text-sm leading-[1.8]">
+                The client portal where Muloo engagements are delivered, tracked and deployed. Existing clients log in to follow progress and access what we ship.
+              </p>
+            </div>
+          </div>
+          <a href="https://deploy.wearemuloo.com/client/login" target="_blank" rel="noopener noreferrer" className="shrink-0">
+            <Button
+              variant="outline"
+              className="font-bold px-6 h-12 text-white border-white/20 hover:bg-white/10"
+              data-testid="button-deploy-login"
+            >
+              Client Login <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </a>
         </div>
       </Section>
 
