@@ -47,7 +47,7 @@ const sections = [
   {
     heading: "8. Contact",
     body: [
-      "Questions about these terms can be sent to jarrud@muloo.co.",
+      "Muloo (Pty) Ltd, 54 Old Sir Lowry's Pass Road, Cape Town, South Africa. Questions about these terms can be sent to jarrud@muloo.co.",
     ],
   },
 ];

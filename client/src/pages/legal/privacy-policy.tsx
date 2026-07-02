@@ -7,7 +7,7 @@ const sections = [
     body: [
       "Muloo is a technical partner for HubSpot, custom engineering and AI, based in Cape Town and serving global teams. This website and our services are operated by Muloo (Pty) Ltd (\"Muloo\", \"we\", \"us\", \"our\"), a company registered in South Africa (registration number 2020/546441/07).",
       "For the personal information we process, Muloo (Pty) Ltd is the responsible party under the Protection of Personal Information Act, 2013 (POPIA), and the data controller under the EU/UK GDPR where it applies. This policy explains what personal information we collect, how we use it, and the choices you have.",
-      "For any privacy question, contact us at jarrud@muloo.co.",
+      "Registered address: 54 Old Sir Lowry's Pass Road, Cape Town, South Africa. For any privacy question, contact us at jarrud@muloo.co.",
     ],
   },
   {
