@@ -1,3 +1,4 @@
+import { SEO } from "@/components/layout/SEO";
 import { Section } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, BrainCircuit, LineChart, Settings } from "lucide-react";
@@ -14,6 +15,10 @@ export function ServicesConsulting() {
 
   return (
     <div className="flex flex-col">
+      <SEO
+        title="Muloo Consulting | Senior Systems & Governance Advisory"
+        description="Senior support without the overhead. Muloo diagnoses, prioritises, and guides delivery across HubSpot, systems, and governance."
+      />
       <Section className="pt-20 pb-16 md:pt-28 md:pb-20 bg-hero-cosmic">
         <div className="max-w-4xl">
           <Badge variant="outline" className="mb-6 border-brand-orange/20 text-brand-orange bg-brand-orange/5">Advisory</Badge>

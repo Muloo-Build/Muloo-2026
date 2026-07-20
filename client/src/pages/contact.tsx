@@ -1,3 +1,4 @@
+import { SEO } from "@/components/layout/SEO";
 import { Section } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
 import { ContactForm } from "@/components/sections/contact-form";
@@ -18,6 +19,10 @@ export function Contact() {
 
   return (
     <div className="flex flex-col">
+      <SEO
+        title="Contact Muloo | Talk to a HubSpot & Systems Partner"
+        description="Get in touch with Muloo in Cape Town. Book a call or send a message about HubSpot implementation, CRM rescue, integrations, or AI automation."
+      />
       <Section className="pt-5 pb-6 md:pt-7 md:pb-8 text-center bg-hero-gradient border-b border-white/5">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-white">Get in touch</h1>

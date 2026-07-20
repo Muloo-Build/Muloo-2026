@@ -1,3 +1,4 @@
+import { SEO } from "@/components/layout/SEO";
 import { Section } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
 import { Terminal, Linkedin } from "lucide-react";
@@ -22,6 +23,10 @@ export function About() {
 
   return (
     <div className="flex flex-col">
+      <SEO
+        title="About Muloo | The Team Behind the Systems"
+        description="Meet the Muloo team — the Cape Town-based engineers designing, rescuing, and governing HubSpot environments, custom software, and AI automation."
+      />
       <Section className="pt-20 pb-16 md:pt-28 md:pb-20 bg-hero-cosmic">
         <div className="max-w-4xl">
            <div className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm font-medium text-brand-orange mb-8 backdrop-blur-md">

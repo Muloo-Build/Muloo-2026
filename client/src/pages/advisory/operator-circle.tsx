@@ -1,3 +1,4 @@
+import { SEO } from "@/components/layout/SEO";
 import { Section } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -7,6 +8,10 @@ import { ArrowRight } from "lucide-react";
 export function OperatorCircle() {
   return (
     <div className="flex flex-col">
+      <SEO
+        title="Operator Circle | Muloo Advisory"
+        description="A private circle for operators shaping how modern revenue, delivery, and AI-assisted systems get built, facilitated by Muloo."
+      />
       {/* Hero */}
       <Section className="pt-20 pb-20 md:pt-28 md:pb-24 bg-hero-gradient relative overflow-hidden">
         <div className="absolute inset-0 bg-grid-pattern-fade pointer-events-none" />

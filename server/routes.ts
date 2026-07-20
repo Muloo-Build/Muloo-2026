@@ -141,13 +141,11 @@ LLMs: ${siteUrl}/llms.txt
       ...content.caseStudies.map((study) => `/case-studies/${study.id}`),
       ...content.resourcePosts.map((post) => `/blog/${post.slug}`),
     ];
-    const today = new Date().toISOString().slice(0, 10);
     const body = urls
       .map((url) => {
         const priority = url === "/" ? "1.0" : url.startsWith("/case-studies") || url.startsWith("/blog") ? "0.8" : "0.7";
         return `  <url>
     <loc>${escapeXml(`${siteUrl}${url}`)}</loc>
-    <lastmod>${today}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>${priority}</priority>
   </url>`;

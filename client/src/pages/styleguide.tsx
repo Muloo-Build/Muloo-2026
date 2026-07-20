@@ -1,3 +1,4 @@
+import { SEO } from "@/components/layout/SEO";
 import { Section } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -224,6 +225,11 @@ export function Styleguide() {
 
   return (
     <div className="flex flex-col" data-testid="styleguide-page">
+      <SEO
+        title="Styleguide | Muloo"
+        description="Internal Muloo design system reference."
+        robots="noindex,nofollow"
+      />
       {/* Hero */}
       <Section className="bg-hero-gradient pt-32" data-testid="styleguide-hero">
         <Badge variant="teal" className="mb-4" data-testid="badge-design-system">Design System</Badge>

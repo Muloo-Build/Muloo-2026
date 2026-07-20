@@ -1,3 +1,4 @@
+import { SEO } from "@/components/layout/SEO";
 import { useMemo } from "react";
 import { Link, useRoute } from "wouter";
 import { ArrowLeft } from "lucide-react";
@@ -27,6 +28,11 @@ export function MeetingBookingPage() {
 
   return (
     <div className="flex flex-col">
+      <SEO
+        title="Book a Meeting | Muloo"
+        description="Book time with the Muloo team."
+        robots="noindex,nofollow"
+      />
       <Section className="pt-8 pb-6 md:pt-10 md:pb-8 bg-hero-gradient border-b border-white/5">
         <div className="max-w-4xl">
           <Link href="/contact">
